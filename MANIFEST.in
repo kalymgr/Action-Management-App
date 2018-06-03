@@ -1,0 +1,3 @@
+graft actionmanagementapp/static
+graft actionmanagementapp/templates
+global-exclude *.pyc

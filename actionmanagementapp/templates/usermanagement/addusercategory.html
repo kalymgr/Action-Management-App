@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Προσθήκη κατηγορίας χρήστη{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+    <h1>Προσθήκη κατηγορίας χρήστη</h1>
+
+    <form action="#" method="get">
+        <p>Κωδ. : <input type="text" name="id"></p>
+        <p>Όνομα: <input type="text" name="name"></p>
+        <input type="submit" value="ΟΚ">
+    </form>
+
+    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+{% endblock %}
