@@ -8,7 +8,7 @@ Python module that sets up the database for the application
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from flaskr.users.model import Base
+from actionmanagementapp.users.model import Base
 
 
 def createEngine(db_UserName, db_Password, database_Name, db_Server, connection_Charset):

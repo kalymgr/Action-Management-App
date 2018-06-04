@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # encoding has been set as utf-8 for greek characters to appear properly
-from flaskr.users.model import UserCategory, User
+from actionmanagementapp.users.model import UserCategory, User
 
 userCategory = {
     'id': 1,
