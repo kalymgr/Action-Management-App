@@ -16,8 +16,6 @@ def test_register(client, app):
         '/auth/register', data={'username': 'a', 'password': 'a', 'name': 'aName'},
     )
 
-    assert True
-
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
         ('', '', b'Username is required.'),
@@ -34,6 +32,11 @@ def test_register_validate_input(client, username, password, message):
 
 def test_login(client, auth):
     assert client.get('/auth/login').status_code == 200
-    response = auth.login
-    assert response.headers['Location'] == 'http://localhost/users'
+    response = auth.login()
+
+    with client:
+        client.get('/users')
+        assert session['user_id'] == 1
+        assert g.user['username'] == 'test'
+
 

@@ -9,6 +9,7 @@ Python module that sets up the database for the application
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from actionmanagementapp.users.model import Base
+from actionmanagementapp.users.model import User
 
 
 def createEngine(db_UserName, db_Password, database_Name, db_Server, connection_Charset):
@@ -68,6 +69,15 @@ def getTestingDatabaseSession():
     """
     engine = createEngine('root', '', 'test_actionapplicationdb', 'localhost', 'utf8')
     # go into the database and add the classes as new tables
-    return getSession(Base, engine)
+    dbSession = getSession(Base, engine)
+
+    # create a dummy user called test (automated usage in some tests)
+
+    testUser = dbSession.query(User).filter(User.username == 'test').first()
+    if testUser is None:
+        testUser = User(name="test user", username="test", password="test")
+        dbSession.add(testUser)
+        dbSession.commit()
+    return dbSession
 
 

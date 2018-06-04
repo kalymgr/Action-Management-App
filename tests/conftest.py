@@ -9,8 +9,8 @@ from actionmanagementapp.utilities.database_setup import getTestingDatabaseSessi
 @pytest.fixture
 def app():
     app = create_app({
-        'TESTING': True,
-        'DBSESSION': getTestingDatabaseSession()
+        'TESTING': True,  # set TESTING to True
+        'DBSESSION': getTestingDatabaseSession()  # use the test database
     })
     yield app
 

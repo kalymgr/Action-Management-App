@@ -74,7 +74,6 @@ def login():
         # first() will return None
         user = dbSession.query(User).filter(User.username == username).first()
 
-
         if user is None:
             error = 'Incorrect username.'
         elif not check_password_hash(user.password, password):
