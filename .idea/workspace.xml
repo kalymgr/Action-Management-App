@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/usr.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,32 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="auth.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3103">
-              <caret line="107" column="26" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-              <folding>
-                <element signature="e#39#81#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="database_setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+            <state relative-caret-position="17">
+              <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
               <folding>
                 <element signature="e#401#440#0" expanded="true" />
               </folding>
@@ -50,11 +27,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usr.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
+      <file leaf-file-name="conftest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/conftest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
+            <state relative-caret-position="87">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -124,15 +119,15 @@
         <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/userdetails.html" />
         <option value="$PROJECT_DIR$/flaskr/usr.py" />
         <option value="$PROJECT_DIR$/MANIFEST.in" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/tests/users/dummyData.py" />
         <option value="$PROJECT_DIR$/tests/dummyData.py" />
         <option value="$PROJECT_DIR$/tests/data.py" />
-        <option value="$PROJECT_DIR$/tests/conftest.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/usr.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/auth.py" />
-        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/__init__.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py" />
+        <option value="$PROJECT_DIR$/tests/conftest.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -162,8 +157,7 @@
             <path>
               <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
               <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
-              <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
-              <item name="utilities" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,12 +234,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46984127" visible="true" weight="0.28229168" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46984127" visible="true" weight="0.28229168" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30208334" side_tool="true" weight="0.21030495" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6979167" visible="true" weight="0.33049947" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6979167" visible="true" weight="0.33049947" />
       <window_info id="Structure" order="1" sideWeight="0.53015876" side_tool="true" visible="true" weight="0.28229168" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.36382756" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -397,23 +391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/conftest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#73#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -433,8 +410,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="54" column="7" lean-forward="true" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+        <state relative-caret-position="17">
+          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
           <folding>
             <element signature="e#401#440#0" expanded="true" />
           </folding>
@@ -443,8 +420,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="118">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/conftest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
         </state>
       </provider>
     </entry>

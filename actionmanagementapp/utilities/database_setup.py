@@ -54,12 +54,20 @@ engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
 def getProductionDatabaseSession():
     """
     Function that gets the database session
-    :return:
+    :return:db session for the production database
     """
     engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
     # go into the database and add the classes as new tables
     return getSession(Base, engine)
 
 
+def getTestingDatabaseSession():
+    """
+    Function that gets the database session for test database
+    :return: db session for the testing database
+    """
+    engine = createEngine('root', '', 'test_actionapplicationdb', 'localhost', 'utf8')
+    # go into the database and add the classes as new tables
+    return getSession(Base, engine)
 
 
