@@ -129,10 +129,10 @@ def insertDummyDataToMYSQL(session):
     # add some users, if there are none
     if session.query(User).count() == 0:
         users = [
-            User(name='Michalis Tsougranis', username='kalymgr', userCategoryId=3),
-            User(name='Dimitris Roditis', username='dimitri', userCategoryId=3),
-            User(name='Thanasis Reveras', username='trevelas', userCategoryId=2),
-            User(name='Michalis Bairamis', username='bairam', userCategoryId=1),
+            User(name='Michalis Tsougranis', username='kalymgr', userCategoryId=3, password=''),
+            User(name='Dimitris Roditis', username='dimitri', userCategoryId=3, password=''),
+            User(name='Thanasis Reveras', username='trevelas', userCategoryId=2, password=''),
+            User(name='Michalis Bairamis', username='bairam', userCategoryId=1, password=''),
         ]
         session.add_all(users)
         session.commit()

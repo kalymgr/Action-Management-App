@@ -7,13 +7,13 @@ from werkzeug.exceptions import abort
 
 from tests.users import dummyData
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, app)
+    Blueprint, flash, redirect, render_template, request, url_for)
 from auth import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
 from utilities.database_setup import databaseSession
-from users.model import User, UserCategory
-from werkzeug.security import check_password_hash, generate_password_hash
+from users.model import User
+from werkzeug.security import generate_password_hash
 
 @bp.route('/')
 @login_required
@@ -48,7 +48,6 @@ def userDetails(user_id):
     """
 
     return render_template('usermanagement/userdetails.html', user=user)
-
 
 
 @bp.route('/add', methods=('GET', 'POST'))
