@@ -2,12 +2,11 @@
 Blueprint for authentication
 """
 
-from utilities import database_setup
 from users.model import User, UserCategory
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, current_app
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -24,6 +23,8 @@ def register():
     Function for routing the register page requests
     :return:
     """
+    # get the db session from the application settings
+    dbSession = current_app.config['DBSESSION']
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -38,7 +39,7 @@ def register():
         else:
             # check if the user is in the database
             noOfExistingUser =\
-                database_setup.databaseSession.query(User).filter(User.username == username).count()
+                dbSession.query(User).filter(User.username == username).count()
             if noOfExistingUser !=0:  # the user already exists
                 error = "The user already exists"
 
@@ -46,8 +47,8 @@ def register():
             # insert new user in the database
             newUser = User(name=name, username=username,
                            password=generate_password_hash(password, salt_length=8))
-            database_setup.databaseSession.add(newUser)
-            database_setup.databaseSession.commit()
+            dbSession.add(newUser)
+            dbSession.commit()
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -61,6 +62,8 @@ def login():
     Function for routing the login page requests
     :return:
     """
+    # get the db session from the application settings
+    dbSession = current_app.config['DBSESSION']
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -69,7 +72,7 @@ def login():
 
         # get the user with the specific username. If not user is found,
         # first() will return None
-        user = database_setup.databaseSession.query(User).filter(User.username == username).first()
+        user = dbSession.query(User).filter(User.username == username).first()
 
 
         if user is None:
@@ -95,12 +98,14 @@ def load_logged_in_user():
     It gets the user data from the database so as to user them when needed
     :return:
     """
+    # get the db session from the application settings
+    dbSession = current_app.config['DBSESSION']
     user_id = session.get('user_id')
 
     if user_id is None:
         g.user = None
     else:
-        g.user = database_setup.databaseSession.query(User).filter(User.id == user_id).first()
+        g.user = dbSession.query(User).filter(User.id == user_id).first()
 
 
 @bp.route('/logout')

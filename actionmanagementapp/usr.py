@@ -11,7 +11,6 @@ from flask import (
 from auth import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
-from utilities.database_setup import databaseSession
 from users.model import User
 from werkzeug.security import generate_password_hash
 from flask import current_app
@@ -28,7 +27,9 @@ def userList():
     # usersData = dummyData.getUsersWithCategoryDescription()
     # return the rendered template
 
+    # get the db session from the application settings
     dbSession = current_app.config['DBSESSION']
+    # get the list of users
     users = dbSession.query(User).all()
     return render_template('usermanagement/users.html', users=users)
 
@@ -41,7 +42,9 @@ def userDetails(user_id):
     User details routing function
     :return:
     """
-    user = databaseSession.query(User).filter(User.id == user_id).first()
+    # get the db session from the application settings
+    dbSession = current_app.config['DBSESSION']
+    user = dbSession.query(User).filter(User.id == user_id).first()
     katigoria = user.userCategory.name
     if user is None:
         abort(404, u"Ο Χρήστης δεν υπάρχει. The user does not exist!")
@@ -106,8 +109,10 @@ def addUser():
                            email=email,
                            password=generate_password_hash(password),
                            enabled=enabled)
-            databaseSession.add(newUser)
-            databaseSession.commit()
+            # get the db session from the application settings
+            dbSession = current_app.config['DBSESSION']
+            dbSession.add(newUser)
+            dbSession.commit()
 
             # go to the main users page
             return redirect(url_for('users.userList'))
