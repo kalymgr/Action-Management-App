@@ -14,6 +14,8 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 from utilities.database_setup import databaseSession
 from users.model import User
 from werkzeug.security import generate_password_hash
+from flask import current_app
+
 
 @bp.route('/')
 @login_required
@@ -25,7 +27,9 @@ def userList():
     # create the user list that will be rendered (get the category name for each user)
     # usersData = dummyData.getUsersWithCategoryDescription()
     # return the rendered template
-    users = databaseSession.query(User).all()
+
+    dbSession = current_app.config['DBSESSION']
+    users = dbSession.query(User).all()
     return render_template('usermanagement/users.html', users=users)
 
 
