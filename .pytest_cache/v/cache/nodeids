@@ -1,0 +1,9 @@
+[
+  "tests/test_auth.py::test_register", 
+  "tests/test_auth.py::test_register_validate_input[--Username is required.]", 
+  "tests/test_auth.py::test_register_validate_input[a--Password is required.]", 
+  "tests/test_auth.py::test_register_validate_input[test-test-The user already exists]", 
+  "tests/test_auth.py::test_login", 
+  "tests/test_factory.py::test_config", 
+  "tests/test_factory.py::test_hello"
+]
