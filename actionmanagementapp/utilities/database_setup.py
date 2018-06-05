@@ -84,7 +84,8 @@ def getTestingDatabaseSession():
     if testUser is None:
         testUser = User(name="test user",
                         username="test",
-                        password=generate_password_hash("test"))
+                        password=generate_password_hash("test"),
+                        userCategoryId=1)
         dbSession.add(testUser)
 
     dbSession.commit()  # save changes to the database

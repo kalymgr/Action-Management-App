@@ -45,7 +45,8 @@ def userDetails(user_id):
     # get the db session from the application settings
     dbSession = current_app.config['DBSESSION']
     user = dbSession.query(User).filter(User.id == user_id).first()
-    katigoria = user.userCategory.name
+    if user is not None:  # if the user is found in the database
+        katigoria = user.userCategory.name
     if user is None:
         abort(404, u"Ο Χρήστης δεν υπάρχει. The user does not exist!")
 
