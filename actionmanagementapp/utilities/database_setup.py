@@ -8,8 +8,9 @@ Python module that sets up the database for the application
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from actionmanagementapp.users.model import Base
+from actionmanagementapp.users.model import Base, UserCategory
 from actionmanagementapp.users.model import User
+from werkzeug.security import generate_password_hash
 
 
 def createEngine(db_UserName, db_Password, database_Name, db_Server, connection_Charset):
@@ -71,13 +72,22 @@ def getTestingDatabaseSession():
     # go into the database and add the classes as new tables
     dbSession = getSession(Base, engine)
 
-    # create a dummy user called test (automated usage in some tests)
+    # create a dummy test category
+    testCategory = dbSession.query(UserCategory)\
+        .filter(UserCategory.id == 1).first()
+    if testCategory is None:
+        testCategory = UserCategory(id=1, name="test category")
+        dbSession.add(testCategory)
 
+    # create a dummy user called test (automated usage in some tests)
     testUser = dbSession.query(User).filter(User.username == 'test').first()
     if testUser is None:
-        testUser = User(name="test user", username="test", password="test")
+        testUser = User(name="test user",
+                        username="test",
+                        password=generate_password_hash("test"))
         dbSession.add(testUser)
-        dbSession.commit()
+
+    dbSession.commit()  # save changes to the database
     return dbSession
 
 

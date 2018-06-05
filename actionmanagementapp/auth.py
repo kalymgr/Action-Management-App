@@ -94,7 +94,7 @@ def login():
 def load_logged_in_user():
     """
     This function will always run before the view function, no matter what URL is requested.
-    It gets the user data from the database so as to user them when needed
+    It gets the user data from the database so as to use them when needed
     :return:
     """
     # get the db session from the application settings
