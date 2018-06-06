@@ -80,7 +80,10 @@ def addUser():
         password2 = request.form['password2']
         # The checkbox field isn't returned if it is not checked.
         # So I tell the application that, if the form has no enabled field, return None value
-        enabled = request.form.get('enabled', None)
+        if request.form.get('enabled', None) == "True":
+            enabled = True
+        else:
+            enabled = False
 
         error = ''
 
@@ -120,25 +123,54 @@ def addUser():
     return render_template('usermanagement/adduser.html', userCategories=dummyData.userCategories)
 
 
-@bp.route('/<int:user_id>/delete')
+@bp.route('/<int:user_id>/delete', methods=('GET', 'POST'))
 @login_required
 def deleteUser(user_id):
     """
     Delete user routing function
     :return:
     """
-    return render_template('usermanagement/deleteuser.html', user=dummyData.user)
+    dbSession = current_app.config['DBSESSION']
+    if request.method == 'POST':
+        # delete the user from the database
+        u = dbSession.query(User).filter(User.id == user_id).first()
+        dbSession.delete(u)
+        dbSession.commit()
+
+        # send a message that the specific user has been deleted
+
+        # redirect to the users list page
+        return redirect(url_for('users.userList'))
+
+    else:  # GET method
+        # get the user by his/her user id
+
+        u = dbSession.query(User).filter(User.id == user_id).first()
+        # if the user does not exist, throw 404 error
+        if u is None:
+            abort(404)
+        # if the user exists, show the delete page
+        else:
+            return render_template('usermanagement/deleteuser.html', user=u)
 
 
-@bp.route('/<int:user_id>/edit')
+@bp.route('/<int:user_id>/edit', methods=('GET', 'POST'))
 @login_required
 def editUser(user_id):
     """
     Edit user routing function
     :return:
     """
-
-    return render_template('usermanagement/edituser.html', user=dummyData.getUserWithCategoryDescription(),
+    dbSession = current_app.config['DBSESSION']  # initialize db session variable
+    if request.method == 'POST':
+        pass
+    else:
+        # get the user from the database
+        u = dbSession.query(User).filter(User.id == user_id).first()
+        # if the user does not exist, send 404 response
+        if u is None:
+            abort(404)
+        return render_template('usermanagement/edituser.html', user=u,
                            userCategories=dummyData.userCategories)
 
 

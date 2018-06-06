@@ -8,7 +8,8 @@
     {% if user %} <!-- if the user exists -->
         <h1>Επεξεργασία χρήστη "{{user.name}}"</h1>
         <form action="#" method="post">
-            <p> Όνομα χρήστη: <input type="text" name="name" value="{{ user.name }}"></p>
+            <p> Όνοματεπώνυμο: <input type="text" name="name" value="{{ user.name }}"></p>
+            <p> Όνομα χρήστη: <input type="text" name="username" value="{{ user.username }}"></p>
             <p> Υπηρεσία: <input type="text" name="department" value="{{ user.department }}"></p>
             <p> Κατηγορία:
                 <select name="usercategory">
