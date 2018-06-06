@@ -11,7 +11,7 @@ from flask import (
 from auth import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
-from users.model import User
+from users.model import User, UserCategory
 from werkzeug.security import generate_password_hash
 from flask import current_app
 
@@ -118,6 +118,8 @@ def addUser():
             dbSession.add(newUser)
             dbSession.commit()
 
+            # show message
+            flash("The user %s has been added" % newUser.name)
             # go to the main users page
             return redirect(url_for('users.userList'))
     return render_template('usermanagement/adduser.html', userCategories=dummyData.userCategories)
@@ -138,7 +140,7 @@ def deleteUser(user_id):
         dbSession.commit()
 
         # send a message that the specific user has been deleted
-
+        flash("The user %s has been deleted"%u.name)
         # redirect to the users list page
         return redirect(url_for('users.userList'))
 
@@ -163,15 +165,38 @@ def editUser(user_id):
     """
     dbSession = current_app.config['DBSESSION']  # initialize db session variable
     if request.method == 'POST':
-        pass
+        # get the form data and save them in the database
+        u = dbSession.query(User).filter(User.id == user_id).first()
+        if u is None:  # if the user is not found in the database
+            abort(404)
+
+        u.name = request.form.get('name', None)
+        u.username = request.form.get('username', None)
+        u.enabled = bool(request.form.get('enabled', None))
+        u.email = request.form.get('email', None)
+        u.phone = request.form.get('phone', None)
+        u.mobile = request.form.get('mobile', None)
+        u.userCategoryId = request.form.get('usercategory', None)
+        u.department = request.form.get('department', None)
+
+        dbSession.add(u)  # update the user in the database
+        dbSession.commit()
+
+        # flash message that the user has been updated
+        flash(u"The user %s has been updated"%u.name)
+        # return redirect
+        return redirect(url_for('users.userList'))
+
     else:
         # get the user from the database
         u = dbSession.query(User).filter(User.id == user_id).first()
+        # get the categories from the database
+        uCategories = dbSession.query(UserCategory).all()
         # if the user does not exist, send 404 response
         if u is None:
             abort(404)
         return render_template('usermanagement/edituser.html', user=u,
-                           userCategories=dummyData.userCategories)
+                           userCategories=uCategories)
 
 
 @bp.route('/<int:user_id>/changepassword')

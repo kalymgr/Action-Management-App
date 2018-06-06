@@ -171,7 +171,7 @@ def test_editUser(client, auth):
         userToUpdate.enabled = False
         userToUpdate.email = 'email'
         userToUpdate.phone = 'phone'
-        userToUpdate.mobile = 'mobile',
+        userToUpdate.mobile = 'mobilep'
         userToUpdate.department = 'dep'
 
         dbSession.add(userToUpdate)
@@ -183,7 +183,7 @@ def test_editUser(client, auth):
         userUpdated.enabled = True
         userUpdated.email = 'email updated'
         userUpdated.phone = 'phoneUp'
-        userUpdated.mobile = 'mobileUp',
+        userUpdated.mobile = 'mobileUpdated'
         userUpdated.userCategoryId = 1
         userUpdated.department = 'depUp'
 
@@ -200,7 +200,18 @@ def test_editUser(client, auth):
         }
 
         # send the POST request
-        response = client.post(url_for('users.editUser', user_id = userToUpdate.id),
-                               data = userData)
+        response = client.post(url_for('users.editUser', user_id=userToUpdate.id),
+                               data=userData)
+
+        # check if the data was properly updated
+        userFromDb = dbSession.query(User).filter(User.username == userUpdated.username).first()
+        assert userFromDb is not None
+
+        dbSession.delete(userFromDb)  # delete the updated user (not needed)
+        dbSession.commit()
+
+        # check that after the successful updating of user, the browser redirects to users list page
+        locationHeaderResponse = helperFunctions.getHeaderContent(response.headers, 'Location')
+        assert locationHeaderResponse.endswith(url_for('users.userList'))
 
 
