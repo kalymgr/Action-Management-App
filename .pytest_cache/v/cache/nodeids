@@ -1,4 +1,19 @@
 [
-  "tests/test_simple.py::test_diairesi", 
-  "tests/test_simple.py::test_athroisma"
+  "tests/test_usr.py::test_user_loggedin[/users/]", 
+  "tests/test_usr.py::test_user_loggedin[/users/add]", 
+  "tests/test_usr.py::test_user_loggedin[/users/1]", 
+  "tests/test_usr.py::test_user_loggedin[/users/1/view]", 
+  "tests/test_usr.py::test_user_loggedin[/users/1/edit]", 
+  "tests/test_usr.py::test_user_loggedin[/users/1/delete]", 
+  "tests/test_usr.py::test_user_loggedin[/users/1/changepassword]", 
+  "tests/test_usr.py::test_user_loggedin[/users/categories]", 
+  "tests/test_usr.py::test_user_loggedin[/users/categories/add]", 
+  "tests/test_usr.py::test_user_loggedin[/users/categories/1/edit]", 
+  "tests/test_usr.py::test_user_loggedin[/users/categories/1/delete]", 
+  "tests/test_usr.py::test_userList", 
+  "tests/test_usr.py::test_userDetails", 
+  "tests/test_usr.py::test_addUser", 
+  "tests/test_usr.py::test_DeleteUser", 
+  "tests/test_usr.py::test_editUser", 
+  "tests/test_usr.py::test_changeUserPassword"
 ]
