@@ -167,8 +167,6 @@ def editUser(user_id):
     if request.method == 'POST':
         # get the form data and save them in the database
         u = dbSession.query(User).filter(User.id == user_id).first()
-        if u is None:  # if the user is not found in the database
-            abort(404)
 
         u.name = request.form.get('name', None)
         u.username = request.form.get('username', None)

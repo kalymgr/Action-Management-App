@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/actionmanagementapp/usr.py" line="219" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/actionmanagementapp/usr.py" line="217" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" beforeDir="false" afterPath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.pytest_cache/v/cache/nodeids" beforeDir="false" afterPath="$PROJECT_DIR$/.pytest_cache/v/cache/nodeids" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_usr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/usr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlcov/actionmanagementapp_auth_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlcov/actionmanagementapp_auth_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlcov/actionmanagementapp_usr_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlcov/actionmanagementapp_usr_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlcov/actionmanagementapp_utilities_database_setup_py.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlcov/actionmanagementapp_utilities_database_setup_py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlcov/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlcov/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlcov/status.json" beforeDir="false" afterPath="$PROJECT_DIR$/htmlcov/status.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +24,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test_usr.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_usr.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_usr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="167" column="35" selection-start-line="167" selection-start-column="35" selection-end-line="167" selection-end-column="35" />
+            <state relative-caret-position="-416">
+              <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usr.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
             </state>
           </provider>
         </entry>
@@ -104,12 +117,12 @@
         <option value="$PROJECT_DIR$/actionmanagementapp/templates/usermanagement/deleteuser.html" />
         <option value="$PROJECT_DIR$/actionmanagementapp/templates/usermanagement/edituser.html" />
         <option value="$PROJECT_DIR$/actionmanagementapp/templates/usermanagement/changeuserpassword.html" />
-        <option value="$PROJECT_DIR$/actionmanagementapp/usr.py" />
         <option value="$PROJECT_DIR$/tests/test_simple.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/simple.py" />
         <option value="$PROJECT_DIR$/tests/testsimple.py" />
         <option value="$PROJECT_DIR$/tests/test_factory.py" />
         <option value="$PROJECT_DIR$/tests/test_usr.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/usr.py" />
       </list>
     </option>
   </component>
@@ -124,6 +137,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -150,7 +164,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -179,7 +192,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.py.test for test_usr.test_addUser">
+  <component name="RunManager" selected="Python tests.py.test for test_usr.test_editUser">
     <configuration name="py.test for test_simple.test_diairesi" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="actionsmanagementapp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -208,7 +221,7 @@
       <option name="_new_target" value="&quot;test_usr.test_addUser&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="py.test for test_usr.test_user_loggedin" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="py.test for test_usr.test_editUser" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="actionsmanagementapp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -219,7 +232,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_usr.test_user_loggedin&quot;" />
+      <option name="_new_target" value="&quot;test_usr.test_editUser&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="py.test in test_simple.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -267,18 +280,18 @@
     <list>
       <item itemvalue="Python tests.test_user_loggedin" />
       <item itemvalue="Python tests.py.test in tests" />
-      <item itemvalue="Python tests.py.test for test_usr.test_user_loggedin" />
       <item itemvalue="Python tests.py.test for test_simple.test_diairesi" />
       <item itemvalue="Python tests.py.test in test_simple.py" />
       <item itemvalue="Python tests.py.test for test_usr.test_addUser" />
+      <item itemvalue="Python tests.py.test for test_usr.test_editUser" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.py.test for test_usr.test_editUser" />
         <item itemvalue="Python tests.py.test for test_usr.test_addUser" />
         <item itemvalue="Python tests.py.test in test_simple.py" />
         <item itemvalue="Python tests.py.test for test_simple.test_diairesi" />
         <item itemvalue="Python tests.py.test in tests" />
-        <item itemvalue="Python tests.py.test for test_usr.test_user_loggedin" />
       </list>
     </recent_temporary>
   </component>
@@ -296,18 +309,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_for_test_simple_test_sum - 2018.06.07 at 09h 23m 29s.xml">
-      <configuration name="py.test for test_simple.test_sum" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_simple_test_sum - 2018.06.07 at 09h 23m 54s.xml">
-      <configuration name="py.test for test_simple.test_sum" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_simple_test_sum - 2018.06.07 at 09h 24m 09s.xml">
-      <configuration name="py.test for test_simple.test_sum" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_simple_test_sum - 2018.06.07 at 09h 24m 18s.xml">
-      <configuration name="py.test for test_simple.test_sum" configurationId="tests" />
-    </history-entry>
     <history-entry file="py_test_for_test_usr_test_userList - 2018.06.07 at 09h 28m 26s.xml">
       <configuration name="py.test for test_usr.test_userList" configurationId="tests" />
     </history-entry>
@@ -326,6 +327,18 @@
     <history-entry file="py_test_for_test_usr_test_addUser - 2018.06.07 at 10h 13m 06s.xml">
       <configuration name="py.test for test_usr.test_addUser" configurationId="tests" />
     </history-entry>
+    <history-entry file="py_test_for_test_usr_test_editUser - 2018.06.07 at 11h 40m 10s.xml">
+      <configuration name="py.test for test_usr.test_editUser" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_usr_test_editUser - 2018.06.07 at 11h 43m 25s.xml">
+      <configuration name="py.test for test_usr.test_editUser" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_usr_test_editUser - 2018.06.07 at 11h 43m 53s.xml">
+      <configuration name="py.test for test_usr.test_editUser" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_usr_test_editUser - 2018.06.07 at 12h 27m 04s.xml">
+      <configuration name="py.test for test_usr.test_editUser" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -339,14 +352,14 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.80454546" visible="true" weight="0.18125" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4548353" visible="true" weight="0.18125" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297414" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30260417" side_tool="true" weight="0.39957938" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3297414" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3286638" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.2996812" />
-      <window_info id="Structure" order="1" sideWeight="0.19545455" side_tool="true" visible="true" weight="0.18125" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" visible="true" weight="0.2986185" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.664187" />
+      <window_info id="Structure" order="1" sideWeight="0.5451647" side_tool="true" visible="true" weight="0.18125" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.33368757" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.4218916" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -439,8 +452,23 @@
           <line>254</line>
           <option name="timeStamp" value="91" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actionmanagementapp/usr.py</url>
+          <line>193</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actionmanagementapp/usr.py</url>
+          <line>194</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_usr.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="93" />
+      <option name="time" value="96" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -629,13 +657,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_simple.py" />
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5511">
-          <caret line="209" selection-start-line="209" selection-end-line="209" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_auth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
@@ -653,16 +674,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/simple.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/testsimple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/simple.py" />
+    <entry file="file://$PROJECT_DIR$/tests/testsimple.py" />
     <entry file="file://$PROJECT_DIR$/setup.cfg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -686,8 +699,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_usr.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="167" column="35" selection-start-line="167" selection-start-column="35" selection-end-line="167" selection-end-column="35" />
+        <state relative-caret-position="-416">
+          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
         </state>
       </provider>
     </entry>
