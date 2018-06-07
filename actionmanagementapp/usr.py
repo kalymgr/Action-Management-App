@@ -12,7 +12,7 @@ from auth import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
 from users.model import User, UserCategory
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 
 
@@ -199,14 +199,39 @@ def editUser(user_id):
                            userCategories=uCategories)
 
 
-@bp.route('/<int:user_id>/changepassword')
+@bp.route('/<int:user_id>/changepassword', methods=('GET', 'POST'))
 @login_required
 def changeUserPassword(user_id):
     """
     Change user password routing function
     :return:
     """
-    return render_template('usermanagement/changeuserpassword.html', user=dummyData.user)
+    dbSession = current_app.config['DBSESSION']  # initialize db session variable
+    if request.method == 'POST':
+        oldPass = request.form['oldpassword']
+        newPass1 = request.form['newpassword1']
+        oldPass = request.form['newpassword2']
+
+        # get the user from the database
+        u = dbSession.query(User).filter(User.id == user_id).first()
+
+        error = ''  # initialize an empty error message
+        # check that the password given by the user is right
+        if not check_password_hash(oldPass, u.password):
+            error += 'Λάθος κωδικός χρήστη'
+
+        if error == '':  # if there is no error
+            pass  # change the user password
+
+        flash(error)
+
+
+
+    else:  # GET method
+        u = dbSession.query(User).filter(User.id == user_id).first()
+        if u is None:  # if the user does not exist in the database
+            abort(404)
+        return render_template('usermanagement/changeuserpassword.html', user=u)
 
 
 @bp.route('/categories')

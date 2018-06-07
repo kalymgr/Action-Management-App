@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 import pytest
 from flask import g, current_app, url_for
+from werkzeug.security import generate_password_hash
 
 from actionmanagementapp.users.model import User
 from tests import helperFunctions
@@ -215,3 +217,48 @@ def test_editUser(client, auth):
         assert locationHeaderResponse.endswith(url_for('users.userList'))
 
 
+def test_changeUserPassword(client, auth):
+    with client:
+        auth.login()  # the user is logged in
+        dbSession = current_app.config['DBSESSION']  # get the database session
+
+        # create a new user for testing
+        u = User(name='testchangepwduser',
+                 username='pwdusername',
+                 password=generate_password_hash('1234'))
+        dbSession.add(u)
+        dbSession.commit()
+
+        # test that the user properly gets the page (answer 200)
+        response = client.get(url_for('users.changeUserPassword', user_id=u.id))
+        assert response.status_code == 200
+
+        # test that the global user exists
+        assert g.user.id == 1  # the id of the default test user
+
+        # test that the user get the page for changing his/her password (not someone else)
+        # the response data had to be decoded with UTF-8 because of Greek
+        assert u.name in response.data.decode('utf-8')
+
+        # test that for a non existing user, a 404 error is returned
+        response404 = client.get(url_for('users.changeUserPassword', user_id=11846292))
+        assert response404.status_code == 404
+
+        # test that the old password is right
+        passwordData = {'oldpassword1': 'lathoskodikos',
+                        'newpassword1': '321',
+                        'newpassword2': '321'
+                        }
+        response2 = client.post(
+            # url_for('users.changeUserPassword', user_id=u.id),
+            '/users/1/changepassword')
+        assert u'Λάθος κωδικός' in response2.data.decode('utf-8')
+
+
+        # test that the new password is not blank
+
+        # test that the new password has been properly inserted in the database
+
+        # delete user
+        dbSession.delete(u)
+        dbSession.commit()
