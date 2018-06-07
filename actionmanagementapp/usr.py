@@ -69,6 +69,7 @@ def addUser():
         error = None  # set an error variable
 
         forma = request.form
+        """
         name = request.form['name']
         username = request.form['username']
         department = request.form['department']
@@ -78,6 +79,16 @@ def addUser():
         email = request.form['email']
         password = request.form['password']
         password2 = request.form['password2']
+        """
+        name = request.form.get('name', None)
+        username = request.form.get('username', None)
+        department = request.form.get('department', None)
+        userCatId = request.form.get('usercategory', None)
+        phone = request.form.get('phone', None)
+        mobile = request.form.get('mobile', None)
+        email = request.form.get('email', None)
+        password = request.form.get('password', None)
+        password2 = request.form.get('password2', None)
         # The checkbox field isn't returned if it is not checked.
         # So I tell the application that, if the form has no enabled field, return None value
         if request.form.get('enabled', None) == "True":
@@ -88,8 +99,8 @@ def addUser():
         error = ''
 
         # Check for required fields that are empty
-        if not name:
-            error += u' Δε δόθηκε το όνομα.'
+        if not name or name == '':
+            error += u'Δε δόθηκε το όνομα.'
         if not username:
             error += u' Δε δόθηκε όνομα χρήστη.'
         if not userCatId:
@@ -205,31 +216,39 @@ def changeUserPassword(user_id):
     :return:
     """
     dbSession = current_app.config['DBSESSION']  # initialize db session variable
+    u = dbSession.query(User).filter(User.id == user_id).first()  # get the user from the database
+    if u is None:  # if the user does not exist in the database
+        abort(404)
     if request.method == 'POST':
-        oldPass = request.form['oldpassword']
-        newPass1 = request.form['newpassword1']
-        oldPass = request.form['newpassword2']
-
-        # get the user from the database
-        u = dbSession.query(User).filter(User.id == user_id).first()
+        oldPass = request.form.get('oldpassword', '')
+        newPass1 = request.form.get('newpassword1', '')
+        newPass2 = request.form.get('newpassword2', '')
 
         error = ''  # initialize an empty error message
         # check that the password given by the user is right
-        if not check_password_hash(oldPass, u.password):
-            error += 'Λάθος κωδικός χρήστη'
-
-        if error == '':  # if there is no error
-            pass  # change the user password
+        if not check_password_hash(u.password, oldPass):
+            error += u'Λάθος κωδικός χρήστη'
+        # check that the new password is not blank
+        if newPass1 == '':
+            error += u'Ο καινούριος κωδικός δε μπορεί να είναι κενός'
+        # check that the two passwords match
+        if newPass1 != newPass2:
+            error += u'Οι δύο κωδικοί δεν ταιριάζουν'
+        # if there is no error
+        if error == '':
+            # insert the new password in the database
+            u.password = generate_password_hash(newPass1)
+            dbSession.add(u)
+            dbSession.commit()
+            # go to the user details page
+            flash(u'Ο Κωδικός για το χρήστη %s έχει αλλάξει'%u.name)
+            return redirect(url_for('users.userDetails', user_id=user_id))
 
         flash(error)
 
+        # return redirect(url_for('users.userDetails', user_id=user_id))
 
-
-    else:  # GET method
-        u = dbSession.query(User).filter(User.id == user_id).first()
-        if u is None:  # if the user does not exist in the database
-            abort(404)
-        return render_template('usermanagement/changeuserpassword.html', user=u)
+    return render_template('usermanagement/changeuserpassword.html', user=u)
 
 
 @bp.route('/categories')
