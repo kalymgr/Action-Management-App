@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Προσθήκη χρήστη{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+    <h1>Προσθήκη χρήστη</h1>
+    <form action="#" method="post">
+        <p> Όνοματεπώνυμο: <input type="text" name="name"></p>
+        <p> Όνομα χρήστη: <input type="text" name="username"></p>
+        <p> Υπηρεσία: <input type="text" name="department"></p>
+        <p> Κατηγορία:
+            <select name="usercategory">
+                {%  for cat in userCategories %}
+                <option value="{{ cat.id }}">{{ cat.name }}</option>
+                {%  endfor %}
+            </select>
+        </p>
+        <p> Τηλ: <input type="text" name="phone"></p>
+        <p> Κινητό: <input type="text" name="mobile"></p>
+        <p> Email: <input type="text" name="email"></p>
+        <p> Ενεργός: <input type="checkbox" name="enabled" value="True"> </p>
+        <p> Νέος Κωδικός: <input type="password" name="password"></p>
+        <p> Επιβεβαίωση νέου κωδικού: <input type="password" name="password2"></p>
+        <input type="submit" value="OK">
+    </form>
+
+    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+{% endblock %}
