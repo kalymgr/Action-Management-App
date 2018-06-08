@@ -24,7 +24,7 @@ class UserCategory(Base, TimeStampMixin):
 
     # mapper code that creates columns
     id = Column(Integer, primary_key=True,  autoincrement=False)
-    name = Column(String(200), nullable=False)
+    name = Column(String(200), nullable=False, unique=True)
     # users = relationship('User', backref=backref("userCategory", cascade="save-update"))
 
 
@@ -37,12 +37,12 @@ class User(Base, TimeStampMixin):
     # mapper code that creates columns
     id = Column(Integer, primary_key=True)
     name = Column(String(200), nullable=False)
-    username = Column(String(50), nullable=False)
+    username = Column(String(50), nullable=False, unique=True)
     password = Column(String(500), nullable=False)
     department = Column(String(200))
     phone = Column(String(15))
     mobile = Column(String(15))
-    email = Column(String(50))
+    email = Column(String(50), unique=True, nullable=False)
     enabled = Column(Boolean)
-    userCategoryId = Column(Integer, ForeignKey('usercategory.id', onupdate='cascade'))
+    userCategoryId = Column(Integer, ForeignKey('usercategory.id', onupdate='cascade'), nullable=False)
     userCategory = relationship('UserCategory', backref=backref('users'))

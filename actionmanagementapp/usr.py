@@ -3,6 +3,7 @@
 """
 Blueprint related to user management
 """
+from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import abort
 
 from tests.users import dummyData
@@ -258,16 +259,44 @@ def userCategories():
     User categories routing function
     :return:
     """
-    return render_template('usermanagement/usercategories.html', userCategories=dummyData.userCategories)
+    dbSession = current_app.config['DBSESSION']  # initialize db session variable
+    categories = dbSession.query(UserCategory).all()
+    return render_template('usermanagement/usercategories.html', userCategories=categories)
 
 
-@bp.route('/categories/add')
+@bp.route('/categories/add', methods=('GET', 'POST'))
 @login_required
 def addUserCategory():
     """
     Add category routing function
     :return:
     """
+    if request.method == 'POST':
+
+        dbSession = current_app.config['DBSESSION']  # initialize db session variable
+        c = UserCategory()
+        c.id = request.form.get('id', None)
+        c.name = request.form.get('name', None)
+
+        error = ''
+        if c.id == '' or c.id is None:
+            error += u' Δε συμπληρώθηκε κωδικός κατηγορίας.'
+        if c.name == '' or c.id is None:
+            error += u' Δε συμπληρώθηκε όνομα κατηγορίας.'
+
+        if error == '':
+            try:
+                dbSession.add(c)
+                dbSession.commit()  # add the new category in the database
+                flash(u'Η νέα κατηγορία έχει προστεθεί')
+                return redirect(url_for('users.userCategories'))
+            except IntegrityError as e:
+                flash(u' Ο κωδικός κατηγορίας υπάρχει ήδη.')
+                dbSession.rollback()
+
+        else:
+            flash(error)
+
     return render_template('usermanagement/addusercategory.html')
 
 

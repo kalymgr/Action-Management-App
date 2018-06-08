@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Python module that sets up the database for the application
 """
@@ -60,7 +61,34 @@ def getProductionDatabaseSession():
     """
     engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
     # go into the database and add the classes as new tables
-    return getSession(Base, engine)
+    dbSession = getSession(Base, engine)
+
+    # insert some default values in the database
+    defaultUserCategories = [
+        {'id': '1', 'name': u'Χρήστης'},
+        {'id': '2', 'name': u'Διαχειριστής'},
+        {'id': '3', 'name': u'Υπερδιαχειριστής'},
+    ]
+
+    if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
+        for uc in defaultUserCategories:
+            dbSession.add(UserCategory(id=uc['id'], name=uc['name']))
+        dbSession.commit()
+
+    # add the default user
+    defaultUser = User(
+        id=1,
+        name=u'Μιχάλης Τσουγκράνης',
+        username='kalymgr',
+        email='mtsougranis@gmail.com',
+        password=generate_password_hash('kalymgr'),
+        userCategoryId=3,
+        enabled=True
+    )
+    if dbSession.query(User).count() == 0:
+        dbSession.add(defaultUser)
+        dbSession.commit()
+    return dbSession
 
 
 def getTestingDatabaseSession():

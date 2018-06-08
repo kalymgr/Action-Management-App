@@ -3,7 +3,7 @@ import pytest
 from flask import g, current_app, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from actionmanagementapp.users.model import User
+from actionmanagementapp.users.model import User, UserCategory
 from tests import helperFunctions
 
 @pytest.mark.parametrize('path', (
@@ -315,3 +315,61 @@ def test_changeUserPassword(client, auth):
         # delete user
         dbSession.delete(u)
         dbSession.commit()
+
+def test_userCategories(client, auth):
+    with client:
+        auth.login()  # login
+        dbSession = current_app.config['DBSESSION']  # get the database session
+
+        # test that the response for a get request is 200
+        response = client.get(url_for('users.userCategories'))
+        assert response.status_code == 200
+
+        # test that the categories are shown on the page
+        categories = dbSession.query(UserCategory).all()  # get the categories from the database
+        for category in categories:
+            assert category.name in response.data.decode('utf-8')  # all category names should appear on page
+
+
+@pytest.mark.parametrize(('catId', 'name', 'message'),(
+        ('', 'empty id category', u'Δε συμπληρώθηκε κωδικός κατηγορίας'),
+        ('28391782', '', u'Δε συμπληρώθηκε όνομα κατηγορίας')
+))
+def test_addUserCategory_validateInput(client, auth, catId, name, message):
+    with client:
+        auth.login()
+        response = client.post(url_for('users.addUserCategory'), data={'id': catId, 'name': name})
+        assert message in response.data.decode('utf-8')
+
+
+def test_addUserCategory(client, auth):
+    with client:
+        auth.login()  # login
+        dbSession = current_app.config['DBSESSION']  # get the database session
+
+        # test that the get method returns a 200 status
+        response = client.get(url_for('users.addUserCategory'))
+        assert response.status_code == 200
+
+        # test that the post method properly saves the data in the database
+        categoryData = {'id': 5827, 'name': 'testing add new category'}
+        responsePost = client.post(url_for('users.addUserCategory'), data=categoryData)
+
+        catAdded = dbSession.query(UserCategory).filter(UserCategory.id == categoryData['id']).first()
+        assert catAdded is not None
+
+        # remove the category from the database (cleaning)
+        dbSession.delete(catAdded)
+        dbSession.commit()
+
+        # test that the user cannot create a new category with an existing id (integrity error)
+        cat = dbSession.query(UserCategory).first()  # get an existing category
+        newCat = UserCategory()
+        newCat.id = cat.id
+        newCat.name = cat.name
+        responseDuplicateKey = client.post(url_for('users.addUserCategory'),
+                                           data={
+                                               'id': newCat.id,
+                                               'name': newCat.name
+                                           })
+        assert u'Ο κωδικός κατηγορίας υπάρχει ήδη' in responseDuplicateKey.data.decode('utf-8')
