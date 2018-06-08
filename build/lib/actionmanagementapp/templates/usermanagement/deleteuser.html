@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Διαγραφή χρήστη{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+    {% if user %}
+        <h1>Διαγραφή χρήστη "{{user.name}}"</h1>
+        <i> Είστε σίγουρος/η ότι θέλετε να διαγράψετε το/τη χρήστη;</i>
+        <form action="#" method="post"><input type="submit" value="OK"> </form>
+    {% else %}
+        <p> Δεν υπάρχει τέτοιος χρήστης </p>
+    {% endif %}
+    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+{% endblock %}

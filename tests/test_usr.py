@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 from flask import g, current_app, url_for
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from actionmanagementapp.users.model import User
 from tests import helperFunctions
@@ -110,6 +110,27 @@ def test_addUser(client, auth):
         dbSession.commit()
 
 
+@pytest.mark.parametrize(('name', 'username', 'userCategory', 'password', 'password2', 'message'),
+                         (
+                                ('', 'aoua', '1', '1', '1', u'Δε δόθηκε το όνομα'),  # empty name
+                                ('aaaa', '', '1', '1', '1', u'Δε δόθηκε όνομα χρήστη'),  # empty user name
+                                ('aaaa', 'aaa', '', '1', '1', u'Δε δόθηκε κατηγορία χρήστη'),  # empty category
+                                ('aaaa', 'aa', '1', '', '', u'Κενός κωδικός χρήστη'),  # empty password
+                                ('aaaa', '', '1', '123', '321', u'Δεν ταιριάζουν οι κωδικοί')  # passwords do not match
+                         ))
+def test_addUser_validInput(client, auth, name, username, userCategory, password, password2, message):
+    with client:
+        auth.login()  # login
+        response = client.post(url_for('users.addUser'),
+                               data={
+                                   'name': name,
+                                   'username': username,
+                                   'usercategory': userCategory,
+                                   'password': password,
+                                   'password2': password2
+                               })
+        assert message in response.data.decode('utf-8')
+
 def test_DeleteUser(client, auth):
 
     with client:
@@ -142,7 +163,7 @@ def test_DeleteUser(client, auth):
         assert u is None  # the user no more exists in the database
 
         # check that there has been a redirection to the users list page
-        locationHeaderResponse = helperFunctions.getHeaderContent(response.headers,'Location')
+        locationHeaderResponse = helperFunctions.getHeaderContent(response.headers, 'Location')
         assert locationHeaderResponse.endswith(url_for('users.userList'))
 
 
@@ -244,20 +265,52 @@ def test_changeUserPassword(client, auth):
         response404 = client.get(url_for('users.changeUserPassword', user_id=11846292))
         assert response404.status_code == 404
 
-        # test that the old password is right
-        passwordData = {'oldpassword1': 'lathoskodikos',
-                        'newpassword1': '321',
-                        'newpassword2': '321'
-                        }
-        response2 = client.post(
-            # url_for('users.changeUserPassword', user_id=u.id),
-            '/users/1/changepassword')
-        # assert u'Λάθος κωδικός' in response2.data.decode('utf-8')
+        userData = {  # user data with wrong old password
+            'oldpassword': u'1',
+            'newpassword1': u'1',
+            'newpassword2': u'1'
+        }
 
+        # send the POST request
+        responsePost = client.post(url_for('users.changeUserPassword', user_id=u.id),
+                                   data=userData)
+        assert u'Λάθος κωδικός' in responsePost.data.decode('utf-8')
 
         # test that the new password is not blank
+        userDataBlankNewPassword = {  # user data with empty new password
+            'oldpassword': u'1234',
+            'newpassword1': u'',
+            'newpassword2': u''
+        }
+        responsePost = client.post(url_for('users.changeUserPassword', user_id=u.id),
+                                   data=userDataBlankNewPassword)
+        assert u'Ο καινούριος κωδικός δε μπορεί να είναι κενός' in responsePost.data.decode('utf-8')
+
+        # test that the two new passwords match
+        userDataNewPasswordsDontMatch= {  # new passwords don't match
+            'oldpassword': u'1234',
+            'newpassword1': u'9999',
+            'newpassword2': u'8888'
+        }
+        responsePost = client.post(url_for('users.changeUserPassword', user_id=u.id),
+                                   data=userDataNewPasswordsDontMatch)
+
+        assert u'Οι δύο κωδικοί δεν ταιριάζουν' in responsePost.data.decode('utf-8')
 
         # test that the new password has been properly inserted in the database
+        userDataOK = {  # user data which is OK
+            'oldpassword': u'1234',
+            'newpassword1': u'9999',
+            'newpassword2': u'9999'
+        }
+        # change the password of the user
+        responsePost = client.post(url_for('users.changeUserPassword', user_id=u.id),
+                                   data=userDataOK)
+        # get the user from the database
+        userWithChangedPassword = dbSession.query(User).filter(User.id == u.id).first()
+        # check if the new password is the one inserted
+        assert check_password_hash(userWithChangedPassword.password, userDataOK['newpassword1'])
+
 
         # delete user
         dbSession.delete(u)
