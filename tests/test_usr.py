@@ -139,7 +139,8 @@ def test_DeleteUser(client, auth):
 
         # create a user to be deleted
         userToBeDeleted = User(name='User to be deleted',
-                               username='del', password='del')
+                               username='del', password='del', email='tobedeleted@gmail.com',
+                               userCategoryId=1)
         dbSession = current_app.config['DBSESSION']
         dbSession.add(userToBeDeleted)
         dbSession.commit()
@@ -195,7 +196,8 @@ def test_editUser(client, auth):
         userToUpdate.email = 'email'
         userToUpdate.phone = 'phone'
         userToUpdate.mobile = 'mobilep'
-        userToUpdate.department = 'dep'
+        userToUpdate.department = 'dep',
+        userToUpdate.userCategoryId = 1
 
         dbSession.add(userToUpdate)
         dbSession.commit()
@@ -246,7 +248,9 @@ def test_changeUserPassword(client, auth):
         # create a new user for testing
         u = User(name='testchangepwduser',
                  username='pwdusername',
-                 password=generate_password_hash('1234'))
+                 password=generate_password_hash('1234'),
+                 email='testchangeuserpassword@gmail.com',
+                 userCategoryId=1)
         dbSession.add(u)
         dbSession.commit()
 
@@ -373,3 +377,67 @@ def test_addUserCategory(client, auth):
                                                'name': newCat.name
                                            })
         assert u'Ο κωδικός κατηγορίας υπάρχει ήδη' in responseDuplicateKey.data.decode('utf-8')
+
+
+def test_editUserCategory(client, auth):
+    with client:
+        auth.login()  # login
+        dbSession = current_app.config['DBSESSION']  # get the db session variable
+
+        # check that for a non existing category, a 404 error is raised
+        response404 = client.get(url_for('users.editUserCategory', user_category_id=817687612))
+        assert response404.status_code == 404
+
+        # create and inserrt a category in the database. Will be used for this test and then deleted
+        c = UserCategory(id=987654, name='Testing edit category')
+        dbSession.add(c)
+        dbSession.commit()
+
+        # check that the edit user category is fetched, if the user category exists
+        response200 = client.get(url_for('users.editUserCategory', user_category_id=c.id))
+        assert response200.status_code == 200
+
+        # check that all category data are properly inserted in form fields
+        assert c.name in response200.data.decode('utf-8')
+        # after you are finished, delete the category
+
+        # check that the updated category data will be stored in the database
+        newCatName = 'updated testing category name'
+        responseUpdate = client.post(url_for('users.editUserCategory', user_category_id=c.id),
+                                     data={'id': c.id, 'name': newCatName})
+        cUpdated = dbSession.query(UserCategory).filter(UserCategory.id == c.id).first()
+        assert newCatName == cUpdated.name
+
+        dbSession.delete(c)
+        dbSession.commit()
+
+
+def test_deleteUserCategory(client, auth):
+    with client:
+        auth.login()  # login
+        dbSession = current_app.config['DBSESSION']  # get the db session
+        # test for 404 error for a non existing category
+        response404 = client.get(url_for('users.deleteUserCategory', user_category_id=987658163))
+        assert response404.status_code == 404
+
+        # test for 200 response for existing category
+        catToBeDeleted = UserCategory(id='1453', name='cat to be deleted')
+        catToBeDeleteId = catToBeDeleted.id  # hold the id in a separate variable. Used when testing POST
+        dbSession.add(catToBeDeleted)
+        dbSession.commit()  # test category added
+        response200 = client.get(url_for('users.deleteUserCategory', user_category_id=catToBeDeleted.id))
+        assert response200.status_code == 200
+
+        # test that it responds with the proper category data
+        assert catToBeDeleted.name in response200.data.decode('utf-8')
+
+        # test that the category was properly deleted
+        responseDelete = client.post(url_for('users.deleteUserCategory', user_category_id=catToBeDeleted.id),
+                                     data={'id': catToBeDeleted.id})
+
+        catToBeDeletedConfirmed = \
+            dbSession.query(UserCategory).filter(UserCategory.id == catToBeDeleteId).first()
+        assert catToBeDeletedConfirmed is None  # check the category no longer exists in the database
+        # delete the test category
+        # dbSession.delete(catToBeDeleted)
+        # dbSession.commit()

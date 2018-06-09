@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, app
+from flask import Flask, render_template, app, g
 
 from utilities import database_setup
 import auth

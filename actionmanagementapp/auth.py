@@ -17,19 +17,17 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 # Here, the routing functions are associated with URLS and functionality is implemented
+"""
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    """
-    Function for routing the register page requests
-    :return:
-    """
+    
     # get the db session from the application settings
     dbSession = current_app.config['DBSESSION']
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         name = request.form['name']
-
+        email = request.form.get('email', None)
         error = None
 
         if not username:
@@ -54,6 +52,7 @@ def register():
         flash(error)
 
     return render_template('auth/register.html')
+"""
 
 
 @bp.route('/login', methods=('GET', 'POST'))

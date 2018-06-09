@@ -8,9 +8,9 @@
     <h1>Διαγραφή κατηγορίας χρήστη "{{ userCategory.name }}"</h1>
     <p> Είστε σίγουρος/η ότι θέλετε να διαγράψετε την κατηγορία; </p>
 
-    <form action="#" method="get">
+    <form action="#" method="post">
         <input type="submit" value="ΟΚ">
     </form>
 
-    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+    <a href="{{ url_for('users.userCategories') }}"> Πίσω στη Λίστα κατηγοριών </a>
 {% endblock %}

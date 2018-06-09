@@ -8,7 +8,7 @@ from werkzeug.exceptions import abort
 
 from tests.users import dummyData
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for)
+    Blueprint, flash, redirect, render_template, request, url_for, session)
 from auth import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
@@ -66,6 +66,8 @@ def addUser():
     Add user routing function
     :return:
     """
+    dbSession = current_app.config['DBSESSION']
+    userCat = dbSession.query(UserCategory).all()
     if request.method == 'POST':
         error = None  # set an error variable
 
@@ -134,7 +136,7 @@ def addUser():
             flash("The user %s has been added" % newUser.name)
             # go to the main users page
             return redirect(url_for('users.userList'))
-    return render_template('usermanagement/adduser.html', userCategories=dummyData.userCategories)
+    return render_template('usermanagement/adduser.html', userCategories=userCat)
 
 
 @bp.route('/<int:user_id>/delete', methods=('GET', 'POST'))
@@ -300,21 +302,64 @@ def addUserCategory():
     return render_template('usermanagement/addusercategory.html')
 
 
-@bp.route('/categories/<int:user_category_id>/edit')
+@bp.route('/categories/<int:user_category_id>/edit', methods=('GET', 'POST'))
 @login_required
 def editUserCategory(user_category_id):
     """
     Edit category routing function
     :return:
     """
-    return render_template('usermanagement/editusercategory.html', userCategory=dummyData.userCategory)
+    # get the db session variable
+    dbSession = current_app.config['DBSESSION']
+    if request.method == 'POST':
+        # get the POST fields
+        catNameUpdated = request.form.get('name', None)
+
+        c = dbSession.query(UserCategory).filter(UserCategory.id == user_category_id).first()
+
+        # check for validation errors
+        error = ''
+        if catNameUpdated == '':
+            error += u'Το όνομα της κατηγορίας δε μπορεί να είναι κενό.'
+
+        if error != '':
+            flash(error)
+        else:
+            # get the category from the database
+            c.name = catNameUpdated
+            dbSession.add(c)
+            dbSession.commit()
+
+            # show message for successful edit
+            flash(u'Οι αλλαγές στην κατηγορία %s καταχωρήθηκαν με επιτυχία'%catNameUpdated)
+            # go to the main categories page
+            return redirect(url_for('users.userCategories'))
+    else:
+        # get the category from the database
+        c = dbSession.query(UserCategory).filter(UserCategory.id == user_category_id).first()
+        if c is None:  # if the category with the specific id does not exist
+            abort(404)  # respond with 404 error
+
+    return render_template('usermanagement/editusercategory.html', userCategory=c)
 
 
-@bp.route('/categories/<int:user_category_id>/delete')
+@bp.route('/categories/<int:user_category_id>/delete', methods=('GET', 'POST'))
 @login_required
 def deleteUserCategory(user_category_id):
     """
     Delete category routing function
     :return:
     """
-    return render_template('usermanagement/deleteusercategory.html', userCategory=dummyData.userCategory)
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    c = dbSession.query(UserCategory).filter(UserCategory.id == user_category_id).first()  # get the category
+    if request.method == 'POST':
+        # get the id of the category to be deleted
+        dbSession.delete(c)
+        dbSession.commit()
+        flash(u'Η κατηγορία έχει διαγραφεί')
+        return redirect(url_for('users.userCategories'))
+    else:
+        if c is None:
+            abort(404)
+
+    return render_template('usermanagement/deleteusercategory.html', userCategory=c)

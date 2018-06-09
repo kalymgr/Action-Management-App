@@ -113,7 +113,8 @@ def getTestingDatabaseSession():
         testUser = User(name="test user",
                         username="test",
                         password=generate_password_hash("test"),
-                        userCategoryId=1)
+                        userCategoryId=1,
+                        email='test@gmail.com')
         dbSession.add(testUser)
 
     dbSession.commit()  # save changes to the database

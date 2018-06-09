@@ -7,8 +7,8 @@
 {% block content %}
     <h1>Επεξεργασία κατηγορίας χρήστη "{{ userCategory.name }}"</h1>
 
-    <form action="#" method="get">
-        <p>Κωδ. : <input type="text" name="id" value="{{ userCategory.id }}"></p>
+    <form action="#" method="post">
+        <p>Κωδ. : <input type="text" name="id" value="{{ userCategory.id }}" disabled></p>
         <p>Όνομα: <input type="text" name="name" value="{{ userCategory.name }}"></p>
         <input type="submit" value="ΟΚ">
     </form>
