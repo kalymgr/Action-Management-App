@@ -4,10 +4,7 @@ from flask import Flask, render_template, app, g
 from utilities import database_setup
 import auth
 import usr
-
-
-# TODO: Add custom 404 error pages
-
+from actionmanagementapp.various import custom_error_pages
 
 def create_app(test_config=None):
     """
@@ -46,6 +43,9 @@ def create_app(test_config=None):
     # the blueprints will be registered here, before the app is returned
     app.register_blueprint(auth.bp)
     app.register_blueprint(usr.bp)
+
+    # register error pages handlers
+    app.register_error_handler(404, custom_error_pages.page_not_found)
 
     return app
 

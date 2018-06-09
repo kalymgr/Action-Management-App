@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Η σελίδα δε βρέθηκε{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+<b>Η σελίδα που ψάχνετε δε βρέθηκε.</b> </br>
+    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+{% endblock %}
