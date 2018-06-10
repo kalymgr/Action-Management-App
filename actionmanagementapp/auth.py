@@ -63,6 +63,9 @@ def login():
     """
     # get the db session from the application settings
     dbSession = current_app.config['DBSESSION']
+
+    applicationLogger = current_app.logger  # get the application logger
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -75,10 +78,13 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
+            # log the attempt
+            applicationLogger.info("Login attempt: Incorrect username")
         elif not check_password_hash(user.password, password):
             error = 'Incorrect password.'
-
+            applicationLogger.info("Login attempt: Incorrect password")
         if error is None:
+            applicationLogger.info("Login attempt: Successful login")
             session.clear()
             session['user_id'] = user.id
             # return redirect(url_for('index'))

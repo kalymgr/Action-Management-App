@@ -4,7 +4,7 @@ from flask import Flask, render_template, app, g
 from utilities import database_setup
 import auth
 import usr
-from actionmanagementapp.various import custom_error_pages
+from actionmanagementapp.various import custom_error_pages, logging_settings
 
 def create_app(test_config=None):
     """
@@ -16,6 +16,10 @@ def create_app(test_config=None):
     :param test_config:
     :return:
     """
+
+    # configure the logging settings before you create the app
+    logging_settings.setLoggingSettings()
+
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     # the config attribute of the app is an object that holds the loaded
