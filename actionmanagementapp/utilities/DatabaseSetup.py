@@ -9,9 +9,14 @@ Python module that sets up the database for the application
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from actionmanagementapp.users.model import Base, UserCategory
-from actionmanagementapp.users.model import User
+from actionmanagementapp.users.UsersModels import UserCategory
+from actionmanagementapp.users.UsersModels import User
+from actionmanagementapp.log.LogModels import LogRecords  # do not remove. It is used to create the log db table
+# TODO: improve the way the declarative base is created and handled
 from werkzeug.security import generate_password_hash
+from actionmanagementapp.utilities import SQLALchemyUtils
+
+Base = SQLALchemyUtils.Base
 
 
 def createEngine(db_UserName, db_Password, database_Name, db_Server, connection_Charset):

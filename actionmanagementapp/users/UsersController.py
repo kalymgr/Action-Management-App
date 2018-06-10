@@ -6,13 +6,13 @@ Blueprint related to user management
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import abort
 
-from tests.users import dummyData
+
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session)
-from auth import login_required
+from actionmanagementapp.auth.authController import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
-from users.model import User, UserCategory
+from actionmanagementapp.users.UsersModels import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 
@@ -72,17 +72,6 @@ def addUser():
         error = None  # set an error variable
 
         forma = request.form
-        """
-        name = request.form['name']
-        username = request.form['username']
-        department = request.form['department']
-        userCatId = request.form['usercategory']
-        phone = request.form['phone']
-        mobile = request.form['mobile']
-        email = request.form['email']
-        password = request.form['password']
-        password2 = request.form['password2']
-        """
         name = request.form.get('name', None)
         username = request.form.get('username', None)
         department = request.form.get('department', None)
@@ -103,7 +92,7 @@ def addUser():
 
         # Check for required fields that are empty
         if not name or name == '':
-            error += u'Δε δόθηκε το όνομα.'
+            error += u' Δε δόθηκε το όνομα.'
         if not username:
             error += u' Δε δόθηκε όνομα χρήστη.'
         if not userCatId:
@@ -112,6 +101,8 @@ def addUser():
             error += u' Κενός κωδικός χρήστη.'
         if password != password2:
             error += u' Δεν ταιριάζουν οι κωδικοί.'
+        if not email:
+            error += u' Δε δόθηκε διεύθυνση email. '
         """
         """
         if error is not '':  # if there was an error

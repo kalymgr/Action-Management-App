@@ -36,17 +36,17 @@ def setLoggingSettings():
         },
         'handlers':
             {
-                'smtp':  # handler that sends email to infoerawebdesign@gmail.com when a login event happens
+                'smtp':  # handler that sends email to infoerawebdesign@gmail.com when an ERROR (or worse) happens
                 {
                     'class': 'logging.handlers.SMTPHandler',
                     'formatter': 'default',
                     'mailhost': 'smtp.gmail.com',
                     'secure': (),  # needed because of tls/ssl smtp server
-                    'credentials': ('mtsougranis2@gmail.com', 'k@lymn0s'),  # have to add the credentials for the account
+                    'credentials': ('mtsougranis2@gmail.com', 'k@lymn0s'),
                     'fromaddr': 'mtsougranis2@gmail.com',
                     'toaddrs': 'infoerawebdesign@gmail.com',
                     'subject': 'Actions Management App Log Event',
-                    'filters': ['loginAttempt']
+                    # 'filters': ['loginAttempt']
                     # 'level': 'ERROR',  # filter logging level per handler
                 },
                 'debugconsole':  # handler that sends all messages to the console - should be activated only during dev
@@ -56,6 +56,12 @@ def setLoggingSettings():
                     # 'level': 'DEBUG',
 
                 },
+                'dblog': {  # handler that stores logs in the database
+                    'class': 'logging.handlers.HTTPHandler',
+                    'host': 'localhost',
+                    'url': '',
+                    'method': 'POST'
+                }
 
              },
         'root': {

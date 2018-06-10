@@ -1,19 +1,14 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, func, Boolean
-from sqlalchemy.ext.declarative import declarative_base
+
 from sqlalchemy.orm import relationship, sessionmaker, backref
+
 
 # create a class that inherits all the features of sql alchemy
 # it will be inherited from the classes
-Base = declarative_base()
+from actionmanagementapp.utilities.DbModels import TimeStampMixin
+from actionmanagementapp.utilities import SQLALchemyUtils
 
-
-class TimeStampMixin(object):
-    """
-    Mixin class with timestamp columns that should be added to every table
-    """
-    created_at = Column(DateTime, default=func.now())  # column that stores the time when a row was created
-    mysql_engine = 'InnoDB',
-    mysql_charset = 'utf8'
+Base = SQLALchemyUtils.Base
 
 
 class UserCategory(Base, TimeStampMixin):

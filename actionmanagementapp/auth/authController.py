@@ -2,7 +2,7 @@
 Blueprint for authentication
 """
 
-from users.model import User, UserCategory
+from actionmanagementapp.users.UsersModels import User, UserCategory
 import functools
 
 from flask import (
@@ -14,45 +14,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 # a blueprint named auth is created.Like the application object,
 # the blueprint needs to know where it's defined, so __name__ is passed as the second argument
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-
-
-# Here, the routing functions are associated with URLS and functionality is implemented
-"""
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
-    
-    # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        name = request.form['name']
-        email = request.form.get('email', None)
-        error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        else:
-            # check if the user is in the database
-            noOfExistingUser =\
-                dbSession.query(User).filter(User.username == username).count()
-            if noOfExistingUser !=0:  # the user already exists
-                error = "The user already exists"
-
-        if error is None:
-            # insert new user in the database
-            newUser = User(name=name, username=username,
-                           password=generate_password_hash(password, salt_length=8))
-            dbSession.add(newUser)
-            dbSession.commit()
-            return redirect(url_for('auth.login'))
-
-        flash(error)
-
-    return render_template('auth/register.html')
-"""
 
 
 @bp.route('/login', methods=('GET', 'POST'))

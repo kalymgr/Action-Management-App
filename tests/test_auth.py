@@ -1,7 +1,7 @@
 import pytest
 from flask import g, session, current_app
-from actionmanagementapp.users.model import User
-from actionmanagementapp.utilities import database_setup
+from actionmanagementapp.users.UsersModels import User
+from actionmanagementapp.utilities import DatabaseSetup
 
 """
 def test_register(client, app):

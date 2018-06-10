@@ -3,7 +3,7 @@ import pytest
 from flask import g, current_app, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from actionmanagementapp.users.model import User, UserCategory
+from actionmanagementapp.users.UsersModels import User, UserCategory
 from tests import helperFunctions
 
 @pytest.mark.parametrize('path', (

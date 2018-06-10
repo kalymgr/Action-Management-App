@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/actionmanagementapp/usr.py" line="365" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/actionmanagementapp/users/UsersController.py" line="356" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.pytest_cache/v/cache/nodeids" beforeDir="false" afterPath="$PROJECT_DIR$/.pytest_cache/v/cache/nodeids" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Documentation/Product features.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Product features.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actionmanagementapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/auth/authController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/users/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/users/UsersModels.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/users/usersController.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/users/UsersController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/utilities/DatabaseSetup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/various/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/various/custom_error_pages.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/utilities/CustomErrorPages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/log/logging_settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/actionmanagementapp/utilities/database_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/actionmanagementapp/utilities/database_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/tests/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/tests/test_auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/test_usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/tests/test_usr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/tests/users/dummyData.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/tests/users/dummyData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_usr.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_usr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/users/dummyData.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/users/dummyData.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,24 +37,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="auth.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="80" column="29" lean-forward="true" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
-              <folding>
-                <element signature="e#38#80#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
+            <state relative-caret-position="270">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -42,13 +50,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logging_settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py">
+      <file leaf-file-name="DatabaseSetup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/DatabaseSetup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="32" column="92" selection-start-line="32" selection-start-column="92" selection-end-line="32" selection-end-column="92" />
+            <state relative-caret-position="378">
+              <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UsersModels.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/UsersModels.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="20" column="64" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="64" />
               <folding>
-                <element signature="e#59#85#0" expanded="true" />
+                <element signature="e#0#83#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLALchemyUtils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/SQLALchemyUtils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="2" column="77" selection-start-line="2" selection-start-column="77" selection-end-line="2" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogModels.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/LogModels.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+              <folding>
+                <element signature="e#0#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DbModels.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/DbModels.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,6 +125,7 @@
       <find>dbS</find>
       <find>client.post</find>
       <find>decode</find>
+      <find>Base</find>
     </findStrings>
     <dirStrings>
       <dir>E:\python_foundation\actionsmanagementapp\actionsmanagerep</dir>
@@ -86,17 +137,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flaskr/templates/auth/base.html" />
-        <option value="$PROJECT_DIR$/flaskr/users.py" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/addusercategory.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/changeuserpassword.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/deleteuser.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/deleteusercategory.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/editusercategory.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/usercategories.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/edituser.html" />
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/users.html" />
-        <option value="$PROJECT_DIR$/flaskr/users/model.py" />
         <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/adduser.html" />
         <option value="$PROJECT_DIR$/flaskr/templates/base.html" />
         <option value="$PROJECT_DIR$/flaskr/templates/404.html" />
@@ -134,13 +174,24 @@
         <option value="$PROJECT_DIR$/actionmanagementapp/usr.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/templates/page_not_found.html" />
         <option value="$PROJECT_DIR$/actionmanagementapp/various/custom_error_pages.py" />
-        <option value="$PROJECT_DIR$/actionmanagementapp/__init__.py" />
-        <option value="$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/auth.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/log.py" />
+        <option value="$PROJECT_DIR$/tests/test_log.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/log/model.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/auth/authController.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/users/usersController.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/ModelMixins.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/__init__.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/SQLALchemyUtils.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/DbModels.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/users/UsersModels.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/log/LogModels.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/utilities/DatabaseSetup.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-164" />
     <option name="y" value="241" />
     <option name="width" value="1936" />
@@ -151,6 +202,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,13 +219,18 @@
               <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
               <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
               <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
-              <item name="various" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
+              <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
+              <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
+              <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -183,11 +240,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\python_foundation\actionsmanagementapp\actionsmanagerep\actionmanagementapp\utilities" />
+      <recent name="E:\python_foundation\actionsmanagementapp\actionsmanagerep\actionmanagementapp\log" />
+      <recent name="E:\python_foundation\actionsmanagementapp\actionsmanagerep\actionmanagementapp\auth" />
+      <recent name="E:\python_foundation\actionsmanagementapp\actionsmanagerep\actionmanagementapp\users" />
       <recent name="G:\python_foundation\actionsmanagementapp\actionsmanagerep\tests\users" />
-      <recent name="G:\python_foundation\actionsmanagementapp\actionsmanagerep\tests" />
-      <recent name="E:\python_foundation\actionsmanagementapp\flaskr\static" />
-      <recent name="E:\python_foundation\actionsmanagementapp\test\users" />
-      <recent name="E:\python_foundation\actionsmanagementapp\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -220,6 +277,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="py.test for test_log.test_addLog" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="actionsmanagementapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_log.test_addLog&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="py.test for test_usr.test_deleteUserCategory" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="actionsmanagementapp" />
@@ -263,20 +334,6 @@
       <option name="_new_target" value="&quot;tests.test_usr.test_changeUserPassword&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="py.test for tests.test_usr.test_editUser" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="actionsmanagementapp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_usr.test_editUser&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
     <configuration name="py.test in tests" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="actionsmanagementapp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -309,18 +366,18 @@
       <item itemvalue="Python tests.py.test for test_usr.test_editUserCategory" />
       <item itemvalue="Python tests.test_user_loggedin" />
       <item itemvalue="Python tests.py.test in tests" />
-      <item itemvalue="Python tests.py.test for tests.test_usr.test_editUser" />
       <item itemvalue="Python tests.py.test for tests.test_usr.test_changeUserPassword" />
       <item itemvalue="Python tests.py.test for test_usr.test_deleteUserCategory" />
       <item itemvalue="Python.__init__" />
+      <item itemvalue="Python tests.py.test for test_log.test_addLog" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.__init__" />
         <item itemvalue="Python tests.py.test in tests" />
+        <item itemvalue="Python tests.py.test for test_log.test_addLog" />
         <item itemvalue="Python tests.py.test for test_usr.test_deleteUserCategory" />
         <item itemvalue="Python tests.py.test for tests.test_usr.test_changeUserPassword" />
-        <item itemvalue="Python tests.py.test for tests.test_usr.test_editUser" />
       </list>
     </recent_temporary>
   </component>
@@ -338,21 +395,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 30m 09s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 31m 43s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 32m 17s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 32m 36s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 33m 51s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
     <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 44m 38s.xml">
       <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
     </history-entry>
@@ -366,6 +408,21 @@
       <configuration name="py.test in tests" configurationId="tests" />
     </history-entry>
     <history-entry file="py_test_in_tests - 2018.06.09 at 11h 01m 22s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 15h 28m 32s.xml">
+      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 15h 29m 22s.xml">
+      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 15h 46m 50s.xml">
+      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.10 at 16h 04m 58s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.10 at 19h 18m 52s.xml">
       <configuration name="py.test in tests" configurationId="tests" />
     </history-entry>
   </component>
@@ -382,23 +439,23 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6386431" visible="true" weight="0.21917808" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.73109245" visible="true" weight="0.27186513" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297414" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30260417" side_tool="true" weight="0.39957938" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3297414" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3286638" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.69739586" visible="true" weight="0.26939654" />
-      <window_info id="Structure" order="1" sideWeight="0.36135694" side_tool="true" visible="true" weight="0.21917808" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.69739586" visible="true" weight="0.23060344" />
+      <window_info id="Structure" order="1" sideWeight="0.26890758" side_tool="true" visible="true" weight="0.27186513" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.29094827" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.2112069" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.43103448" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.30599368" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.30495688" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -443,7 +500,7 @@
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/actionmanagementapp/auth.py</url>
+          <url>file://$PROJECT_DIR$/actionmanagementapp/auth/authController.py</url>
           <line>25</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
@@ -468,28 +525,38 @@
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/actionmanagementapp/usr.py</url>
-          <line>328</line>
+          <url>file://$PROJECT_DIR$/actionmanagementapp/users/UsersController.py</url>
+          <line>319</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/actionmanagementapp/auth.py</url>
+          <url>file://$PROJECT_DIR$/actionmanagementapp/auth/authController.py</url>
           <line>81</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py</url>
+          <url>file://$PROJECT_DIR$/actionmanagementapp/log/logging_settings.py</url>
           <line>14</line>
           <option name="timeStamp" value="150" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actionmanagementapp/__init__.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actionmanagementapp/__init__.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="151" />
+      <option name="time" value="154" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string />
+        <expression-string>create_app({'TESTING': True}).testing</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -500,6 +567,26 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>usersController.bp</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>usersController</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>__name__</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sys.stderr</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>applicationLogger</expression-string>
         <language-id>Python</language-id>
@@ -525,37 +612,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>session</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>request</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>g</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>x.name</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/usermanagement/edituser.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/usermanagement/users.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/usermanagement/adduser.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/auth/base.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/base.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/templates/404.html" />
-    <entry file="file://$PROJECT_DIR$/flaskr/various/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/flaskr/utilities/database_setup.py" />
     <entry file="file://$PROJECT_DIR$/flaskr/__init__.py" />
     <entry file="file://$PROJECT_DIR$/flaskr/users/model.py" />
     <entry file="file://$PROJECT_DIR$/flaskr/templates/usermanagement/userdetails.html" />
@@ -642,13 +701,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/conftest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -670,13 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_auth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/templates/auth/login.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -684,13 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/database_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>
@@ -743,47 +781,116 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/various/testDbAccess.py" />
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/various/custom_error_pages.py">
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/CustomErrorPages.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/usr.py">
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/UsersController.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="64" lean-forward="true" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_auth.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/log.py" />
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth/authController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/logging_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="61" column="28" lean-forward="true" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/UsersController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="94" column="29" lean-forward="true" selection-start-line="94" selection-start-column="29" selection-end-line="94" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
+        <state relative-caret-position="270">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/various/logging_settings.py">
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/LogModels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="32" column="92" selection-start-line="32" selection-start-column="92" selection-end-line="32" selection-end-column="92" />
+        <state relative-caret-position="351">
+          <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
           <folding>
-            <element signature="e#59#85#0" expanded="true" />
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth.py">
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/DbModels.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="80" column="29" lean-forward="true" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+        <state relative-caret-position="81">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
           <folding>
-            <element signature="e#38#80#0" expanded="true" />
+            <element signature="e#0#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/SQLALchemyUtils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="77" selection-start-line="2" selection-start-column="77" selection-end-line="2" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/UsersModels.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="20" column="64" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/utilities/DatabaseSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
         </state>
       </provider>
     </entry>

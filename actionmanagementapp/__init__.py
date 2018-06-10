@@ -1,10 +1,14 @@
 import os
-from flask import Flask, render_template, app, g
+from flask import Flask
+from sqlalchemy.ext.declarative import declarative_base
 
-from utilities import database_setup
+from utilities import DatabaseSetup
 import auth
-import usr
-from actionmanagementapp.various import custom_error_pages, logging_settings
+from actionmanagementapp.users import UsersController, UsersModels
+from actionmanagementapp.auth import authController
+from actionmanagementapp.utilities import CustomErrorPages
+from actionmanagementapp.log import logging_settings
+
 
 def create_app(test_config=None):
     """
@@ -28,7 +32,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         # DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        DBSESSION=database_setup.getProductionDatabaseSession()
+        DBSESSION=DatabaseSetup.getProductionDatabaseSession()
     )
 
     if test_config is None:
@@ -45,17 +49,18 @@ def create_app(test_config=None):
         pass
 
     # the blueprints will be registered here, before the app is returned
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(usr.bp)
+    app.register_blueprint(authController.bp)
+    app.register_blueprint(UsersController.bp)
+    # app.register_blueprint(log.bp)
 
     # register error pages handlers
-    app.register_error_handler(404, custom_error_pages.page_not_found)
+    app.register_error_handler(404, CustomErrorPages.page_not_found)
 
     return app
 
 
 if __name__ == '__main__':
-    database_setup  # I put that here. Maybe I do it in a different way
+    DatabaseSetup  # I put that here. Maybe I do it in a different way
     app = create_app()
     app.secret_key = 'super_secret_key'
     app.debug = True
