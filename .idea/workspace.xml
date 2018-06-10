@@ -4,11 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/actionmanagementapp/usr.py" line="365" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/actionmanagementapp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmanagementapp/various/testDbAccess.py" beforeDir="false" />
-    </list>
+    <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,20 +29,11 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="1242">
               <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom_error_pages.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/actionmanagementapp/various/custom_error_pages.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -335,9 +322,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 26m 39s.xml">
-      <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
-    </history-entry>
     <history-entry file="py_test_for_test_usr_test_deleteUserCategory - 2018.06.09 at 08h 30m 09s.xml">
       <configuration name="py.test for test_usr.test_deleteUserCategory" configurationId="tests" />
     </history-entry>
@@ -365,6 +349,9 @@
     <history-entry file="py_test_in_tests - 2018.06.09 at 08h 50m 51s.xml">
       <configuration name="py.test in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.09 at 11h 01m 22s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -377,15 +364,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.63922155" visible="true" weight="0.21917808" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64008623" visible="true" weight="0.21917808" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297414" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30260417" side_tool="true" weight="0.39957938" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3297414" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3286638" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.69739586" visible="true" weight="0.2801724" />
-      <window_info id="Structure" order="1" sideWeight="0.36077845" side_tool="true" visible="true" weight="0.21917808" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.43103448" />
+      <window_info id="Structure" order="1" sideWeight="0.3599138" side_tool="true" visible="true" weight="0.21917808" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.29094827" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.37176725" />
@@ -476,7 +462,7 @@
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string />
+        <expression-string>create_app({'TESTING': True}).testing</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -528,7 +514,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>import flask</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -768,7 +754,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
+        <state relative-caret-position="1242">
           <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
