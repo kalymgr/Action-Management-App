@@ -1,7 +1,7 @@
 import pytest
 from flask import g, current_app, url_for
 
-from actionmanagementapp.users.UsersModels import User
+from actionmanagementapp.users.users_models import User
 from tests import helperFunctions
 
 @pytest.mark.parametrize('path', (

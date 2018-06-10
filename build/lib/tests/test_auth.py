@@ -1,6 +1,6 @@
 import pytest
 from flask import g, session, current_app
-from actionmanagementapp.users.UsersModels import User
+from actionmanagementapp.users.users_models import User
 from actionmanagementapp.utilities import DatabaseSetup
 
 

@@ -4,8 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from utilities import DatabaseSetup
 import auth
-from actionmanagementapp.users import UsersController, UsersModels
-from actionmanagementapp.auth import authController
+from actionmanagementapp.users import users_controller, users_models
+from actionmanagementapp.auth import auth_controller
+from actionmanagementapp.log import log_controller
 from actionmanagementapp.utilities import CustomErrorPages
 from actionmanagementapp.log import logging_settings
 
@@ -49,9 +50,9 @@ def create_app(test_config=None):
         pass
 
     # the blueprints will be registered here, before the app is returned
-    app.register_blueprint(authController.bp)
-    app.register_blueprint(UsersController.bp)
-    # app.register_blueprint(log.bp)
+    app.register_blueprint(auth_controller.bp)
+    app.register_blueprint(users_controller.bp)
+    app.register_blueprint(log_controller.bp)
 
     # register error pages handlers
     app.register_error_handler(404, CustomErrorPages.page_not_found)

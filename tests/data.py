@@ -2,7 +2,7 @@
 Module for inserting dummy data in the database
 """
 
-from actionmanagementapp.users.UsersModels import UserCategory, User
+from actionmanagementapp.users.users_models import UserCategory, User
 
 
 def insertDummyDataToMYSQL(session):

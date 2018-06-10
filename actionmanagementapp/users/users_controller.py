@@ -9,10 +9,10 @@ from werkzeug.exceptions import abort
 
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session)
-from actionmanagementapp.auth.authController import login_required
+from actionmanagementapp.auth.auth_controller import login_required
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
-from actionmanagementapp.users.UsersModels import User, UserCategory
+from actionmanagementapp.users.users_models import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 

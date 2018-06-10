@@ -8,12 +8,12 @@ from actionmanagementapp.utilities import SQLALchemyUtils
 Base = SQLALchemyUtils.Base
 
 
-class LogRecords(Base, TimeStampMixin):
+class LoggingRecord(Base, TimeStampMixin):
     """
     table in the database for storing the log records
     """
     __tablename__ = 'logrecords'
 
-    id = Column(Integer, primary_key=True, autoincrement=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(300))
 

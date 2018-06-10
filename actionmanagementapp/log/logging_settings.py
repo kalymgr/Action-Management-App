@@ -4,6 +4,8 @@ File that is used for configuring logging settings
 from logging import Filter
 from logging.config import dictConfig
 
+from flask import url_for
+
 
 class LoginAttemptFilter(Filter):
     """
@@ -59,7 +61,7 @@ def setLoggingSettings():
                 'dblog': {  # handler that stores logs in the database
                     'class': 'logging.handlers.HTTPHandler',
                     'host': 'localhost',
-                    'url': '',
+                    'url': url_for('log.addLog'),
                     'method': 'POST'
                 }
 

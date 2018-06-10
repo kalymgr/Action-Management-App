@@ -2,7 +2,7 @@
 Blueprint for authentication
 """
 
-from actionmanagementapp.users.UsersModels import User, UserCategory
+from actionmanagementapp.users.users_models import User, UserCategory
 import functools
 
 from flask import (

@@ -8,8 +8,8 @@ Python module that sets up the database for the application
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from actionmanagementapp.users.UsersModels import Base, UserCategory
-from actionmanagementapp.users.UsersModels import User
+from actionmanagementapp.users.users_models import Base, UserCategory
+from actionmanagementapp.users.users_models import User
 from werkzeug.security import generate_password_hash
 
 
