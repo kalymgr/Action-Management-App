@@ -49,20 +49,21 @@ def setLoggingSettings():
                     'toaddrs': 'infoerawebdesign@gmail.com',
                     'subject': 'Actions Management App Log Event',
                     # 'filters': ['loginAttempt']
-                    # 'level': 'ERROR',  # filter logging level per handler
+                    'level': 'ERROR',  # filter logging level per handler
                 },
                 'debugconsole':  # handler that sends all messages to the console - should be activated only during dev
                 {
                     'class': 'logging.StreamHandler',
                     'formatter': 'default',
-                    # 'level': 'DEBUG',
-
+                    'level': 'DEBUG',
+                    # 'filters': ['loginAttempt']
                 },
                 'dblog': {  # handler that stores logs in the database
                     'class': 'logging.handlers.HTTPHandler',
-                    'host': 'localhost',
-                    'url': url_for('log.addLog'),
-                    'method': 'POST'
+                    'host': 'localhost:5000',
+                    'url': '/log/',
+                    'method': 'POST',
+                    'filters': ['loginAttempt']
                 }
 
              },
