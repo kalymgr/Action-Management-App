@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/Git.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Git.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Documentation/Product features.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Product features.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -135,12 +134,6 @@
               <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
               <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
               <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
-              <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
-              <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
@@ -358,16 +351,16 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7254902" visible="true" weight="0.27186513" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.72331154" visible="true" weight="0.38040042" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30260417" side_tool="true" weight="0.39957938" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.25816995" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.14705883" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3278867" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.25816995" />
-      <window_info id="Structure" order="1" sideWeight="0.27450982" side_tool="true" visible="true" weight="0.27186513" />
+      <window_info id="Structure" order="1" sideWeight="0.27668846" side_tool="true" visible="true" weight="0.38040042" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.29094827" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.36601308" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
