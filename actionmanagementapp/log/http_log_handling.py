@@ -3,6 +3,10 @@ import logging.handlers
 
 
 class HttpLoggerSetup:
+    """
+    Class that manages the http logging. Sends logs to a POST url,
+    which stores them in the database
+    """
     def __init__(self):
         self.logger = logging.getLogger('synchronous logging')
         self.logger.setLevel('INFO')

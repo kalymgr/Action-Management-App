@@ -44,14 +44,11 @@ def login():
         if user is None:
             error = 'Incorrect username.'
             # log the attempt
-            # applicationLogger.info("Login attempt: Incorrect username")
             dbLoginLogger.info('Login attempt. Incorrect username')
         elif not check_password_hash(user.password, password):
             error = 'Incorrect password.'
-            applicationLogger.info("Login attempt: Incorrect password")
             dbLoginLogger.info('Login attempt: Incorrect password')
         if error is None:
-            applicationLogger.info("Login attempt: Successful login")
             dbLoginLogger.info('Login attempt: Successful login for user '+username)
             session.clear()
             session['user_id'] = user.id
