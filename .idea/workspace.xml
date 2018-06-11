@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="" />
+    <list default="true" id="f682dc36-90fd-42a4-a732-6593a2e9c95a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/Git.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Git.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/Product features.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/Product features.xlsx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +52,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flaskr/templates/usermanagement/userdetails.html" />
         <option value="$PROJECT_DIR$/flaskr/usr.py" />
         <option value="$PROJECT_DIR$/tests/users/dummyData.py" />
         <option value="$PROJECT_DIR$/tests/dummyData.py" />
@@ -95,10 +98,11 @@
         <option value="$PROJECT_DIR$/actionmanagementapp/__init__.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/log/log_models.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/log/log_controller.py" />
-        <option value="$PROJECT_DIR$/actionmanagementapp/auth/auth_controller.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/log/logging_settings.py" />
         <option value="$PROJECT_DIR$/actionmanagementapp/log/http_log_handling.py" />
         <option value="$PROJECT_DIR$/tests/test_log.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/users/users_controller.py" />
+        <option value="$PROJECT_DIR$/actionmanagementapp/auth/auth_controller.py" />
       </list>
     </option>
   </component>
@@ -130,7 +134,7 @@
               <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
               <item name="actionsmanagerep" type="462c0819:PsiDirectoryNode" />
               <item name="actionmanagementapp" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="actionsmanagerep" type="b2602c69:ProjectViewProjectNode" />
@@ -290,8 +294,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.py.test in tests" />
-        <item itemvalue="Python tests.py.test for test_log.test_addLog" />
         <item itemvalue="Python.__init__" />
+        <item itemvalue="Python tests.py.test for test_log.test_addLog" />
         <item itemvalue="Python tests.py.test for test_usr.test_deleteUserCategory" />
         <item itemvalue="Python tests.py.test for tests.test_usr.test_changeUserPassword" />
       </list>
@@ -311,15 +315,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 21h 29m 03s.xml">
-      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 21h 30m 06s.xml">
-      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 21h 35m 35s.xml">
-      <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
-    </history-entry>
     <history-entry file="py_test_for_test_log_test_addLog - 2018.06.10 at 21h 37m 31s.xml">
       <configuration name="py.test for test_log.test_addLog" configurationId="tests" />
     </history-entry>
@@ -341,6 +336,15 @@
     <history-entry file="py_test_in_tests - 2018.06.11 at 09h 02m 18s.xml">
       <configuration name="py.test in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.11 at 09h 25m 29s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.11 at 09h 27m 23s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_tests - 2018.06.11 at 09h 28m 26s.xml">
+      <configuration name="py.test in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -354,14 +358,13 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.72727275" visible="true" weight="0.27186513" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7254902" visible="true" weight="0.27186513" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.30260417" side_tool="true" weight="0.39957938" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.30495688" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.53267974" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3286638" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.5054466" />
-      <window_info id="Structure" order="1" sideWeight="0.27272728" side_tool="true" visible="true" weight="0.27186513" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.14705883" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.62291664" weight="0.3278867" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69739586" weight="0.25816995" />
+      <window_info id="Structure" order="1" sideWeight="0.27450982" side_tool="true" visible="true" weight="0.27186513" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49947917" weight="0.29094827" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.56666666" weight="0.36601308" />
@@ -371,6 +374,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.30495688" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -722,14 +726,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/users_controller.py" />
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/log_models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="16" column="61" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -737,16 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1277">
           <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth/auth_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#37#106#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,10 +750,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/actionmanagementapp/log/logging_settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="545">
           <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/users/users_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="336" column="52" lean-forward="true" selection-start-line="336" selection-start-column="52" selection-end-line="336" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actionmanagementapp/auth/auth_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <folding>
+            <element signature="e#37#106#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -771,16 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_log.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
         </state>
       </provider>
     </entry>
