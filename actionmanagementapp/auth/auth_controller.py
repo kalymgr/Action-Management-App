@@ -1,7 +1,7 @@
 """
 Blueprint for authentication
 """
-
+from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
 import functools
 
@@ -37,15 +37,22 @@ def login():
         # first() will return None
         user = dbSession.query(User).filter(User.username == username).first()
 
+        # setup a logger that stores login attempts in the database
+        dbLoginLoggerSetup = HttpLoggerSetup()
+        dbLoginLogger = dbLoginLoggerSetup.getLogger()
+
         if user is None:
             error = 'Incorrect username.'
             # log the attempt
-            applicationLogger.info("Login attempt: Incorrect username")
+            # applicationLogger.info("Login attempt: Incorrect username")
+            dbLoginLogger.info('Login attempt. Incorrect username')
         elif not check_password_hash(user.password, password):
             error = 'Incorrect password.'
             applicationLogger.info("Login attempt: Incorrect password")
+            dbLoginLogger.info('Login attempt: Incorrect password')
         if error is None:
             applicationLogger.info("Login attempt: Successful login")
+            dbLoginLogger.info('Login attempt: Successful login for user '+username)
             session.clear()
             session['user_id'] = user.id
             # return redirect(url_for('index'))
