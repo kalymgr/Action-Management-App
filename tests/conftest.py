@@ -3,7 +3,7 @@ Contains setup functions called fixtures that each test will use
 """
 import pytest
 from actionmanagementapp import create_app
-from actionmanagementapp.utilities.DatabaseSetup import getTestingDatabaseSession
+from actionmanagementapp.utilities.database_setup import getTestingDatabaseSession
 
 
 @pytest.fixture

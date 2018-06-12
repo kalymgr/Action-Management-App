@@ -2,12 +2,12 @@ import os
 from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
 
-from utilities import DatabaseSetup
+from utilities import database_setup
 import auth
 from actionmanagementapp.users import users_controller, users_models
 from actionmanagementapp.auth import auth_controller
 from actionmanagementapp.log import log_controller
-from actionmanagementapp.utilities import CustomErrorPages
+from actionmanagementapp.utilities import custom_error_pages
 from actionmanagementapp.log import logging_settings
 
 
@@ -33,7 +33,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         # DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        DBSESSION=DatabaseSetup.getProductionDatabaseSession()
+        DBSESSION=database_setup.getProductionDatabaseSession()
     )
 
     if test_config is None:
@@ -55,13 +55,13 @@ def create_app(test_config=None):
     app.register_blueprint(log_controller.bp)
 
     # register error pages handlers
-    app.register_error_handler(404, CustomErrorPages.page_not_found)
+    app.register_error_handler(404, custom_error_pages.page_not_found)
 
     return app
 
 
 if __name__ == '__main__':
-    DatabaseSetup  # I put that here. Maybe I do it in a different way
+    database_setup  # I put that here. Maybe I do it in a different way
     app = create_app()
     app.secret_key = 'super_secret_key'
     app.debug = True

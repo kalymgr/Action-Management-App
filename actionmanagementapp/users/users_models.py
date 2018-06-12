@@ -5,10 +5,10 @@ from sqlalchemy.orm import relationship, sessionmaker, backref
 
 # create a class that inherits all the features of sql alchemy
 # it will be inherited from the classes
-from actionmanagementapp.utilities.DbModels import TimeStampMixin
-from actionmanagementapp.utilities import SQLALchemyUtils
+from actionmanagementapp.utilities.db_models import TimeStampMixin
+from actionmanagementapp.utilities import sql_alchemy_utils
 
-Base = SQLALchemyUtils.Base
+Base = sql_alchemy_utils.Base
 
 
 class UserCategory(Base, TimeStampMixin):

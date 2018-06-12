@@ -14,9 +14,9 @@ from actionmanagementapp.users.users_models import User
 from actionmanagementapp.log.log_models import LoggingRecord  # do not remove. It is used to create the log db table
 # TODO: improve the way the declarative base is created and handled
 from werkzeug.security import generate_password_hash
-from actionmanagementapp.utilities import SQLALchemyUtils
+from actionmanagementapp.utilities import sql_alchemy_utils
 
-Base = SQLALchemyUtils.Base
+Base = sql_alchemy_utils.Base
 
 
 def createEngine(db_UserName, db_Password, database_Name, db_Server, connection_Charset):
@@ -105,12 +105,17 @@ def getTestingDatabaseSession():
     # go into the database and add the classes as new tables
     dbSession = getSession(Base, engine)
 
-    # create a dummy test category
-    testCategory = dbSession.query(UserCategory)\
-        .filter(UserCategory.id == 1).first()
-    if testCategory is None:
-        testCategory = UserCategory(id=1, name="test category")
-        dbSession.add(testCategory)
+    # insert some default values in the database
+    defaultUserCategories = [
+        {'id': '1', 'name': u'Χρήστης'},
+        {'id': '2', 'name': u'Διαχειριστής'},
+        {'id': '3', 'name': u'Υπερδιαχειριστής'},
+    ]
+
+    if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
+        for uc in defaultUserCategories:
+            dbSession.add(UserCategory(id=uc['id'], name=uc['name']))
+        dbSession.commit()
 
     # create a dummy user called test (automated usage in some tests)
     testUser = dbSession.query(User).filter(User.username == 'test').first()
@@ -118,8 +123,9 @@ def getTestingDatabaseSession():
         testUser = User(name="test user",
                         username="test",
                         password=generate_password_hash("test"),
-                        userCategoryId=1,
-                        email='test@gmail.com')
+                        userCategoryId=3,
+                        email='test@gmail.com',
+                        enabled=True)
         dbSession.add(testUser)
 
     dbSession.commit()  # save changes to the database

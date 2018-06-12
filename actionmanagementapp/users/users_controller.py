@@ -8,8 +8,8 @@ from werkzeug.exceptions import abort
 
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for, session)
-from actionmanagementapp.auth.auth_controller import login_required
+    Blueprint, flash, redirect, render_template, request, url_for, session, g)
+from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
 # create the blueprint
 bp = Blueprint("users", __name__, url_prefix="/users")
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -19,17 +19,20 @@ from flask import current_app
 
 @bp.route('/')
 @login_required
+@user_permissions_restrictions
 def userList():
     """
     User List page routing function
     :return:
     """
-    # create the user list that will be rendered (get the category name for each user)
-    # usersData = dummyData.getUsersWithCategoryDescription()
-    # return the rendered template
-
     # get the db session from the application settings
     dbSession = current_app.config['DBSESSION']
+
+    # if the user is a simple user (cat id == 1) then redirect to his user details page
+    # u = dbSession.query(User).filter(User.id == g.user.id).first()
+    # if u.userCategoryId == 1:  # if he/she is a simple user
+    #     return redirect(url_for('users.userDetails', user_id=g.user.id))
+
     # get the list of users
     users = dbSession.query(User).all()
     return render_template('usermanagement/users.html', users=users)
@@ -38,6 +41,7 @@ def userList():
 @bp.route('/<int:user_id>')
 @bp.route('/<int:user_id>/view')
 @login_required
+@user_permissions_restrictions
 def userDetails(user_id):
     """
     User details routing function
@@ -61,12 +65,19 @@ def userDetails(user_id):
 
 @bp.route('/add', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def addUser():
     """
     Add user routing function
     :return:
     """
     dbSession = current_app.config['DBSESSION']
+
+    # if the user is a simple user (cat id == 1) then return error 403 (access denied)
+    # u = dbSession.query(User).filter(User.id == g.user.id).first()
+    # if u.userCategoryId == 1:  # if he/she is a simple user
+    #     abort(403)  # access denied
+
     userCat = dbSession.query(UserCategory).all()
     if request.method == 'POST':
         error = None  # set an error variable
@@ -132,6 +143,7 @@ def addUser():
 
 @bp.route('/<int:user_id>/delete', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def deleteUser(user_id):
     """
     Delete user routing function
@@ -163,6 +175,7 @@ def deleteUser(user_id):
 
 @bp.route('/<int:user_id>/edit', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def editUser(user_id):
     """
     Edit user routing function
@@ -204,6 +217,7 @@ def editUser(user_id):
 
 @bp.route('/<int:user_id>/changepassword', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def changeUserPassword(user_id):
     """
     Change user password routing function
@@ -218,16 +232,7 @@ def changeUserPassword(user_id):
         newPass1 = request.form.get('newpassword1', '')
         newPass2 = request.form.get('newpassword2', '')
 
-        error = ''  # initialize an empty error message
-        # check that the password given by the user is right
-        if not check_password_hash(u.password, oldPass):
-            error += u'Λάθος κωδικός χρήστη'
-        # check that the new password is not blank
-        if newPass1 == '':
-            error += u'Ο καινούριος κωδικός δε μπορεί να είναι κενός'
-        # check that the two passwords match
-        if newPass1 != newPass2:
-            error += u'Οι δύο κωδικοί δεν ταιριάζουν'
+        error = UserHelperFunctions.checkChangeUserPassword(u, oldPass, newPass1, newPass2)
         # if there is no error
         if error == '':
             # insert the new password in the database
@@ -247,6 +252,7 @@ def changeUserPassword(user_id):
 
 @bp.route('/categories')
 @login_required
+@user_permissions_restrictions
 def userCategories():
     """
     User categories routing function
@@ -259,6 +265,7 @@ def userCategories():
 
 @bp.route('/categories/add', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def addUserCategory():
     """
     Add category routing function
@@ -295,6 +302,7 @@ def addUserCategory():
 
 @bp.route('/categories/<int:user_category_id>/edit', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def editUserCategory(user_category_id):
     """
     Edit category routing function
@@ -336,6 +344,7 @@ def editUserCategory(user_category_id):
 
 @bp.route('/categories/<int:user_category_id>/delete', methods=('GET', 'POST'))
 @login_required
+@user_permissions_restrictions
 def deleteUserCategory(user_category_id):
     """
     Delete category routing function
@@ -354,3 +363,33 @@ def deleteUserCategory(user_category_id):
             abort(404)
 
     return render_template('usermanagement/deleteusercategory.html', userCategory=c)
+
+
+class UserHelperFunctions:
+    """
+    Class with helper functions related to user management
+    """
+
+    @staticmethod
+    def checkChangeUserPassword(user, oldPass, newPass1, newPass2):
+        """
+        Method that checks whether a user password can be changed
+        :param user: the user object
+        :param oldPass: the old password
+        :param newPass1: the new password
+        :param newPass2: the new password
+        :return: an error, if there is a problem, else ''
+        """
+
+        error = ''  # initialize an empty error message
+        # check that the password given by the user is right
+        if not check_password_hash(user.password, oldPass):
+            error += u'Λάθος κωδικός χρήστη'
+        # check that the new password is not blank
+        if newPass1 == '':
+            error += u'Ο καινούριος κωδικός δε μπορεί να είναι κενός'
+        # check that the two passwords match
+        if newPass1 != newPass2:
+            error += u'Οι δύο κωδικοί δεν ταιριάζουν'
+
+        return error

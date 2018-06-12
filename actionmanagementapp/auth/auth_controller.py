@@ -1,6 +1,8 @@
 """
 Blueprint for authentication
 """
+from werkzeug.exceptions import abort
+
 from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
 import functools
@@ -31,8 +33,6 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        error = None
-
         # get the user with the specific username. If not user is found,
         # first() will return None
         user = dbSession.query(User).filter(User.username == username).first()
@@ -41,14 +41,10 @@ def login():
         dbLoginLoggerSetup = HttpLoggerSetup()
         dbLoginLogger = dbLoginLoggerSetup.getLogger()
 
-        if user is None:
-            error = 'Incorrect username.'
-            # log the attempt
-            dbLoginLogger.info('Login attempt. Incorrect username')
-        elif not check_password_hash(user.password, password):
-            error = 'Incorrect password.'
-            dbLoginLogger.info('Login attempt: Incorrect password')
-        if error is None:
+        # check if the user can login
+        error = LoginHelperFunctions.checkLogin(user, password, dbLoginLogger)
+
+        if error is '':
             dbLoginLogger.info('Login attempt: Successful login for user '+username)
             session.clear()
             session['user_id'] = user.id
@@ -101,3 +97,70 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+def user_permissions_restrictions(view):
+    """
+    sets restrictions on user permissions
+    :param view:
+    :return:
+    """
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        dbSession = current_app.config['DBSESSION']
+        # get the user id from the url
+        userIdFromUrl = kwargs.get('user_id', None)
+
+        if g.user.userCategoryId == 1:  # if he is a simple user - Level 1
+
+            if userIdFromUrl is None:
+                return redirect(url_for('users.userDetails', user_id=g.user.id))
+            else:
+                # if he tries to access any url that isn't related to him
+                if g.user.id != userIdFromUrl:
+                    # redirect the user to his user page
+                    abort(403)  # access denied
+        elif g.user.userCategoryId == 2:  # if he is an administrator - Level 2
+            if userIdFromUrl is not None:
+                # get the user category
+                u = dbSession.query(User).filter(User.id == userIdFromUrl).first()
+                uCategory = u.userCategoryId
+
+                # if the page is not related to simple users and not related to the logged in user
+                if uCategory != 1 and userIdFromUrl != g.user.id:
+                    abort(403)  # access denied
+                # check for the urls related to user categories
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+class LoginHelperFunctions:
+    """
+    class that contains helper functions for logging in
+    """
+
+    @staticmethod
+    def checkLogin(user, password, dbLoginLogger):
+        """
+        Static Method that decides whether the user will log in or not.
+        :param: the user object
+        :param: the user password typed by the user
+        :return: error message (if there is one), else ''
+        """
+
+        error = ''  # initialize the error variable
+
+        if user is None:
+            error = 'Incorrect username.'
+            # log the attempt
+            dbLoginLogger.info('Login attempt. Incorrect username')
+        elif not check_password_hash(user.password, password):
+            error = 'Incorrect password.'
+            dbLoginLogger.info('Login attempt: Incorrect password')
+        elif user.enabled is False:  # the user is not activated/enabled
+            error = 'The user is not activated'
+            dbLoginLogger.info('Login attempt: The user is not activated')
+
+        return error
