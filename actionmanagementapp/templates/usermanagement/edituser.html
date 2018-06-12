@@ -12,15 +12,19 @@
             <p> Όνομα χρήστη: <input type="text" name="username" value="{{ user.username }}"></p>
             <p> Υπηρεσία: <input type="text" name="department" value="{{ user.department }}"></p>
             <p> Κατηγορία:
+                {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
+                <select name="usercategory" disabled> <!-- disable the category selection -->
+            {% else %}
                 <select name="usercategory">
-                    {%  for cat in userCategories %}
-                        {% if user.userCategoryId == cat.id%} <!-- set the category of the user as selected -->
-                            <option value="{{ cat.id }}" selected>{{ cat.name }}</option>
-                        {% else %}
-                            <option value="{{ cat.id }}" >{{ cat.name }}</option>
-                        {% endif %}
-                    {%  endfor %}
-                </select>
+            {% endif %}
+                {%  for cat in userCategories %}
+                    {% if user.userCategoryId == cat.id%} <!-- select the category of the user -->
+                        <option value="{{ cat.id }}" selected>{{ cat.name }}</option>
+                    {% else %}
+                        <option value="{{ cat.id }}">{{ cat.name }}</option>
+                    {% endif %}
+                {%  endfor %}
+            </select>
             </p>
             <p> Τηλ: <input type="text" name="phone" value="{{ user.phone }}"></p>
             <p> Κινητό: <input type="text" name="mobile" value="{{ user.mobile }}"></p>

@@ -107,7 +107,8 @@ def addUser():
         if not username:
             error += u' Δε δόθηκε όνομα χρήστη.'
         if not userCatId:
-            error += u' Δε δόθηκε κατηγορία χρήστη.'
+            # error += u' Δε δόθηκε κατηγορία χρήστη.'
+            userCatId = 1  # make him/her a simple user
         if not password:
             error += u' Κενός κωδικός χρήστη.'
         if password != password2:
@@ -192,7 +193,11 @@ def editUser(user_id):
         u.email = request.form.get('email', None)
         u.phone = request.form.get('phone', None)
         u.mobile = request.form.get('mobile', None)
-        u.userCategoryId = request.form.get('usercategory', None)
+
+        # get user category
+        uCat = request.form.get('usercategory', None)
+        if uCat is not None:
+            u.userCategoryId = uCat
         u.department = request.form.get('department', None)
 
         dbSession.add(u)  # update the user in the database

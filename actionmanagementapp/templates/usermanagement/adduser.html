@@ -11,11 +11,16 @@
         <p> Όνομα χρήστη: <input type="text" name="username"></p>
         <p> Υπηρεσία: <input type="text" name="department"></p>
         <p> Κατηγορία:
-            <select name="usercategory">
+            {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
+                <select name="usercategory" disabled> <!-- disable the category selection -->
+            {% else %}
+                <select name="usercategory">
+            {% endif %}
                 {%  for cat in userCategories %}
-                <option value="{{ cat.id }}">{{ cat.name }}</option>
+                        <option value="{{ cat.id }}">{{ cat.name }}</option>
                 {%  endfor %}
             </select>
+
         </p>
         <p> Τηλ: <input type="text" name="phone"></p>
         <p> Κινητό: <input type="text" name="mobile"></p>
