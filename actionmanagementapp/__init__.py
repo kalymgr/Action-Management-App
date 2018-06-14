@@ -63,6 +63,6 @@ def create_app(test_config=None):
 if __name__ == '__main__':
     database_setup  # I put that here. Maybe I do it in a different way
     app = create_app()
-    app.secret_key = 'super_secret_key'
+    app.secret_key = 'super_secret_key'  # TODO: change the secret key before production
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

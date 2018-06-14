@@ -15,6 +15,7 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 from actionmanagementapp.users.users_models import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
+from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings
 
 
 @bp.route('/')
@@ -53,12 +54,7 @@ def userDetails(user_id):
     if user is not None:  # if the user is found in the database
         katigoria = user.userCategory.name
     if user is None:
-        abort(404, u"Ο Χρήστης δεν υπάρχει. The user does not exist!")
-
-    """ 
-    if user_id != g.user.id:
-        abort(403, u"Δεν έχετε δικαιώματα να δείτε το χρήστη. No rights to view this user")
-    """
+        abort(404, UsersResourceString.ERROR_NON_EXISTING_USER)
 
     return render_template('usermanagement/userdetails.html', user=user)
 
@@ -72,11 +68,6 @@ def addUser():
     :return:
     """
     dbSession = current_app.config['DBSESSION']
-
-    # if the user is a simple user (cat id == 1) then return error 403 (access denied)
-    # u = dbSession.query(User).filter(User.id == g.user.id).first()
-    # if u.userCategoryId == 1:  # if he/she is a simple user
-    #     abort(403)  # access denied
 
     userCat = dbSession.query(UserCategory).all()
     if request.method == 'POST':
@@ -103,18 +94,18 @@ def addUser():
 
         # Check for required fields that are empty
         if not name or name == '':
-            error += u' Δε δόθηκε το όνομα.'
+            error += UsersResourceString.ERROR_NAME_NOT_ENTERED
         if not username:
-            error += u' Δε δόθηκε όνομα χρήστη.'
+            error += UsersResourceString.ERROR_USERNAME_NOT_ENTERED
         if not userCatId:
-            # error += u' Δε δόθηκε κατηγορία χρήστη.'
+            # error += UsersResourceString.ERROR_USER_CATEGORY_NOT_ENTERED
             userCatId = 1  # make him/her a simple user
         if not password:
-            error += u' Κενός κωδικός χρήστη.'
+            error += UsersResourceString.ERROR_EMPTY_USER_PASSWORD
         if password != password2:
-            error += u' Δεν ταιριάζουν οι κωδικοί.'
+            error += UsersResourceString.ERROR_PASSWORDS_DO_NOT_MATCH
         if not email:
-            error += u' Δε δόθηκε διεύθυνση email. '
+            error += UsersResourceString.ERROR_EMAIL_ADDRESS_NOT_ENTERED
         """
         """
         if error is not '':  # if there was an error
@@ -136,7 +127,7 @@ def addUser():
             dbSession.commit()
 
             # show message
-            flash("The user %s has been added" % newUser.name)
+            flash(UsersResourceString.INFO_USER_ADDED % newUser.name)
             # go to the main users page
             return redirect(url_for('users.userList'))
     return render_template('usermanagement/adduser.html', userCategories=userCat)
@@ -158,7 +149,7 @@ def deleteUser(user_id):
         dbSession.commit()
 
         # send a message that the specific user has been deleted
-        flash("The user %s has been deleted"%u.name)
+        flash(UsersResourceString.INFO_USER_DELETED % u.name)
         # redirect to the users list page
         return redirect(url_for('users.userList'))
 
@@ -204,7 +195,7 @@ def editUser(user_id):
         dbSession.commit()
 
         # flash message that the user has been updated
-        flash(u"The user %s has been updated"%u.name)
+        flash(UsersResourceString.INFO_USER_UPDATED % u.name)
         # return redirect
         return redirect(url_for('users.userList'))
 
@@ -245,7 +236,7 @@ def changeUserPassword(user_id):
             dbSession.add(u)
             dbSession.commit()
             # go to the user details page
-            flash(u'Ο Κωδικός για το χρήστη %s έχει αλλάξει'%u.name)
+            flash(UsersResourceString.INFO_USER_PASSWORD_CHANGED % u.name)
             return redirect(url_for('users.userDetails', user_id=user_id))
 
         flash(error)
@@ -285,18 +276,18 @@ def addUserCategory():
 
         error = ''
         if c.id == '' or c.id is None:
-            error += u' Δε συμπληρώθηκε κωδικός κατηγορίας.'
+            error += UsersResourceString.ERROR_USER_CATEGORY_ID_NOT_ENTERED
         if c.name == '' or c.id is None:
-            error += u' Δε συμπληρώθηκε όνομα κατηγορίας.'
+            error += UsersResourceString.ERROR_USER_CATEGORY_NAME_NOT_ENTERED
 
         if error == '':
             try:
                 dbSession.add(c)
                 dbSession.commit()  # add the new category in the database
-                flash(u'Η νέα κατηγορία έχει προστεθεί')
+                flash(UsersResourceString.INFO_USER_CATEGORY_ADDED)
                 return redirect(url_for('users.userCategories'))
             except IntegrityError as e:
-                flash(u' Ο κωδικός κατηγορίας υπάρχει ήδη.')
+                flash(UsersResourceString.INFO_USER_CATEGORY_ID_EXISTS)
                 dbSession.rollback()
 
         else:
@@ -324,7 +315,7 @@ def editUserCategory(user_category_id):
         # check for validation errors
         error = ''
         if catNameUpdated == '':
-            error += u'Το όνομα της κατηγορίας δε μπορεί να είναι κενό.'
+            error += UsersResourceString.ERROR_USER_CATEGORY_NAME_NOT_ENTERED
 
         if error != '':
             flash(error)
@@ -335,7 +326,7 @@ def editUserCategory(user_category_id):
             dbSession.commit()
 
             # show message for successful edit
-            flash(u'Οι αλλαγές στην κατηγορία %s καταχωρήθηκαν με επιτυχία'%catNameUpdated)
+            flash(UsersResourceString.INFO_USER_CATEGORY_UPDATED)
             # go to the main categories page
             return redirect(url_for('users.userCategories'))
     else:
@@ -361,7 +352,7 @@ def deleteUserCategory(user_category_id):
         # get the id of the category to be deleted
         dbSession.delete(c)
         dbSession.commit()
-        flash(u'Η κατηγορία έχει διαγραφεί')
+        flash(UsersResourceString.INFO_USER_CATEGORY_DELETED)
         return redirect(url_for('users.userCategories'))
     else:
         if c is None:
@@ -389,12 +380,12 @@ class UserHelperFunctions:
         error = ''  # initialize an empty error message
         # check that the password given by the user is right
         if not check_password_hash(user.password, oldPass):
-            error += u'Λάθος κωδικός χρήστη'
+            error += AuthResourceStrings.ERROR_WRONG_PASSWORD
         # check that the new password is not blank
         if newPass1 == '':
-            error += u'Ο καινούριος κωδικός δε μπορεί να είναι κενός'
+            error += UsersResourceString.ERROR_USER_NEW_PASSWORD_BLANK
         # check that the two passwords match
         if newPass1 != newPass2:
-            error += u'Οι δύο κωδικοί δεν ταιριάζουν'
+            error += UsersResourceString.ERROR_USER_PASSWORDS_DO_NOT_MATCH
 
         return error

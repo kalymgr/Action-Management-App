@@ -2,6 +2,7 @@
 Blueprint for authentication
 """
 from werkzeug.exceptions import abort
+from actionmanagementapp.utilities.resource_strings import AuthResourceStrings
 
 from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -45,7 +46,7 @@ def login():
         error = LoginHelperFunctions.checkLogin(user, password, dbLoginLogger)
 
         if error is '':
-            dbLoginLogger.info('Login attempt: Successful login for user '+username)
+            dbLoginLogger.info(AuthResourceStrings.INFO_SUCCESSSFUL_LOGIN % username)
             session.clear()
             session['user_id'] = user.id
             # return redirect(url_for('index'))
@@ -153,14 +154,14 @@ class LoginHelperFunctions:
         error = ''  # initialize the error variable
 
         if user is None:
-            error = 'Incorrect username.'
+            error = AuthResourceStrings.ERROR_WRONG_USERNAME
             # log the attempt
-            dbLoginLogger.info('Login attempt. Incorrect username')
+            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_USERNAME_2)
         elif not check_password_hash(user.password, password):
-            error = 'Incorrect password.'
-            dbLoginLogger.info('Login attempt: Incorrect password')
+            error = AuthResourceStrings.ERROR_WRONG_PASSWORD
+            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_PASSWORD_2)
         elif user.enabled is False:  # the user is not activated/enabled
-            error = 'The user is not activated'
-            dbLoginLogger.info('Login attempt: The user is not activated')
+            error = AuthResourceStrings.ERROR_USER_NOT_ACTIVATED
+            dbLoginLogger.info(AuthResourceStrings.ERROR_USER_NOT_ACTIVATED_2)
 
         return error
