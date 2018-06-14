@@ -1,0 +1,4 @@
+# deciding which files to exclude from git
+htmlcov/*
+*.pyc
+.idea/workspace.xml
