@@ -1,15 +1,15 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %}{% endblock %} - {{config['APPLICATION_NAME']}}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>Actions Management Application</h1>
+  <h1>{{config['APPLICATION_NAME']}}</h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><a href="{{ url_for('auth.logout') }}">{{g.authResourceStrings.TXT_LOGOUT}}</a>
     {% else %}
 
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('auth.login') }}">{{g.authResourceStrings.TXT_LOGIN}}</a>
     {% endif %}
   </ul>
 </nav>
