@@ -5,13 +5,13 @@
     <!-- here I can add page-specific resources like css stylesheets -->
 {% endblock %}
 {% block content %}
-    <h1>Προσθήκη κατηγορίας χρήστη</h1>
+    <h1>{{g.userResourceStrings.TXT_ADD_USER_CATEGORY}}</h1>
 
     <form action="#" method="post">
-        <p>Κωδ. : <input type="text" name="id"></p>
-        <p>Όνομα: <input type="text" name="name"></p>
-        <input type="submit" value="ΟΚ">
+        <p>{{g.userResourceStrings.FRM_USER_CATEGORY_ID}} <input type="text" name="id"></p>
+        <p>{{g.userResourceStrings.FRM_USER_CATEGORY_NAME}} <input type="text" name="name"></p>
+        <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
     </form>
 
-    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+    <a href="{{ url_for('users.userCategories') }}"> {{g.userResourceStrings.TXT_BACK_TO_CATEGORY_LIST}} </a>
 {% endblock %}

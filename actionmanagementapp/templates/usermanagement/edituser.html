@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Επεξεργασία χρήστη{% endblock %}
+{% block title %}{{g.userResourceStrings.TXT_EDIT_USER}}{% endblock %}
 {% block head %}
     {{ super() }}
     <!-- here I can add page-specific resources like css stylesheets -->
 {% endblock %}
 {% block content %}
-    {% if user %} <!-- if the user exists -->
-        <h1>Επεξεργασία χρήστη "{{user.name}}"</h1>
+
+        <h1>{{g.userResourceStrings.TXT_EDIT_USER}} "{{user.name}}"</h1>
         <form action="#" method="post">
-            <p> Όνοματεπώνυμο: <input type="text" name="name" value="{{ user.name }}"></p>
-            <p> Όνομα χρήστη: <input type="text" name="username" value="{{ user.username }}"></p>
-            <p> Υπηρεσία: <input type="text" name="department" value="{{ user.department }}"></p>
-            <p> Κατηγορία:
+            <p> {{g.userResourceStrings.FRM_FULL_NAME}} <input type="text" name="name" value="{{ user.name }}"></p>
+            <p> {{g.userResourceStrings.FRM_USERNAME}} <input type="text" name="username" value="{{ user.username }}"></p>
+            <p> {{g.userResourceStrings.FRM_DEPARTMENT}} <input type="text" name="department" value="{{ user.department }}"></p>
+            <p> {{g.userResourceStrings.FRM_USER_CATEGORY}}
                 {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
                 <select name="usercategory" disabled> <!-- disable the category selection -->
             {% else %}
@@ -26,22 +26,20 @@
                 {%  endfor %}
             </select>
             </p>
-            <p> Τηλ: <input type="text" name="phone" value="{{ user.phone }}"></p>
-            <p> Κινητό: <input type="text" name="mobile" value="{{ user.mobile }}"></p>
-            <p> Email: <input type="text" name="email" value="{{ user.email }}"></p>
+            <p> {{g.userResourceStrings.FRM_PHONE}} <input type="text" name="phone" value="{{ user.phone }}"></p>
+            <p> {{g.userResourceStrings.FRM_MOBILE}} <input type="text" name="mobile" value="{{ user.mobile }}"></p>
+            <p> {{g.userResourceStrings.FRM_EMAIL}} <input type="text" name="email" value="{{ user.email }}"></p>
             {% if user.enabled == True %} <!-- set the checkbox checked if true -->
-                <p> Ενεργός: <input type="checkbox" name="enabled" checked> </p>
+                <p> {{g.userResourceStrings.FRM_ENABLED}}<input type="checkbox" name="enabled" checked> </p>
             {% else %}
-                <p> Ενεργός: <input type="checkbox" name="enabled"> </p>
+                <p> {{g.userResourceStrings.FRM_ENABLED}} <input type="checkbox" name="enabled"> </p>
             {% endif %}
-            <input type="submit" value="OK">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
         </form>
         <form action="{{url_for('users.changeUserPassword', user_id=user.id)}}" method="get"> <!-- Button for changing the user password -->
-            <input type="submit" value="Αλλαγή κωδικού">
+            <input type="submit" value="{{g.userResourceStrings.FRM_CHANGE_PASSWORD}}">
         </form>
-    {% else %}
-        <p> Δεν υπάρχει τέτοιος χρήστης </p>
-    {% endif %}
 
-    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+
+    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
 {% endblock %}

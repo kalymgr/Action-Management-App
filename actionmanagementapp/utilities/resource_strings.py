@@ -62,8 +62,48 @@ class UsersResourceString:
     ERROR_USER_PASSWORDS_DO_NOT_MATCH = u' Οι δύο κωδικοί δεν ταιριάζουν. '
 
     # -- form elements
+    FRM_FULL_NAME = u'Όνοματεπώνυμο:'
+    FRM_USERNAME = u'Όνομα χρήστη:'
+    FRM_DEPARTMENT = u'Υπηρεσία:'
+    FRM_USER_CATEGORY = u'Κατηγορία:'
+    FRM_PHONE = u'Τηλ:'
+    FRM_MOBILE = u'Κινητό:'
+    FRM_EMAIL = u'Email:'
+    FRM_ENABLED = u'Ενεργός:'
+    FRM_OLD_PASSWORD = u'Παλιός κωδικός:'
+    FRM_NEW_PASSWORD = u'Νέος Κωδικός:'
+    FRM_CONFIRM_NEW_PASSWORD = u'Επιβεβαίωση νέου κωδικού:'
+    FRM_USER_CATEGORY_ID = u'Κωδ. :'
+    FRM_USER_CATEGORY_NAME = u'Όνομα:'
+    FRM_CHANGE_PASSWORD = u'Αλλαγή κωδικού'
+    FRM_ADD_CATEGORY = u'Προσθήκη κατηγορίας'
+    FRM_ADD_USER = u'Προσθήκη χρήστη'
+    FRM_USER_CATEGORIES = u'Κατηγορίες χρηστών'
 
     # -- text elements
+    TXT_ADD_USER = u'Προσθήκη χρήστη'
+    TXT_BACK_TO_USER_LIST = u'Επιστροφή στη λίστα χρηστών'
+    TXT_ADD_USER_CATEGORY = u'Προσθήκη κατηγορίας χρήστη'
+    TXT_CHANGE_USER_PASSWORD_TITLE = u'Αλλαγή κωδικού χρήστη'
+    TXT_CHANGE_USER_PASSWORD = u'Αλλαγή κωδικού για το χρήστη'
+    TXT_DELETE_USER = u'Διαγραφή χρήστη'
+    TXT_CONFIRM_USER_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε το/τη χρήστη;'
+    TXT_DELETE_USER_CATEGORY = u'Διαγραφή κατηγορίας χρήστη'
+    TXT_CONFIRM_USER_CATEGORY_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε την κατηγορία;'
+    TXT_BACK_TO_CATEGORY_LIST = u'Πίσω στη Λίστα κατηγοριών'
+    TXT_EDIT_USER = u'Επεξεργασία χρήστη'
+    TXT_EDIT_USER_CATEGORY = u'Επεξεργασία κατηγορίας χρήστη'
+    TXT_USER_CATEGORIES = u'Κατηγορίες χρηστών'
+    TXT_USER_INFO = u'Πληροφορίες χρήστη'
+    TXT_USER_LIST = u'Λίστα χρηστών'
+
 
 class GeneralResourceStrings:
-    pass
+    """
+    class with resource strings for generic use
+    """
+    # -- Form elements
+    FRM_SAVE = u'OK'
+    FRM_EDIT = u'Επεξεργασία'
+    FRM_DELETE = u'Διαγραφή'
+    FRM_VIEW = u'Προβολή'

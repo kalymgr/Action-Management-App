@@ -1,24 +1,23 @@
 {% extends "base.html" %}
-{% block title %}Κατηγορίες χρηστών{% endblock %}
+{% block title %}{{g.userResourceStrings.TXT_USER_CATEGORIES}}{% endblock %}
 {% block head %}
     {{ super() }}
     <!-- here I can add page-specific resources like css stylesheets -->
 {% endblock %}
 {% block content %}
-    <h1>Κατηγορίες χρηστών</h1>
+    <h1>{{g.userResourceStrings.TXT_USER_CATEGORIES}}</h1>
     <p><form action="{{ url_for('users.addUserCategory') }}" method="get">
-    <input type="submit" value="Προσθήκη κατηγορίας"> </form> </p>
-    {% if userCategories %} <!-- if there are user categories -->
-        {% for userCategory in userCategories %}
-            <p> Κωδ.: {{userCategory.id}}, Όνομα: {{userCategory.name}}</p>
-            <form action="{{ url_for('users.editUserCategory', user_category_id=userCategory.id) }}" method="get">
-                <input type="submit" value="Επεξεργασία"></form>
-            <form action="{{ url_for('users.deleteUserCategory', user_category_id=userCategory.id) }}" method="get">
-                <input type="submit" value="Διαγραφή"></form>
-        {% endfor %}
-    {% else %}
-        <p> Δεν έχουν οριστεί κατηγορίες χρηστών </p>
-    {% endif %}
+    <input type="submit" value="{{g.userResourceStrings.FRM_ADD_CATEGORY}}"> </form> </p>
 
-    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+        {% for userCategory in userCategories %}
+            <p> {{g.userResourceStrings.FRM_USER_CATEGORY_ID}} {{userCategory.id}},
+                {{g.userResourceStrings.FRM_USER_CATEGORY_NAME}} {{userCategory.name}}</p>
+            <form action="{{ url_for('users.editUserCategory', user_category_id=userCategory.id) }}" method="get">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
+            <form action="{{ url_for('users.deleteUserCategory', user_category_id=userCategory.id) }}" method="get">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+        {% endfor %}
+
+
+    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
 {% endblock %}

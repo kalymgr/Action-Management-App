@@ -113,7 +113,7 @@ def test_addUser(client, auth):
 @pytest.mark.parametrize(('name', 'username', 'userCategory', 'password', 'password2', 'message'),
                          (
                                 ('', 'aoua', '1', '1', '1', u'Δε δόθηκε το όνομα'),  # empty name
-                                ('aaaa', '', '1', '1', '1', u'Δε δόθηκε όνομα χρήστη'),  # empty user name
+                                ('aaaa', '', '1', '1', '1', u'Δε δόθηκε το όνομα χρήστη'),  # empty user name
                                 # ('aaaa', 'aaa', '', '1', '1', u'Δε δόθηκε κατηγορία χρήστη'),  # empty category
                                 ('aaaa', 'aa', '1', '', '', u'Κενός κωδικός χρήστη'),  # empty password
                                 ('aaaa', '', '1', '123', '321', u'Δεν ταιριάζουν οι κωδικοί')  # passwords do not match

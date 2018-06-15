@@ -47,7 +47,7 @@ def login():
         error = LoginHelperFunctions.checkLogin(user, password, dbLoginLogger)
 
         if error is '':
-            dbLoginLogger.info(AuthResourceStrings.INFO_SUCCESSSFUL_LOGIN % username)
+            dbLoginLogger.info((AuthResourceStrings.INFO_SUCCESSSFUL_LOGIN % username).encode('utf-8'))
             session.clear()
             session['user_id'] = user.id
             # return redirect(url_for('index'))
@@ -172,12 +172,13 @@ class LoginHelperFunctions:
         if user is None:
             error = AuthResourceStrings.ERROR_WRONG_USERNAME
             # log the attempt
-            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_USERNAME_2)
+            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_USERNAME_2.encode('utf-8'))
+
         elif not check_password_hash(user.password, password):
             error = AuthResourceStrings.ERROR_WRONG_PASSWORD
-            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_PASSWORD_2)
+            dbLoginLogger.info(AuthResourceStrings.ERROR_WRONG_PASSWORD_2.encode('utf-8'))
         elif user.enabled is False:  # the user is not activated/enabled
             error = AuthResourceStrings.ERROR_USER_NOT_ACTIVATED
-            dbLoginLogger.info(AuthResourceStrings.ERROR_USER_NOT_ACTIVATED_2)
+            dbLoginLogger.info(AuthResourceStrings.ERROR_USER_NOT_ACTIVATED_2.encode('utf-8'))
 
         return error

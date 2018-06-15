@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 File that is used for configuring logging settings.
 The LoginAttemptFilter class and the filters section are not used because

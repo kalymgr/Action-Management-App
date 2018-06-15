@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # create the blueprint
 from flask import Blueprint, request, current_app
 import json

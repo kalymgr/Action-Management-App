@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import pytest
 from flask import g, session, current_app
 from actionmanagementapp.users.users_models import User
 from actionmanagementapp.utilities import database_setup
+from actionmanagementapp.utilities.resource_strings import AuthResourceStrings
 
 """
 def test_register(client, app):
@@ -42,12 +45,14 @@ def test_login(client, auth):
 
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('onoma_xristi', 'test', b'Incorrect username.'),
-    ('test', 'a', b'Incorrect password.'),
+    ('onoma_xristi', 'test', AuthResourceStrings.ERROR_WRONG_USERNAME),
+    ('test', 'a', AuthResourceStrings.ERROR_WRONG_PASSWORD),
 ))
 def test_login_validate_input(auth, username, password, message):
     response = auth.login(username, password)
-    assert message in response.data
+    assert message.encode('utf-8') in response.data
+
+    # assert ' ' in response.data
 
 
 def test_logout(client, auth):

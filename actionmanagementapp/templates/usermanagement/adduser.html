@@ -5,12 +5,12 @@
     <!-- here I can add page-specific resources like css stylesheets -->
 {% endblock %}
 {% block content %}
-    <h1>Προσθήκη χρήστη</h1>
+    <h1>{{ g.userResourceStrings.TXT_ADD_USER }}</h1>
     <form action="#" method="post">
-        <p> Όνοματεπώνυμο: <input type="text" name="name"></p>
-        <p> Όνομα χρήστη: <input type="text" name="username"></p>
-        <p> Υπηρεσία: <input type="text" name="department"></p>
-        <p> Κατηγορία:
+        <p> {{g.userResourceStrings.FRM_FULL_NAME}} <input type="text" name="name"></p>
+        <p> {{g.userResourceStrings.FRM_USERNAME}} <input type="text" name="username"></p>
+        <p> {{g.userResourceStrings.FRM_DEPARTMENT}} <input type="text" name="department"></p>
+        <p> {{g.userResourceStrings.FRM_USER_CATEGORY}}
             {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
                 <select name="usercategory" disabled> <!-- disable the category selection -->
             {% else %}
@@ -22,14 +22,14 @@
             </select>
 
         </p>
-        <p> Τηλ: <input type="text" name="phone"></p>
-        <p> Κινητό: <input type="text" name="mobile"></p>
-        <p> Email: <input type="text" name="email"></p>
-        <p> Ενεργός: <input type="checkbox" name="enabled" value="True"> </p>
-        <p> Νέος Κωδικός: <input type="password" name="password"></p>
-        <p> Επιβεβαίωση νέου κωδικού: <input type="password" name="password2"></p>
-        <input type="submit" value="OK">
+        <p> {{g.userResourceStrings.FRM_PHONE}} <input type="text" name="phone"></p>
+        <p> {{g.userResourceStrings.FRM_MOBILE}} <input type="text" name="mobile"></p>
+        <p> {{g.userResourceStrings.FRM_EMAIL}} <input type="text" name="email"></p>
+        <p> {{g.userResourceStrings.FRM_ENABLED}} <input type="checkbox" name="enabled" value="True"> </p>
+        <p> {{g.userResourceStrings.FRM_NEW_PASSWORD}} <input type="password" name="password"></p>
+        <p> {{g.userResourceStrings.FRM_CONFIRM_NEW_PASSWORD}} <input type="password" name="password2"></p>
+        <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
     </form>
 
-    <a href="{{ url_for('users.userList') }}"> Πίσω στη Λίστα χρηστών </a>
+    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
 {% endblock %}
