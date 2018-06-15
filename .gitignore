@@ -2,3 +2,6 @@
 htmlcov/*
 *.pyc
 .idea/workspace.xml
+# ignore microsoft office temporary files
+*~$*.docx
+*~$*.xlsx
