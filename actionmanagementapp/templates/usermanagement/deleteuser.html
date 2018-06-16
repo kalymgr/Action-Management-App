@@ -8,7 +8,7 @@
 
         <h1>{{g.userResourceStrings.TXT_DELETE_USER}} "{{user.name}}"</h1>
         <i> {{g.userResourceStrings.TXT_CONFIRM_USER_DELETE}}</i>
-        <form action="#" method="post"><input type="submit" value="{{g.userResourceStrings.FRM_SAVE}}"> </form>
+        <form action="#" method="post"><input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"> </form>
 
-    <a href="{{ url_for('users.userList') }}"> {{g.generalResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
+    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
 {% endblock %}
