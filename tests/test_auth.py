@@ -41,12 +41,12 @@ def test_login(client, auth):
     with client:
         client.get('/users')
         assert session['user_id'] == 1
-        assert g.user.username == 'test'
+        assert g.user.username == 'kalymgr'
 
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('onoma_xristi', 'test', AuthResourceStrings.ERROR_WRONG_USERNAME),
-    ('test', 'a', AuthResourceStrings.ERROR_WRONG_PASSWORD),
+    ('kalymgr', 'a', AuthResourceStrings.ERROR_WRONG_PASSWORD),
 ))
 def test_login_validate_input(auth, username, password, message):
     response = auth.login(username, password)

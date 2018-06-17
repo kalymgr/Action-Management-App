@@ -49,10 +49,10 @@ def test_userList(client, auth):
     # case we get a normal result
     response = client.get('/users/')
     assert response.status_code == 200  # the response is ok
-    assert b"test user" in response.data  # test user exists in page
+    assert b"kalymgr" in response.data  # test user exists in page
     with client:
         client.get('/users/')  # necessary to get the g.user variable
-        assert g.user.username == 'test'
+        assert g.user.username == 'kalymgr'
 
 
 def test_userDetails(client, auth):
@@ -62,7 +62,7 @@ def test_userDetails(client, auth):
     userId = 1
     response = client.get('/users/%s/view'%userId)
     assert response.status_code == 200
-    assert "test user" in response.data
+    assert "kalymgr" in response.data
 
     # test that if the user id in the URL is not valid, the response will be 404
     response2 = client.get('/users/1928336/view')
@@ -89,12 +89,12 @@ def test_addUser(client, auth):
     with client:
         userData = {
             'name': 'Michalis',
-            'username': 'kalymgr',
+            'username': 'kalymngr',
             'department': 'IT Department',
             'usercategory': 1,
             'phone': '22433XXXXX',
             'mobile': '6945XXXXX',
-            'email': 'mtsougranis@gmail.com',
+            'email': 'mtsougranis2@gmail.com',
             'enabled': True,
             'password': 'kalymgr',
             'password2': 'kalymgr',
@@ -103,7 +103,7 @@ def test_addUser(client, auth):
         response = client.post('/users/add', data=userData)
         dbSession = current_app.config['DBSESSION']
         # check if the user has been added to the database
-        newUser = dbSession.query(User).filter(User.username == 'kalymgr').first()
+        newUser = dbSession.query(User).filter(User.username == 'kalymngr').first()
         assert userData['name'] == newUser.name
         # delete the user
         dbSession.delete(newUser)
