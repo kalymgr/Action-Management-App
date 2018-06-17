@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
 
+from actionmanagementapp.org import org_controller
 from utilities import database_setup
 import auth
 from actionmanagementapp.users import users_controller, users_models
@@ -54,9 +55,10 @@ def create_app(test_config=None):
         pass
 
     # the blueprints will be registered here, before the app is returned
-    app.register_blueprint(auth_controller.bp)
-    app.register_blueprint(users_controller.bp)
-    app.register_blueprint(log_controller.bp)
+    app.register_blueprint(auth_controller.bp)  # authorization blueprint
+    app.register_blueprint(users_controller.bp)  # user management blueprint
+    app.register_blueprint(log_controller.bp)  # logging blueprint
+    app.register_blueprint(org_controller.bp)  # organizational chart blueprint
 
     # register error pages handlers
     app.register_error_handler(404, custom_error_pages.page_not_found)

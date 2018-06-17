@@ -1,16 +1,17 @@
+# -*- coding: utf-8 -*-
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, func, Boolean
-
 from sqlalchemy.orm import relationship, sessionmaker, backref
-
-
 # create a class that inherits all the features of sql alchemy
 # it will be inherited from the classes
+from werkzeug.security import generate_password_hash
+
 from actionmanagementapp.utilities.db_models import TimeStampMixin
 from actionmanagementapp.utilities import sql_alchemy_utils
 
 Base = sql_alchemy_utils.Base
 
 
+# -- Database tables
 class UserCategory(Base, TimeStampMixin):
     """
     Class for storing the user categories data
@@ -41,3 +42,39 @@ class User(Base, TimeStampMixin):
     enabled = Column(Boolean)
     userCategoryId = Column(Integer, ForeignKey('usercategory.id', onupdate='cascade'), nullable=False)
     userCategory = relationship('UserCategory', backref=backref('users'))
+
+
+def insertDefaultUserData(dbSession):
+    """
+    Function tha inserts default user data in the database
+
+    :param dbSession:
+    :return:
+    """
+    # -- insert default user category data
+    if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
+        # insert some default values in the database
+        defaultUserCategories = [
+            (1, u'Χρήστης'),
+            (2, u'Διαχειριστής'),
+            (3, u'Υπερδιαχειριστής'),
+        ]
+        for uc in defaultUserCategories:
+            dbSession.add(UserCategory(id=uc[0], name=uc[1]))
+
+
+    # -- insert default user data
+    if dbSession.query(User).count() == 0:  # case the default user does not exist
+        # create the user
+        defaultUser = User(
+            id=1,
+            name=u'Μιχάλης Τσουγκράνης',
+            username='kalymgr',
+            email='mtsougranis@gmail.com',
+            password=generate_password_hash('kalymgr'),
+            userCategoryId=3,
+            enabled=True
+        )
+        # insert the user in the database
+        dbSession.add(defaultUser)
+    dbSession.commit()

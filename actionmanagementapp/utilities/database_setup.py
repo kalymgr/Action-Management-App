@@ -9,9 +9,9 @@ Python module that sets up the database for the application
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from actionmanagementapp.users.users_models import UserCategory
-from actionmanagementapp.users.users_models import User
+from actionmanagementapp.users.users_models import UserCategory, User, insertDefaultUserData
 from actionmanagementapp.log.log_models import LoggingRecord  # do not remove. It is used to create the log db table
+from actionmanagementapp.org.org_models import Organization, Service, OrganizationType, insertDefaultOrgData  # do not remove
 # TODO: improve the way the declarative base is created and handled
 from werkzeug.security import generate_password_hash
 from actionmanagementapp.utilities import sql_alchemy_utils
@@ -59,6 +59,7 @@ def getSession(base, engine):
 engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
 # go into the database and add the classes as new tables
 
+
 def getProductionDatabaseSession():
     """
     Function that gets the database session
@@ -68,31 +69,12 @@ def getProductionDatabaseSession():
     # go into the database and add the classes as new tables
     dbSession = getSession(Base, engine)
 
-    # insert some default values in the database
-    defaultUserCategories = [
-        {'id': '1', 'name': u'Χρήστης'},
-        {'id': '2', 'name': u'Διαχειριστής'},
-        {'id': '3', 'name': u'Υπερδιαχειριστής'},
-    ]
+    # insert default organizational data
+    insertDefaultOrgData(dbSession)
+    # insert default user data
+    insertDefaultUserData(dbSession)
 
-    if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
-        for uc in defaultUserCategories:
-            dbSession.add(UserCategory(id=uc['id'], name=uc['name']))
-        dbSession.commit()
-
-    # add the default user
-    defaultUser = User(
-        id=1,
-        name=u'Μιχάλης Τσουγκράνης',
-        username='kalymgr',
-        email='mtsougranis@gmail.com',
-        password=generate_password_hash('kalymgr'),
-        userCategoryId=3,
-        enabled=True
-    )
-    if dbSession.query(User).count() == 0:
-        dbSession.add(defaultUser)
-        dbSession.commit()
+    # return the db session variable
     return dbSession
 
 
@@ -105,30 +87,11 @@ def getTestingDatabaseSession():
     # go into the database and add the classes as new tables
     dbSession = getSession(Base, engine)
 
-    # insert some default values in the database
-    defaultUserCategories = [
-        {'id': '1', 'name': u'Χρήστης'},
-        {'id': '2', 'name': u'Διαχειριστής'},
-        {'id': '3', 'name': u'Υπερδιαχειριστής'},
-    ]
-
-    if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
-        for uc in defaultUserCategories:
-            dbSession.add(UserCategory(id=uc['id'], name=uc['name']))
-        dbSession.commit()
-
-    # create a dummy user called test (automated usage in some tests)
-    testUser = dbSession.query(User).filter(User.username == 'test').first()
-    if testUser is None:
-        testUser = User(name="test user",
-                        username="test",
-                        password=generate_password_hash("test"),
-                        userCategoryId=3,
-                        email='test@gmail.com',
-                        enabled=True)
-        dbSession.add(testUser)
-
-    dbSession.commit()  # save changes to the database
+    # -- insert some default values in the database
+    # insert default organizational data
+    insertDefaultOrgData(dbSession)
+    # insert default user data
+    insertDefaultUserData(dbSession)
     return dbSession
 
 

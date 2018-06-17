@@ -6,16 +6,16 @@ Blueprint related to user management
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import abort
 
-
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session, g)
 from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
-# create the blueprint
-bp = Blueprint("users", __name__, url_prefix="/users")
 from actionmanagementapp.users.users_models import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings
+
+# create the blueprint
+bp = Blueprint("users", __name__, url_prefix="/users")
 
 
 @bp.route('/')
