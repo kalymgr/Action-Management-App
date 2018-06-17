@@ -13,7 +13,7 @@ class HttpLoggerSetup:
         self.logger = logging.getLogger('synchronous logging')
         self.logger.setLevel('INFO')
         httpHandler = logging.handlers.HTTPHandler(
-            'localhost:5000',
+            '127.0.0.1:5000',
             '/log/addlog',
             method='POST'
         )
