@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of organizations</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+    <h1>{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}</h1>
 
-</body>
-</html>
+    <form method="get" action="{{url_for('org.addOrg')}}">
+        <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}">
+    </form>
+    {% if organizationList|count != 0 %}
+        {%  for organization in organizationList %}
+            <p> {{organization.name}}, {{organization.address}}, {{organization.ceo}}</p>
+        {% endfor %}
+
+    {% else %}
+       <p> {{g.organizationResourceStrings.TXT_NO_ORGANIZATIONS}}</p>
+    {% endif %}
+
+{% endblock %}

@@ -3,7 +3,7 @@ Blueprint for authentication
 """
 from werkzeug.exceptions import abort
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings, UsersResourceString, \
-    GeneralResourceStrings
+    GeneralResourceStrings, OrganizationResourceStrings
 
 from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -68,6 +68,7 @@ def load_resource_strings():
     g.userResourceStrings = UsersResourceString
     g.authResourceStrings = AuthResourceStrings
     g.generalResourceStrings = GeneralResourceStrings
+    g.organizationResourceStrings = OrganizationResourceStrings
 
 
 @bp.before_app_request

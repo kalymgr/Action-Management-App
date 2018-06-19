@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{g.organizationResourceStrings.TXT_ADD_ORGANIZATION_TITLE}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- here I can add page-specific resources like css stylesheets -->
+{% endblock %}
+{% block content %}
+    <h1>{{g.organizationResourceStrings.TXT_ADD_ORGANIZATION_TITLE}}</h1>
+
+    <form method="post">
+        <label for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
+        <input type="text" name="name" id="name"><br>
+        <label for="type">{{g.organizationResourceStrings.FRM_ORGANIZATION_TYPE}}</label>
+        <select id="type" name="type">
+            {% for t in orgTypes %}
+                <option value="{{ t.id }}">{{ t.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="ceo">{{g.organizationResourceStrings.FRM_ORGANIZATION_CEO}}</label>
+        <input type="text" id="ceo" name="ceo"><br>
+        <label for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
+        <select id="parentOrganizationId" name="parentOrganizationId">
+            <option>---------------</option>
+            {% for org in organizations %}
+            <option value="{{ org.id }}">{{ org.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="address">{{g.organizationResourceStrings.FRM_ORGANIZATION_ADDRESS}}</label>
+        <input type="text" id="address" name="address"><br>
+        <label for="phone">{{g.organizationResourceStrings.FRM_ORGANIZATION_PHONE}}</label>
+        <input type="text" id="phone" name="phone"><br>
+        <label for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
+        <input type="text" id="email" name="email"><br>
+        <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+    </form>
+
+{% endblock %}

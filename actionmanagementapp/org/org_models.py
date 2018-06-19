@@ -13,9 +13,9 @@ class Organization(Base, TimeStampMixin):
     class for storing the organization basic info eg Municipality
     """
     __tablename__ = 'organization'
-    id = Column(Integer, primary_key=True, autoincrement=False)
+    id = Column(Integer, primary_key=True)
     name = Column(String(150), nullable=False)
-    type = Column(Integer)
+    type = Column(Integer, ForeignKey('organizationtype.id', onupdate='cascade'))
     address = Column(String(150))
     ceo = Column(String(50), nullable=False)
     phone = Column(String(50))

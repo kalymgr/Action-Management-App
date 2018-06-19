@@ -48,7 +48,7 @@ class UsersResourceString:
     INFO_USER_CATEGORY_UPDATED = u' Τα στοιχεία της κατηγορίας έχουν ενημερωθεί. '
     INFO_USER_CATEGORY_DELETED = u' Η κατηγορία έχει διαγραφεί. '
 
-    # ERROR elements
+    # -- ERROR elements
     ERROR_NON_EXISTING_USER = u' Ο χρήστης δεν υπάρχει. '
     ERROR_NAME_NOT_ENTERED = u' Δε δόθηκε το όνομα. '
     ERROR_USERNAME_NOT_ENTERED = u' Δε δόθηκε το όνομα χρήστη. '
@@ -96,6 +96,31 @@ class UsersResourceString:
     TXT_USER_CATEGORIES = u'Κατηγορίες χρηστών'
     TXT_USER_INFO = u'Πληροφορίες χρήστη'
     TXT_USER_LIST = u'Λίστα χρηστών'
+
+
+class OrganizationResourceStrings:
+    """
+    Strings related to the management of the organization
+    """
+    # -- ERROR elements
+    ERR_ORGANIZATION_EMPTY_NAME = u'Δε δόθηκε όνομα οργανισμού'
+    ERR_ORGANIZATION_EMPTY_CEO = u' Δε δόθηκαν στοιχεία της διοίκησης'
+
+    # -- FORM elements
+    FRM_ORGANIZATION_NAME = u'Όνομα:'
+    FRM_ORGANIZATION_TYPE = u'Τύπος:'
+    FRM_ORGANIZATION_CEO = u'Διοικητής:'
+    FRM_PARENT_ORGANIZATION = u'Υπάγεται σε:'
+    FRM_ORGANIZATION_ADDRESS = u'Διεύθυνση:'
+    FRM_ORGANIZATION_PHONE = u'Τηλέφωνο:'
+    FRM_ORGANIZATION_EMAIL = u'Διεύθυνση Email:'
+    FRM_ADD_ORGANIZATION = u'Προσθήκη οργανισμού'
+
+    # -- TEXT elements
+    TXT_NO_ORGANIZATIONS = u' Δεν υπάρχουν καταχωρημένα νομικά πρόσωπα. '
+    TXT_ORGANIZATION_LIST_TITLE = u'Λίστα νομικών προσώπων'
+    TXT_ORGANIZATION_SAVED = u' Το νομικό πρόσωπο έχει αποθηκευτεί. '
+    TXT_ADD_ORGANIZATION_TITLE = u'Προσθήκη νέου νομικού προσώπου'
 
 
 class GeneralResourceStrings:
