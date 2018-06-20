@@ -13,6 +13,12 @@
     {% if organizationList|count != 0 %}
         {%  for organization in organizationList %}
             <p> {{organization.name}}, {{organization.address}}, {{organization.ceo}}</p>
+            <form action="{{url_for('org.editOrg', org_id=organization.id)}}">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
+            </form>
+            <form action="{{url_for('org.deleteOrg', org_id=organization.id)}}">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
+            </form>
         {% endfor %}
 
     {% else %}

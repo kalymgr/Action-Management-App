@@ -109,7 +109,7 @@ class OrganizationResourceStrings:
     # -- FORM elements
     FRM_ORGANIZATION_NAME = u'Όνομα:'
     FRM_ORGANIZATION_TYPE = u'Τύπος:'
-    FRM_ORGANIZATION_CEO = u'Διοικητής:'
+    FRM_ORGANIZATION_CEO = u'Νόμιμος εκπρόσωπος:'
     FRM_PARENT_ORGANIZATION = u'Υπάγεται σε:'
     FRM_ORGANIZATION_ADDRESS = u'Διεύθυνση:'
     FRM_ORGANIZATION_PHONE = u'Τηλέφωνο:'
@@ -121,7 +121,11 @@ class OrganizationResourceStrings:
     TXT_ORGANIZATION_LIST_TITLE = u'Λίστα νομικών προσώπων'
     TXT_ORGANIZATION_SAVED = u' Το νομικό πρόσωπο έχει αποθηκευτεί. '
     TXT_ADD_ORGANIZATION_TITLE = u'Προσθήκη νέου νομικού προσώπου'
+    TXT_EDIT_ORGANIZATION_TITLE = u'Επεξεργασία νέου νομικού προσώπου'
     TXT_BACK_TO_ORGANIZATION_LIST = u'Πίσω στη λίστα με τα νομικά πρόσωπα'
+    TXT_ORGANIZATION_DELETED = u'Το νομικό πρόσωπο έχει διαγραφεί.'
+    TXT_DELETE_ORGANIZATION_TITLE = u'Επεξεργασία νέου νομικού προσώπου'
+    TXT_CONFIRM_DELETE_ORGANIZATION = u'Είστε σίγουροι ότι θέλετε να διαγράψετε το νομικό πρόσωπο %s;'
 
 
 class GeneralResourceStrings:
