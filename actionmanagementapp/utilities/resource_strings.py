@@ -121,6 +121,7 @@ class OrganizationResourceStrings:
     TXT_ORGANIZATION_LIST_TITLE = u'Λίστα νομικών προσώπων'
     TXT_ORGANIZATION_SAVED = u' Το νομικό πρόσωπο έχει αποθηκευτεί. '
     TXT_ADD_ORGANIZATION_TITLE = u'Προσθήκη νέου νομικού προσώπου'
+    TXT_BACK_TO_ORGANIZATION_LIST = u'Πίσω στη λίστα με τα νομικά πρόσωπα'
 
 
 class GeneralResourceStrings:

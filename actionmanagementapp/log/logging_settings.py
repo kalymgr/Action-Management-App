@@ -54,11 +54,12 @@ def setLoggingSettings():
                     'subject': 'Actions Management App Log Event',
                     'level': 'ERROR',  # filter logging level per handler
                 },
+
                 'debugconsole':  # handler that sends all messages to the console - should be activated only during dev
                 {
                     'class': 'logging.StreamHandler',
                     'formatter': 'default',
-                    'level': 'INFO',
+                    # 'level': 'NOTSET',  # this is the lowest log level
                 },
 
              },

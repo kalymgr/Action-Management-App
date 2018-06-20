@@ -57,11 +57,15 @@ def addOrg():
         newOrg.email = request.form.get('email', None)
         newOrg.parentOrganizationId = request.form.get('parentOrganizationId', None)
 
+        # if needed set, parent organization to None, to avoid sql integrity constraints error
+        if newOrg.parentOrganizationId == '':
+            newOrg.parentOrganizationId = None
+
         # check for constraints
         error = ''
-        if newOrg.name is None:
+        if newOrg.name is None or newOrg.name == '':
             error += OrganizationResourceStrings.ERR_ORGANIZATION_EMPTY_NAME
-        if newOrg.ceo is None:
+        if newOrg.ceo is None or newOrg.ceo == '':
             error += OrganizationResourceStrings.ERR_ORGANIZATION_EMPTY_CEO
 
         # save the new organization in the database

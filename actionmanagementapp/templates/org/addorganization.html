@@ -20,7 +20,7 @@
         <input type="text" id="ceo" name="ceo"><br>
         <label for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
         <select id="parentOrganizationId" name="parentOrganizationId">
-            <option>---------------</option>
+            <option value="">  Κανένας οργανισμός </option>
             {% for org in organizations %}
             <option value="{{ org.id }}">{{ org.name }}</option>
             {% endfor %}
@@ -33,5 +33,5 @@
         <input type="text" id="email" name="email"><br>
         <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
     </form>
-
+<a href="{{url_for('org.orgList')}}">{{g.organizationResourceStrings.TXT_BACK_TO_ORGANIZATION_LIST}}</a>
 {% endblock %}
