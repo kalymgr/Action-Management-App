@@ -3,7 +3,7 @@ Blueprint for authentication
 """
 from werkzeug.exceptions import abort
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings, UsersResourceString, \
-    GeneralResourceStrings, OrganizationResourceStrings
+    GeneralResourceStrings, OrganizationResourceStrings, MenuResourceStrings
 
 from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -69,6 +69,7 @@ def load_resource_strings():
     g.authResourceStrings = AuthResourceStrings
     g.generalResourceStrings = GeneralResourceStrings
     g.organizationResourceStrings = OrganizationResourceStrings
+    g.menuResourceStrings = MenuResourceStrings
 
 
 @bp.before_app_request
@@ -87,8 +88,8 @@ def load_logged_in_user():
     else:
         g.user = dbSession.query(User).filter(User.id == user_id).first()
 
-    g.userResourceStrings = UsersResourceString
-    g.authResourceStrings = AuthResourceStrings
+    # g.userResourceStrings = UsersResourceString
+    # g.authResourceStrings = AuthResourceStrings
 
 
 @bp.route('/logout')

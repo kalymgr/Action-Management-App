@@ -1,9 +1,12 @@
 nav.row.appnavigation {
-    min-height: 10rem;
+    min-height: 5rem;
 }
 header.page_title {
     min-height: 5rem;
 }
 form .row {
     margin-bottom: 15px;
+}
+.bottom-buttons {
+    min-height: 5rem;
 }

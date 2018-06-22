@@ -137,3 +137,13 @@ class GeneralResourceStrings:
     FRM_EDIT = u'Επεξεργασία'
     FRM_DELETE = u'Διαγραφή'
     FRM_VIEW = u'Προβολή'
+
+
+class MenuResourceStrings:
+    """
+    class with resource strings used by the menus
+    """
+
+    # -- TXT elements
+    TXT_MENU_USERS = u'Χρήστες'
+    TXT_MENU_ORGANIZATIONS = u'Νομικά πρόσωπα'

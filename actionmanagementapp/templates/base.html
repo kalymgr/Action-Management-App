@@ -9,49 +9,54 @@
     <!-- My CSS files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- Title -->
-    <title>{% block title %}{% endblock %} - {{config['APPLICATION_NAME']}}</title>
+    <title>{{config['APPLICATION_NAME']}}</title>
 </head>
 <body class="container">
 
+    <!-- Application title -->
+    <div class="row">
+        <h1 class="col text-center">{{config['APPLICATION_NAME']}}</h1>
+    </div>
+
     <!-- Navigation -->
     <nav class="row appnavigation align-items-center">
-            <div class="col-sm-9"><h1>{{config['APPLICATION_NAME']}}</h1></div>
-            <div class="col-sm">
-                <ul>
-                  {% if g.user %}
-                    <li><span>{{ g.user['username'] }}</span>
-                    <li><a href="{{ url_for('auth.logout') }}">{{g.authResourceStrings.TXT_LOGOUT}}</a>
-                  {% else %}
-
-                    <li><a href="{{ url_for('auth.login') }}">{{g.authResourceStrings.TXT_LOGIN}}</a>
-                  {% endif %}
-                </ul>
-            </div>
+        <!-- Menu items -->
+        <span class="col">
+            <a href="/users">{{g.menuResourceStrings.TXT_MENU_USERS}}</a> |
+            <a href="/org">{{g.menuResourceStrings.TXT_MENU_ORGANIZATIONS}}</a>
+        </span>
+        <!-- Login and Logout links -->
+        <div class="col-sm text-right">
+          {% if g.user %}
+            <span>{{ g.user['username'] }}</span>
+            <a href="{{ url_for('auth.logout') }}">{{g.authResourceStrings.TXT_LOGOUT}}</a>
+          {% else %}
+            <a href="{{ url_for('auth.login') }}">{{g.authResourceStrings.TXT_LOGIN}}</a>
+          {% endif %}
+        </div>
     </nav>
 
     <!-- Content -->
     <section>
 
-        <!-- Header of the page -->
-      <header class="page_title">
-          <div class="row">
+        <!-- Title of the page -->
+      <header class="page_title row">
             <h1 class="col text-center">
-                {% block header %}{% endblock %}
+                {% block page_title %}{% endblock %}
             </h1>
-            </div>
       </header>
 
-        <!-- Flash messages -->
+        <!-- Show content of the page -->
+      {% block content %}{% endblock %}
+
+          <!-- Flash messages -->
       {% for msg in get_flashed_messages() %}
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 {{ msg }}
             </div>
         </div>
       {% endfor %}
-
-        <!-- Show content of the page -->
-      {% block content %}{% endblock %}
 
     </section>
 
