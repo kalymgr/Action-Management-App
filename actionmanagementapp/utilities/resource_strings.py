@@ -87,15 +87,20 @@ class UsersResourceString:
     TXT_CHANGE_USER_PASSWORD_TITLE = u'Αλλαγή κωδικού χρήστη'
     TXT_CHANGE_USER_PASSWORD = u'Αλλαγή κωδικού για το χρήστη'
     TXT_DELETE_USER = u'Διαγραφή χρήστη'
-    TXT_CONFIRM_USER_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε το/τη χρήστη;'
+    TXT_CONFIRM_USER_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε το/τη χρήστη %s ;'
     TXT_DELETE_USER_CATEGORY = u'Διαγραφή κατηγορίας χρήστη'
-    TXT_CONFIRM_USER_CATEGORY_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε την κατηγορία;'
+    TXT_CONFIRM_USER_CATEGORY_DELETE = u'Είστε σίγουρος/η ότι θέλετε να διαγράψετε την κατηγορία %s;'
     TXT_BACK_TO_CATEGORY_LIST = u'Πίσω στη Λίστα κατηγοριών'
     TXT_EDIT_USER = u'Επεξεργασία χρήστη'
     TXT_EDIT_USER_CATEGORY = u'Επεξεργασία κατηγορίας χρήστη'
     TXT_USER_CATEGORIES = u'Κατηγορίες χρηστών'
     TXT_USER_INFO = u'Πληροφορίες χρήστη'
     TXT_USER_LIST = u'Λίστα χρηστών'
+    TXT_FULL_NAME = u'Όνοματεπώνυμο'
+    TXT_USERNAME = u'Όνομα χρήστη'
+    TXT_EMAIL = u'Email'
+    TXT_USER_CATEGORY = u'Κατηγορία'
+    TXT_USER_CATEGORY_NAME = u'Όνομα'
 
 
 class OrganizationResourceStrings:
@@ -138,6 +143,8 @@ class GeneralResourceStrings:
     FRM_DELETE = u'Διαγραφή'
     FRM_VIEW = u'Προβολή'
 
+    # -- TEXT elements
+    TXT_OPERATIONS = u'Λειτουργίες'
 
 class MenuResourceStrings:
     """
@@ -147,3 +154,4 @@ class MenuResourceStrings:
     # -- TXT elements
     TXT_MENU_USERS = u'Χρήστες'
     TXT_MENU_ORGANIZATIONS = u'Νομικά πρόσωπα'
+

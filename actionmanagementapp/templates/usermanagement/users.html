@@ -10,17 +10,18 @@
                  <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Ονοματεπώνυμο</th>
-                        <th scope="col">Όνομα χρήστη</th>
-                        <th scope="col">Κατηγορία</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Λειτουργίες</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_FULL_NAME}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_USERNAME}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_USER_CATEGORY}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_EMAIL}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
                     </tr>
                  </thead>
                 <tbody>
+
                 {% for user in users %}
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{loop.index}}</th>
                     <td><a class="col-md"
                            href="{{ url_for('users.userDetails', user_id=user.id) }}">
                         {{ user.name }}</a></td>
@@ -44,8 +45,6 @@
             </table>
         </span>
     </div>
-
-
 
     <!-- buttons at the bottom of the screen -->
     <div class="row justify-content-center bottom-buttons align-items-center">

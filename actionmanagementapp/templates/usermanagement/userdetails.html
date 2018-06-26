@@ -1,23 +1,47 @@
 {% extends "base.html" %}
-{% block title %}{{g.userResourceStrings.TXT_USER_INFO}}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{g.userResourceStrings.TXT_USER_INFO}}{% endblock %}
+
 {% block content %}
-    <h1>{{g.userResourceStrings.TXT_USER_INFO}}</h1>
+<div class="col">
+    <p class="row">
+        <span class="col text-right"> {{g.userResourceStrings.FRM_FULL_NAME}} </span>
+        <span class="col"> {{ user.name }} </span>
+    </p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_USERNAME}}</span>
+        <span class="col"> {{ user.username }} </span>
+    </p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_DEPARTMENT}}</span>
+        <span class="col">{{ user.department }}</span>
+    </p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY}}</span>
+        <span class="col">{{ user.userCategory.name }}</span>
+    </p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_PHONE}}</span>
+        <span class="col">{{ user.phone }}</span>
+    </p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_MOBILE}}</span>
+        <span class="col">{{ user.mobile }}</span></p>
+    <p class="row">
+        <span class="col text-right">{{g.userResourceStrings.FRM_EMAIL}}</span>
+        <span class="col">{{ user.email }}</span></p>
 
-        <p> {{g.userResourceStrings.FRM_FULL_NAME}} {{ user.name }}</p>
-        <p> {{g.userResourceStrings.FRM_USERNAME}} {{ user.username }}</p>
-        <p> {{g.userResourceStrings.FRM_DEPARTMENT}} {{ user.department }}</p>
-        <p> {{g.userResourceStrings.FRM_USER_CATEGORY}} {{ user.userCategory.name }}</p>
-        <p> {{g.userResourceStrings.FRM_PHONE}} {{ user.phone }}</p>
-        <p> {{g.userResourceStrings.FRM_MOBILE}} {{ user.mobile }}</p>
-        <p> {{g.userResourceStrings.FRM_EMAIL}} {{ user.email }}</p>
-        <form action="{{ url_for('users.editUser', user_id=user.id) }}"
-              method="get"><input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
-        <form action="{{ url_for('users.deleteUser', user_id=user.id) }}"
-              method="get"><input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <form class="d-inline" action="{{ url_for('users.editUser', user_id=user.id) }}"
+                  method="get"><input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
+            <form class="d-inline" action="{{ url_for('users.deleteUser', user_id=user.id) }}"
+                  method="get"><input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+        </div>
+    </div>
+    {{ macros.showBacktoUserListNav() }}
 
-    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
+</div>
+
 {% endblock %}

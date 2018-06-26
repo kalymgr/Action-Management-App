@@ -1,14 +1,18 @@
 {% extends "base.html" %}
-{% block title %}{{g.userResourceStrings.TXT_DELETE_USER}}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{g.userResourceStrings.TXT_DELETE_USER}}{% endblock %}
 {% block content %}
 
-        <h1>{{g.userResourceStrings.TXT_DELETE_USER}} "{{user.name}}"</h1>
-        <i> {{g.userResourceStrings.TXT_CONFIRM_USER_DELETE}}</i>
-        <form action="#" method="post"><input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"> </form>
+        <i> {{g.userResourceStrings.TXT_CONFIRM_USER_DELETE%user.name}}</i>
+        <form action="#" method="post">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+                </div>
+            </div>
 
-    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
+        </form>
+
+    {{ macros.showBacktoUserListNav() }}
 {% endblock %}

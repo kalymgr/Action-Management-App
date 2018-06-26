@@ -1,0 +1,12 @@
+{# Creating a macro (it's like a function) to demonstrate it's use #}
+
+
+{% macro showBacktoUserListNav() %}
+{# macro to show the link that gets the user back to the user list#}
+    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
+{% endmacro %}
+
+{% macro showBacktoUserCategoryListNav() %}
+{# macro to show the link that gets the user back to the user category list #}
+    <a href="{{ url_for('users.userCategories') }}"> {{g.userResourceStrings.TXT_BACK_TO_CATEGORY_LIST}} </a>
+{% endmacro %}

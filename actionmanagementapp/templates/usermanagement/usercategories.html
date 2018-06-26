@@ -1,23 +1,47 @@
 {% extends "base.html" %}
-{% block title %}{{g.userResourceStrings.TXT_USER_CATEGORIES}}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{g.userResourceStrings.TXT_USER_CATEGORIES}}{% endblock %}
+
 {% block content %}
-    <h1>{{g.userResourceStrings.TXT_USER_CATEGORIES}}</h1>
-    <p><form action="{{ url_for('users.addUserCategory') }}" method="get">
-    <input type="submit" value="{{g.userResourceStrings.FRM_ADD_CATEGORY}}"> </form> </p>
+    <div class="row justify-content-center">
+        <span class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                       <th scope="col">#</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_USER_CATEGORY_NAME}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for userCategory in userCategories %}
+                    <tr>
+                        <td>
+                            {{userCategory.id}}
+                        </td>
+                        <td>
+                            {{userCategory.name}}
+                        </td>
+                        <td>
+                            <form class="d-inline" action="{{ url_for('users.editUserCategory', user_category_id=userCategory.id) }}" method="get">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
+                            <form class="d-inline" action="{{ url_for('users.deleteUserCategory', user_category_id=userCategory.id) }}" method="get">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </span>
+    </div>
 
-        {% for userCategory in userCategories %}
-            <p> {{g.userResourceStrings.FRM_USER_CATEGORY_ID}} {{userCategory.id}},
-                {{g.userResourceStrings.FRM_USER_CATEGORY_NAME}} {{userCategory.name}}</p>
-            <form action="{{ url_for('users.editUserCategory', user_category_id=userCategory.id) }}" method="get">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
-            <form action="{{ url_for('users.deleteUserCategory', user_category_id=userCategory.id) }}" method="get">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
-        {% endfor %}
+    <div class="row">
+        <form class="col" action="{{ url_for('users.addUserCategory') }}" method="get">
+            <input type="submit" value="{{g.userResourceStrings.FRM_ADD_CATEGORY}}">
+        </form>
+    </div>
 
+    {{ macros.showBacktoUserListNav() }}
 
-    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
 {% endblock %}

@@ -1,18 +1,27 @@
 {% extends "base.html" %}
-{% block title %}Προσθήκη χρήστη{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{ g.userResourceStrings.TXT_ADD_USER }}{% endblock %}
+
 {% block content %}
-    <h1>{{ g.userResourceStrings.TXT_ADD_USER }}</h1>
     <form action="#" method="post">
-        <p> {{g.userResourceStrings.FRM_FULL_NAME}} <input type="text" name="name"></p>
-        <p> {{g.userResourceStrings.FRM_USERNAME}} <input type="text" name="username"></p>
-        <p> {{g.userResourceStrings.FRM_DEPARTMENT}} <input type="text" name="department"></p>
-        <p> {{g.userResourceStrings.FRM_USER_CATEGORY}}
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_FULL_NAME}}</span>
+            <span class="col"><input type="text" name="name"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_USERNAME}}</span>
+            <span class="col"><input type="text" name="username"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_DEPARTMENT}}</span>
+            <span class="col"><input type="text" name="department"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY}}</span>
+            <span class="col">
             {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
-                <select name="usercategory" disabled> <!-- disable the category selection -->
+                <       name="usercategory" disabled> <!-- disable the category selection -->
             {% else %}
                 <select name="usercategory">
             {% endif %}
@@ -20,15 +29,38 @@
                         <option value="{{ cat.id }}">{{ cat.name }}</option>
                 {%  endfor %}
             </select>
+            </span>
         </p>
-        <p> {{g.userResourceStrings.FRM_PHONE}} <input type="text" name="phone"></p>
-        <p> {{g.userResourceStrings.FRM_MOBILE}} <input type="text" name="mobile"></p>
-        <p> {{g.userResourceStrings.FRM_EMAIL}} <input type="text" name="email"></p>
-        <p> {{g.userResourceStrings.FRM_ENABLED}} <input type="checkbox" name="enabled" value="True"> </p>
-        <p> {{g.userResourceStrings.FRM_NEW_PASSWORD}} <input type="password" name="password"></p>
-        <p> {{g.userResourceStrings.FRM_CONFIRM_NEW_PASSWORD}} <input type="password" name="password2"></p>
-        <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_PHONE}}</span>
+            <span class="col"><input type="text" name="phone"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_MOBILE}}</span>
+            <span class="col"><input type="text" name="mobile"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_EMAIL}}</span>
+            <span class="col "><input type="text" name="email"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right"> {{g.userResourceStrings.FRM_ENABLED}}</span>
+            <span class="col"><input type="checkbox" name="enabled" value="True"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_NEW_PASSWORD}}</span>
+            <span class="col"><input type="password" name="password"></span>
+        </p>
+        <p class="row">
+            <span class="col text-right">{{g.userResourceStrings.FRM_CONFIRM_NEW_PASSWORD}}</span>
+            <span class="col"><input type="password" name="password2"></span>
+        </p>
+        <div class="row">
+                <span class="col d-flex justify-content-center">
+                    <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+                </span>
+        </div>
     </form>
 
-    <a href="{{ url_for('users.userList') }}"> {{g.userResourceStrings.TXT_BACK_TO_USER_LIST}} </a>
+    {{ macros.showBacktoUserListNav() }}
 {% endblock %}

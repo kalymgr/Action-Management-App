@@ -1,16 +1,18 @@
 {% extends "base.html" %}
-{% block title %}{{g.userResourceStrings.TXT_DELETE_USER_CATEGORY}}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{g.userResourceStrings.TXT_DELETE_USER_CATEGORY}}{% endblock %}
+
 {% block content %}
-    <h1>{{g.userResourceStrings.TXT_DELETE_USER_CATEGORY}} "{{ userCategory.name }}"</h1>
-    <p> {{g.userResourceStrings.TXT_CONFIRM_USER_CATEGORY_DELETE}} </p>
+
+    <i> {{g.userResourceStrings.TXT_CONFIRM_USER_CATEGORY_DELETE % userCategory.name}} </i>
 
     <form action="#" method="post">
-        <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+            </div>
+        </div>
     </form>
-
-    <a href="{{ url_for('users.userCategories') }}"> {{g.userResourceStrings.TXT_BACK_TO_CATEGORY_LIST}} </a>
+    {{ macros.showBacktoUserCategoryListNav() }}
 {% endblock %}
