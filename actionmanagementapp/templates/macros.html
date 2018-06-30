@@ -10,3 +10,8 @@
 {# macro to show the link that gets the user back to the user category list #}
     <a href="{{ url_for('users.userCategories') }}"> {{g.userResourceStrings.TXT_BACK_TO_CATEGORY_LIST}} </a>
 {% endmacro %}
+
+{% macro showBacktoOrganizationListNav() %}
+{# macro to show the link that gets the user back to the organization list #}
+    <a href="{{ url_for('org.orgList') }}"> {{g.organizationResourceStrings.TXT_BACK_TO_ORGANIZATION_LIST}} </a>
+{% endmacro %}

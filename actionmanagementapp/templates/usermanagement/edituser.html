@@ -5,23 +5,24 @@
 {% block content %}
         <form action="#" method="post">
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_FULL_NAME}}</span>
-                <span class="col"> <input type="text" name="name" value="{{ user.name }}"></span>
+                <label for="name" class="col text-right">{{g.userResourceStrings.FRM_FULL_NAME}}</label>
+                <span class="col"> <input id="name" type="text" name="name" value="{{ user.name }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_USERNAME}}</span>
-                <span class="col"><input type="text" name="username" value="{{ user.username }}"></span>
+                <label for="username" class="col text-right">{{g.userResourceStrings.FRM_USERNAME}}</label>
+                <span class="col"><input type="text" id="username" name="username" value="{{ user.username }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_DEPARTMENT}}</span>
-                <span class="col"><input type="text" name="department" value="{{ user.department }}"></span>
+                <label for="department" class="col text-right">{{g.userResourceStrings.FRM_DEPARTMENT}}</label>
+                <span class="col"><input type="text" id="department" name="department" value="{{ user.department }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY}}</span>
-                <span class="col">{% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
-                <span name="usercategory" disabled> <!-- disable the category selection -->
+                <label for="usercategory" class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY}}</label>
+                <span class="col">
+                    {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
+                <span id="usercategory" name="usercategory" disabled> <!-- disable the category selection -->
             {% else %}
-                <select name="usercategory">
+                <select id="usercategory" name="usercategory">
             {% endif %}
                 {%  for cat in userCategories %}
                     {% if user.userCategoryId == cat.id%} <!-- select the category of the user -->
@@ -33,23 +34,23 @@
                 </select> </span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_PHONE}}</span>
-                <span class="col "><input type="text" name="phone" value="{{ user.phone }}"></span>
+                <label for="phone" class="col text-right">{{g.userResourceStrings.FRM_PHONE}}</label>
+                <span class="col "><input id="phone" type="text" name="phone" value="{{ user.phone }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_MOBILE}}</span>
-                <span class="col"><input type="text" name="mobile" value="{{ user.mobile }}"></span>
+                <label for="mobile" class="col text-right">{{g.userResourceStrings.FRM_MOBILE}}</label>
+                <span class="col"><input id="mobile" type="text" name="mobile" value="{{ user.mobile }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_EMAIL}}</span>
-                <span class="col"><input type="text" name="email" value="{{ user.email }}"></span>
+                <label for="email" class="col text-right">{{g.userResourceStrings.FRM_EMAIL}}</label>
+                <span class="col"><input id="email" type="text" name="email" value="{{ user.email }}"></span>
             </p>
             <p class="row">
-                <span class="col text-right">{{g.userResourceStrings.FRM_ENABLED}}</span>
+                <label for="enabled" class="col text-right">{{g.userResourceStrings.FRM_ENABLED}}</label>
             {% if user.enabled == True %} <!-- set the checkbox checked if true -->
-                <span class="col"><input type="checkbox" name="enabled" checked></span>
+                <span class="col"><input id="enabled" type="checkbox" name="enabled" checked></span>
             {% else %}
-                <span class="col"><input type="checkbox" name="enabled"></span>
+                <span class="col"><input id="enabled" type="checkbox" name="enabled"></span>
             {% endif %}
             </p>
             <div class="row">

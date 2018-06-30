@@ -131,6 +131,9 @@ class OrganizationResourceStrings:
     TXT_ORGANIZATION_DELETED = u'Το νομικό πρόσωπο έχει διαγραφεί.'
     TXT_DELETE_ORGANIZATION_TITLE = u'Επεξεργασία νέου νομικού προσώπου'
     TXT_CONFIRM_DELETE_ORGANIZATION = u'Είστε σίγουροι ότι θέλετε να διαγράψετε το νομικό πρόσωπο %s;'
+    TXT_ORGANIZATION_NAME = u'Όνομα'
+    TXT_ORGANIZATION_ADDRESS = u'Διεύθυνση'
+    TXT_ORGANIZATION_CEO = u'Νόμιμος Εκπρόσωπος'
 
 
 class GeneralResourceStrings:
@@ -145,6 +148,7 @@ class GeneralResourceStrings:
 
     # -- TEXT elements
     TXT_OPERATIONS = u'Λειτουργίες'
+
 
 class MenuResourceStrings:
     """

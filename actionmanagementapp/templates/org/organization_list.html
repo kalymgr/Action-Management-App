@@ -1,28 +1,52 @@
 {% extends "base.html" %}
-{% block title %}{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <!-- here I can add page-specific resources like css stylesheets -->
-{% endblock %}
-{% block content %}
-    <h1>{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}</h1>
+{% import "macros.html" as macros %}
 
-    <form method="get" action="{{url_for('org.addOrg')}}">
-        <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}">
-    </form>
+{% block page_title %}{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}{% endblock %}
+
+{% block content %}
+
     {% if organizationList|count != 0 %}
-        {%  for organization in organizationList %}
-            <p> {{organization.name}}, {{organization.address}}, {{organization.ceo}}</p>
-            <form action="{{url_for('org.editOrg', org_id=organization.id)}}">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
-            </form>
-            <form action="{{url_for('org.deleteOrg', org_id=organization.id)}}">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
-            </form>
-        {% endfor %}
+    <div class="row justify-content-center">
+            <span class = "col">
+                <table class="table">
+                     <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_NAME}}</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_ADDRESS}}</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_CEO}}</th>
+                            <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                        </tr>
+                     </thead>
+                <tbody>
+            {%  for organization in organizationList %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{organization.name}}</td>
+                    <td>{{organization.address}}</td>
+                    <td>{{organization.ceo}}</td>
+                    <td>
+                        <form action="{{url_for('org.editOrg', org_id=organization.id)}}" class="d-inline">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
+                        </form>
+                        <form action="{{url_for('org.deleteOrg', org_id=organization.id)}}" class="d-inline">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
+                        </form>
+                    </td>
+            {% endfor %}
+                </tbody>
+            </table>
+            </span></div>
 
     {% else %}
        <p> {{g.organizationResourceStrings.TXT_NO_ORGANIZATIONS}}</p>
     {% endif %}
+    <div class="row justify-content-center bottom-buttons align-items-center">
+        <span class="col">
+            <form class="d-inline" method="get" action="{{url_for('org.addOrg')}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}">
+            </form>
+        </span>
+    </div>
 
 {% endblock %}
