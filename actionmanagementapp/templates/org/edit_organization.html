@@ -1,64 +1,15 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
-{% block page_title %}{{g.organizationResourceStrings.TXT_EDIT_ORGANIZATION_TITLE}}{% endblock %}
+{% block page_title %}
+    {% if organization == None %}
+        {{g.organizationResourceStrings.TXT_ADD_ORGANIZATION_TITLE}}
+    {% else %}
+        {{g.organizationResourceStrings.TXT_EDIT_ORGANIZATION_TITLE}}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <form method="post">
-        <p class="row">
-           <label class="col text-right" for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
-            <span class="col"><input type="text" name="name" id="name" value="{{organization.name}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="type">{{g.organizationResourceStrings.FRM_ORGANIZATION_TYPE}}</label>
-            <span class="col">
-                <select id="type" name="type">
-                    {% for t in orgTypes %}
-                        {%if t.id == organization.type %}
-                        <option value="{{ t.id }}" selected>{{ t.name }}</option>
-                        {%  else %}
-                        <option value="{{ t.id }}">{{ t.name }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="ceo">{{g.organizationResourceStrings.FRM_ORGANIZATION_CEO}}</label>
-            <span class="col"><input type="text" id="ceo" name="ceo" value="{{organization.ceo}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
-            <span class="col">
-                <select id="parentOrganizationId" name="parentOrganizationId">
-                <option value="">  Κανένας οργανισμός </option>
-                {% for org in organizations %}
-                {%if org.id == organization.parentOrganizationId%}
-                    <option value="{{ org.id }}" selected>{{ org.name }}</option>
-                {% else %}
-                    <option value="{{ org.id }}">{{ org.name }}</option>
-                {% endif %}
-                {% endfor %}
-                </select>
-            </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="address">{{g.organizationResourceStrings.FRM_ORGANIZATION_ADDRESS}}</label>
-        <span class="col"> <input type="text" id="address" name="address" value="{{organization.address}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="phone">{{g.organizationResourceStrings.FRM_ORGANIZATION_PHONE}}</label>
-            <span class="col"> <input type="text" id="phone" name="phone" value="{{organization.phone}}"> </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
-            <span class="col"> <input type="text" id="email" name="email" value="{{organization.email}}"></span>
-        </p>
-        <div class="row">
-            <span class="col d-flex justify-content-center">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
-            </span>
-        </div>
-    </form>
+{{ macros.organizationForm(organization, orgTypes, organizations) }}
 {{ macros.showBacktoOrganizationListNav() }}
 {% endblock %}

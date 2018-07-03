@@ -14,8 +14,8 @@
 <body class="container">
 
     <!-- Application title -->
-    <div class="row">
-        <h1 class="col text-center">{{config['APPLICATION_NAME']}}</h1>
+    <div class="row app-title align-items-center">
+        <h1 class="col text-center display-4">{{config['APPLICATION_NAME']}}</h1>
     </div>
 
     <!-- Navigation -->
@@ -23,7 +23,8 @@
         <!-- Menu items -->
         <span class="col">
             <a href="/users">{{g.menuResourceStrings.TXT_MENU_USERS}}</a> |
-            <a href="/org">{{g.menuResourceStrings.TXT_MENU_ORGANIZATIONS}}</a>
+            <a href="/org">{{g.menuResourceStrings.TXT_MENU_ORGANIZATIONS}}</a> |
+            <a href="/org/services">{{g.menuResourceStrings.TXT_MENU_SERVICES}}</a>
         </span>
         <!-- Login and Logout links -->
         <div class="col-sm text-right">

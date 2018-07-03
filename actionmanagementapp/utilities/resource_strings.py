@@ -108,8 +108,10 @@ class OrganizationResourceStrings:
     Strings related to the management of the organization
     """
     # -- ERROR elements
-    ERR_ORGANIZATION_EMPTY_NAME = u'Δε δόθηκε όνομα οργανισμού'
-    ERR_ORGANIZATION_EMPTY_CEO = u' Δε δόθηκαν στοιχεία της διοίκησης'
+    ERR_ORGANIZATION_EMPTY_NAME = u'Δε δόθηκε όνομα οργανισμού.'
+    ERR_ORGANIZATION_EMPTY_CEO = u' Δε δόθηκαν στοιχεία της διοίκησης.'
+    ERR_SERVICE_EMPTY_NAME = u' Δε δόθηκε όνομα υπηρεσίας. '
+    ERR_SERVICE_EMPTY_TYPE = u' Δε δόθηκε τύπος υπηρεσίας. '
 
     # -- FORM elements
     FRM_ORGANIZATION_NAME = u'Όνομα:'
@@ -119,21 +121,40 @@ class OrganizationResourceStrings:
     FRM_ORGANIZATION_ADDRESS = u'Διεύθυνση:'
     FRM_ORGANIZATION_PHONE = u'Τηλέφωνο:'
     FRM_ORGANIZATION_EMAIL = u'Διεύθυνση Email:'
-    FRM_ADD_ORGANIZATION = u'Προσθήκη οργανισμού'
+    FRM_ADD_ORGANIZATION = u'Προσθήκη νομικού προσώπου'
+    FRM_ADD_SERVICE = u'Προσθήκη υπηρεσίας'
+    FRM_SERVICE_ID = u'Κωδ. Υπηρεσίας: '
+    FRM_SERVICE_NAME = u'Όνομα: '
+    FRM_SERVICE_ADDRESS = u'Διεύθυνση: '
+    FRM_SERVICE_CHIEF = u'Προϊστάμενος: '
+    FRM_SERVICE_PHONE = u'Τηλέφωνο: '
+    FRM_SERVICE_EMAIL = u'Email: '
+    FRM_PARENT_SERVICE = u'Ανήκει σε: '
+    FRM_NO_SERVICE = u'Καμία υπηρεσία '
+    FRM_ORGANIZATION = u'Νομικό πρόσωπο'
+    FRM_SERVICE_TYPE = u'Τύπος'
 
     # -- TEXT elements
     TXT_NO_ORGANIZATIONS = u' Δεν υπάρχουν καταχωρημένα νομικά πρόσωπα. '
     TXT_ORGANIZATION_LIST_TITLE = u'Λίστα νομικών προσώπων'
     TXT_ORGANIZATION_SAVED = u' Το νομικό πρόσωπο έχει αποθηκευτεί. '
     TXT_ADD_ORGANIZATION_TITLE = u'Προσθήκη νέου νομικού προσώπου'
-    TXT_EDIT_ORGANIZATION_TITLE = u'Επεξεργασία νέου νομικού προσώπου'
+    TXT_EDIT_ORGANIZATION_TITLE = u'Επεξεργασία νομικού προσώπου'
     TXT_BACK_TO_ORGANIZATION_LIST = u'Πίσω στη λίστα με τα νομικά πρόσωπα'
     TXT_ORGANIZATION_DELETED = u'Το νομικό πρόσωπο έχει διαγραφεί.'
     TXT_DELETE_ORGANIZATION_TITLE = u'Επεξεργασία νέου νομικού προσώπου'
     TXT_CONFIRM_DELETE_ORGANIZATION = u'Είστε σίγουροι ότι θέλετε να διαγράψετε το νομικό πρόσωπο %s;'
-    TXT_ORGANIZATION_NAME = u'Όνομα'
+    TXT_ORGANIZATION_NAME = u'Όνομα Νομικού Προσώπου'
     TXT_ORGANIZATION_ADDRESS = u'Διεύθυνση'
     TXT_ORGANIZATION_CEO = u'Νόμιμος Εκπρόσωπος'
+    TXT_SERVICES_TITLE = u'Λίστα υπηρεσιών νομικών προσώπων'
+    TXT_NO_SERVICES = u'Δεν υπάρχουν καταχωρημένες υπηρεσίες'
+    TXT_SERVICE_NAME = u'Όνομα Υπηρεσίας'
+    TXT_EDIT_SERVICE_TITLE = u'Επεξεργασία υπηρεσίας'
+    TXT_BACK_TO_SERVICE_LIST = u'Πίσω στη λίστα με τις υπηρεσίες'
+    TXT_SERVICE_SAVED = u'Η υπηρεσία έχει αποθηκευτεί.'
+    TXT_ADD_SERVICE_TITLE = u'Προσθήκη υπηρεσίας'
+
 
 
 class GeneralResourceStrings:
@@ -158,4 +179,5 @@ class MenuResourceStrings:
     # -- TXT elements
     TXT_MENU_USERS = u'Χρήστες'
     TXT_MENU_ORGANIZATIONS = u'Νομικά πρόσωπα'
+    TXT_MENU_SERVICES = u'Υπηρεσίες'
 

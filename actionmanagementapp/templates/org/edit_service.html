@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+
+{% block page_title %}
+    {% if service == None %}
+        {{g.organizationResourceStrings.TXT_ADD_SERVICE_TITLE}}
+    {% else %}
+        {{g.organizationResourceStrings.TXT_EDIT_SERVICE_TITLE}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{{ macros.serviceForm(service, services, organizations, serviceTypes) }}
+
+{{ macros.showBacktoServiceListNav() }}
+{% endblock %}

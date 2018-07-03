@@ -36,7 +36,7 @@ class Service (Base, TimeStampMixin):
     chief = Column(String(50))
     phone = Column(String(50))
     email = Column(String(50))
-    organizationTypeId = Column(Integer, ForeignKey('organizationtype.id', onupdate='cascade'))
+
     # relationship with other services
     parentServiceId = Column(Integer, ForeignKey('service.id', onupdate='cascade'))
     children = relationship("Service",
@@ -44,7 +44,9 @@ class Service (Base, TimeStampMixin):
     # relationship with organization
     organizationId = Column(Integer, ForeignKey('organization.id', onupdate='cascade'), nullable=False)
     organization = relationship('Organization', backref=backref('services'))
-    test = Column(Integer)
+
+    # service type
+    type = Column(Integer, ForeignKey('servicetype.id', onupdate='cascade'))
 
 
 class OrganizationType(Base, TimeStampMixin):
@@ -52,6 +54,15 @@ class OrganizationType(Base, TimeStampMixin):
     class for storing the type of the organization e.g. OTA A bathmou, OTA b bathmou
     """
     __tablename__ = 'organizationtype'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(150), nullable=False)
+
+
+class ServiceType(Base, TimeStampMixin):
+    """
+    class for storing the type of the service e.g. Directorate, Department, Autonomous Department
+    """
+    __tablename__ = 'servicetype'
     id = Column(Integer, primary_key=True)
     name = Column(String(150), nullable=False)
 
@@ -76,4 +87,18 @@ def insertDefaultOrgData(dbSession):
         # insert them in the database
         for orgType in defaultOrganizationTypes:
             dbSession.add(OrganizationType(id=orgType[0], name=orgType[1]))
+        dbSession.commit()
+
+    # insert default service types
+    if dbSession.query(ServiceType).count() == 0:  # if the servicetype table is empty
+        # add the default service types
+        defaultServiceTypes = [
+            (1, u'Διεύθυνση'),
+            (2, u'Τμήμα'),
+            (3, u'Αυτοτελές Τμήμα'),
+            (4, u'Γραφείο'),
+            (5, u'Αυτοτελές Γραφείο')
+        ]
+        for servType in defaultServiceTypes:
+            dbSession.add(ServiceType(id=servType[0], name=servType[1]))
         dbSession.commit()

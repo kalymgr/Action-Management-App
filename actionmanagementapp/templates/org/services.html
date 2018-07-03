@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{g.organizationResourceStrings.TXT_SERVICES_TITLE}}
+{% endblock %}
+
+{% block content %}
+
+{% if services|count == 0%}
+    {{g.organizationResourceStrings.TXT_NO_SERVICES}}
+
+{% else %}
+    <div class="row justify-content-center">
+        <span class = "col">
+            <table class="table">
+                 <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">
+                            {{g.organizationResourceStrings.TXT_SERVICE_NAME}}</th>
+                        <th scope="col">
+                            {{g.organizationResourceStrings.TXT_ORGANIZATION_NAME}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                    </tr>
+                 </thead>
+                <tbody>
+                    {% for service in services %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{service.name}}</td>
+                        <td>{{service.organization.name}}</td>
+                        <td>
+                            <form action="{{url_for('org.editService', service_id=service.id)}}"
+                                  class="d-inline">
+                                <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
+                            </form>
+                            <form action="#" class="d-inline">
+                                <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
+                            </form>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </span>
+    </div>
+{% endif %}
+
+    <div class="row justify-content-center bottom-buttons align-items-center">
+        <span class="col">
+            <form class="d-inline" method="get" action="{{url_for('org.addService')}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_SERVICE}}">
+            </form>
+        </span>
+    </div>
+{% endblock %}

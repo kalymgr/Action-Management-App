@@ -194,3 +194,19 @@ def test_deleteOrg(client, auth):
         assert testOrg2 is None
 
 
+def test_services(client, auth):
+    """
+    Method for testing the page that shows list of services
+    :param client:
+    :param auth:
+    :return:
+    """
+
+    with client:
+        auth.login()
+        dbSession = current_app.config['DBSESSION']
+
+        response200 = client.get(url_for('org.services'))
+        assert response200.status_code == 200
+
+

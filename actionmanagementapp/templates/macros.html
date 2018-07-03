@@ -15,3 +15,177 @@
 {# macro to show the link that gets the user back to the organization list #}
     <a href="{{ url_for('org.orgList') }}"> {{g.organizationResourceStrings.TXT_BACK_TO_ORGANIZATION_LIST}} </a>
 {% endmacro %}
+
+{% macro showBacktoServiceListNav() %}
+{# macro to show the link that gets the user back to the organization list #}
+    <a href="{{ url_for('org.services') }}"> {{g.organizationResourceStrings.TXT_BACK_TO_SERVICE_LIST}} </a>
+{% endmacro %}
+
+{% macro serviceForm(service, services, organizations, serviceTypes) %}
+{# macro for displaying the service form that is used when inserting or updating services #}
+<form method="post">
+
+    <p class="row">
+        <label for="id" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_ID}}
+        </label>
+        <span class="col">
+            <input type="text" id="id" name="id" value="{{service.id}}" disabled>
+        </span>
+    </p>
+    <p class="row">
+        <label for="name" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_NAME }}
+        </label>
+        <span class="col">
+            <input type="text" id="name" name="name" value="{{service.name}}">
+        </span>
+    </p>
+    <p class="row">
+        <label for="address" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_ADDRESS }}
+        </label>
+        <span class="col">
+            <input type="text" id="address" name="address" value="{{service.address}}">
+        </span>
+    </p>
+    <p class="row">
+        <label for="chief" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_CHIEF }}
+        </label>
+        <span class="col">
+            <input type="text" id="chief" name="chief" value="{{service.chief}}">
+        </span>
+    </p>
+    <p class="row">
+        <label for="phone" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_PHONE }}
+        </label>
+        <span class="col">
+            <input type="text" id="phone" name="phone" value="{{service.phone}}">
+        </span>
+    </p>
+    <p class="row">
+        <label for="email" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_EMAIL }}
+        </label>
+        <span class="col">
+            <input type="text" id="email" name="email" value="{{service.email}}">
+        </span>
+    </p>
+    <p class="row">
+        <label for="parentServiceId" class="col text-right">
+            {{g.organizationResourceStrings.FRM_PARENT_SERVICE }}
+        </label>
+        <span class="col">
+            <select id="parentServiceId" name="parentServiceId">
+                <option value="">{{g.organizationResourceStrings.FRM_NO_SERVICE }}</option>
+                {% for s in services %}
+                    {%if service.parentServiceId == s.id%}
+                        <option value="{{s.id}}" selected>{{s.name}} - {{s.organization.name}}</option>
+                    {% else %}
+                        <option value="{{s.id}}">{{s.name}} - {{s.organization.name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </span>
+    </p>
+    <p class="row">
+        <label for="organizationId" class="col text-right">
+            {{g.organizationResourceStrings.FRM_ORGANIZATION }}
+        </label>
+        <span class="col">
+            <select id="organizationId" name="organizationId">
+                {% for org in organizations %}
+                    {% if org.id == service.organizationId%}
+                        <option value="{{org.id}}" selected>{{org.name}}</option>
+                    {% else %}
+                        <option value="{{org.id}}">{{org.name}}</option>
+                    {%endif%}
+                {%endfor%}
+            </select>
+        </span>
+    </p>
+    <p class="row">
+        <label for="type" class="col text-right">
+            {{g.organizationResourceStrings.FRM_SERVICE_TYPE }}
+        </label>
+        <span class="col">
+            <select id="type" name="type">
+                {%for serviceType in serviceTypes %}
+                    {% if serviceType.id == service.type %}
+                        <option value="{{serviceType.id}}" selected>{{serviceType.name}}</option>
+                    {% else %}
+                        <option value="{{serviceType.id}}">{{serviceType.name}}</option>
+                    {% endif %}
+                {%endfor%}
+            </select>
+        </span>
+    </p>
+    <div class="row">
+        <span class="col d-flex justify-content-center">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+        </span>
+    </div>
+</form>
+{% endmacro %}
+
+{% macro organizationForm(organization, orgTypes, organizations) %}
+{# macro for displaying the organization form that is used when inserting or updating organizations #}
+ <form method="post">
+        <p class="row">
+           <label class="col text-right" for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
+            <span class="col"><input type="text" name="name" id="name" value="{{organization.name}}"></span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="type">{{g.organizationResourceStrings.FRM_ORGANIZATION_TYPE}}</label>
+            <span class="col">
+                <select id="type" name="type">
+                    {% for t in orgTypes %}
+                        {%if t.id == organization.type %}
+                        <option value="{{ t.id }}" selected>{{ t.name }}</option>
+                        {%  else %}
+                        <option value="{{ t.id }}">{{ t.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="ceo">{{g.organizationResourceStrings.FRM_ORGANIZATION_CEO}}</label>
+            <span class="col"><input type="text" id="ceo" name="ceo" value="{{organization.ceo}}"></span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
+            <span class="col">
+                <select id="parentOrganizationId" name="parentOrganizationId">
+                <option value="">  Κανένας οργανισμός </option>
+                {% for org in organizations %}
+                {%if org.id == organization.parentOrganizationId%}
+                    <option value="{{ org.id }}" selected>{{ org.name }}</option>
+                {% else %}
+                    <option value="{{ org.id }}">{{ org.name }}</option>
+                {% endif %}
+                {% endfor %}
+                </select>
+            </span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="address">{{g.organizationResourceStrings.FRM_ORGANIZATION_ADDRESS}}</label>
+        <span class="col"> <input type="text" id="address" name="address" value="{{organization.address}}"></span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="phone">{{g.organizationResourceStrings.FRM_ORGANIZATION_PHONE}}</label>
+            <span class="col"> <input type="text" id="phone" name="phone" value="{{organization.phone}}"> </span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
+            <span class="col"> <input type="text" id="email" name="email" value="{{organization.email}}"></span>
+        </p>
+        <div class="row">
+            <span class="col d-flex justify-content-center">
+                <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+            </span>
+        </div>
+    </form>
+{% endmacro %}

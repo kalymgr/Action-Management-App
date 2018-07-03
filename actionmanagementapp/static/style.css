@@ -1,5 +1,9 @@
+.app-title {
+    min-height: 10rem;
+}
+
 nav.row.appnavigation {
-    min-height: 5rem;
+    min-height: 3rem;
 }
 header.page_title {
     min-height: 5rem;
