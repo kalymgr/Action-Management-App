@@ -44,13 +44,14 @@ class User(Base, TimeStampMixin):
     userCategory = relationship('UserCategory', backref=backref('users'))
 
 
-def insertDefaultUserData(dbSession):
+def insertDefaultUserData(DBSession):
     """
     Function tha inserts default user data in the database
 
     :param dbSession:
     :return:
     """
+    dbSession = DBSession()
     # -- insert default user category data
     if dbSession.query(UserCategory).count() == 0:  # if the user categories table is empty
         # insert some default values in the database

@@ -29,7 +29,7 @@ def orgList():
     """
 
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
 
     # get the organization list
     organizationList = dbSession.query(Organization).all()
@@ -45,7 +45,7 @@ def addOrg():
     routing function for adding a new organization
     :return:
     """
-    dbSession = current_app.config['DBSESSION']  # get the db session
+    dbSession = current_app.config['DBSESSION']()  # get the db session
     orgTypes = dbSession.query(OrganizationType).all()  # get the organization types
     organizations = dbSession.query(Organization).all()
     org = Organization()
@@ -65,7 +65,7 @@ def addOrg():
 def editOrg(org_id):
     """routing function for editing an organization data"""
 
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
     # get the organization from the database
     org = dbSession.query(Organization).filter(Organization.id == org_id).first()
     orgTypes = dbSession.query(OrganizationType).all()
@@ -78,6 +78,9 @@ def editOrg(org_id):
 
     if error == '':
         return redirect(url_for('org.orgList'))
+    else:
+        # dbSession.rollback()
+        pass
 
     return render_template('org/edit_organization.html',
                            organization=org,
@@ -93,7 +96,7 @@ def deleteOrg(org_id):
     :param org_id:
     :return:
     """
-    dbSession=current_app.config['DBSESSION']
+    dbSession=current_app.config['DBSESSION']()
     org = dbSession.query(Organization).filter(Organization.id == org_id).first()
     if org is None:
         abort(404)
@@ -114,7 +117,7 @@ def services():
     Function that returns a page with a list of the services
     :return:
     """
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
 
     # get the list of services from the db
     serv = dbSession.query(Service).all()
@@ -129,7 +132,7 @@ def editService(service_id):
     :param service_id:
     :return:
     """
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
     serv = dbSession.query(Service).filter(Service.id == service_id).first()
     services = dbSession.query(Service).all()
     organizations = dbSession.query(Organization).all()
@@ -154,7 +157,7 @@ def editService(service_id):
 @bp.route('/services/add', methods=('GET', 'POST'))
 @login_required
 def addService():
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
     services = dbSession.query(Service).all()
     organizations = dbSession.query(Organization).all()
     serviceTypes = dbSession.query(ServiceType).all()

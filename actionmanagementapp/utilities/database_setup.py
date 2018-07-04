@@ -52,12 +52,8 @@ def getSession(base, engine):
     base.metadata.create_all(engine)
     base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
-    databaseSession = DBSession()
-    return databaseSession
-
-
-engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
-# go into the database and add the classes as new tables
+    # databaseSession = DBSession()
+    return DBSession
 
 
 def getProductionDatabaseSession():
@@ -67,15 +63,15 @@ def getProductionDatabaseSession():
     """
     engine = createEngine('root', '', 'actionapplicationdb', 'localhost', 'utf8')
     # go into the database and add the classes as new tables
-    dbSession = getSession(Base, engine)
+    DBSession = getSession(Base, engine)
 
     # insert default organizational data
-    insertDefaultOrgData(dbSession)
+    insertDefaultOrgData(DBSession)
     # insert default user data
-    insertDefaultUserData(dbSession)
+    insertDefaultUserData(DBSession)
 
     # return the db session variable
-    return dbSession
+    return DBSession
 
 
 def getTestingDatabaseSession():
@@ -83,15 +79,14 @@ def getTestingDatabaseSession():
     Function that gets the database session for test database
     :return: db session for the testing database
     """
+
     engine = createEngine('root', '', 'test_actionapplicationdb', 'localhost', 'utf8')
     # go into the database and add the classes as new tables
-    dbSession = getSession(Base, engine)
+    DBSession = getSession(Base, engine)
 
     # -- insert some default values in the database
     # insert default organizational data
-    insertDefaultOrgData(dbSession)
+    insertDefaultOrgData(DBSession)
     # insert default user data
-    insertDefaultUserData(dbSession)
-    return dbSession
-
-
+    insertDefaultUserData(DBSession)
+    return DBSession

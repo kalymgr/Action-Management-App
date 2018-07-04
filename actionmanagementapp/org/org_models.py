@@ -67,12 +67,13 @@ class ServiceType(Base, TimeStampMixin):
     name = Column(String(150), nullable=False)
 
 
-def insertDefaultOrgData(dbSession):
+def insertDefaultOrgData(DBSession):
     """
     Function that inserts default organization data in the application
     :param dbSession:
     :return:
     """
+    dbSession = DBSession()
     # insert default organization types
     if dbSession.query(OrganizationType).count() == 0:  # if the organizationtype table is empty
         # create the list with organization types

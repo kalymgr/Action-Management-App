@@ -27,7 +27,7 @@ def login():
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
 
     applicationLogger = current_app.logger  # get the application logger
 
@@ -80,7 +80,7 @@ def load_logged_in_user():
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']
+    dbSession = current_app.config['DBSESSION']()
     user_id = session.get('user_id')
 
     if user_id is None:
