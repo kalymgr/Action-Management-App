@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
 
 from actionmanagementapp.utilities.db_models import TimeStampMixin
 
 from actionmanagementapp.utilities import sql_alchemy_utils
 
-Base = sql_alchemy_utils.Base
+# Base = sql_alchemy_utils.Base
+from actionmanagementapp.utilities.database_init import Base
 
 
 class LoggingRecord(Base, TimeStampMixin):

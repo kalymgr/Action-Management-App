@@ -2,6 +2,7 @@
 Blueprint for authentication
 """
 from werkzeug.exceptions import abort
+
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings, UsersResourceString, \
     GeneralResourceStrings, OrganizationResourceStrings, MenuResourceStrings
 
@@ -10,8 +11,8 @@ from actionmanagementapp.users.users_models import User, UserCategory
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, current_app
-)
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, current_app,
+    app)
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -27,10 +28,10 @@ def login():
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']()
+    # dbSession = current_app.config['DBSESSION']()
 
     applicationLogger = current_app.logger  # get the application logger
-
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -80,9 +81,9 @@ def load_logged_in_user():
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']()
+    # dbSession = current_app.config['DBSESSION']()
     user_id = session.get('user_id')
-
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if user_id is None:
         g.user = None
     else:
@@ -126,10 +127,9 @@ def user_permissions_restrictions(view):
     """
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        dbSession = current_app.config['DBSESSION']
         # get the user id from the url
         userIdFromUrl = kwargs.get('user_id', None)
-
+        dbSession = current_app.config['DBSESSION']  # get the db session
         if g.user.userCategoryId == 1:  # if he is a simple user - Level 1
 
             if userIdFromUrl is None:

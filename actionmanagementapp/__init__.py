@@ -4,7 +4,7 @@ from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
 
 from actionmanagementapp.org import org_controller
-from utilities import database_setup
+from actionmanagementapp.utilities.database_init import initDb, dbSession
 import auth
 from actionmanagementapp.users import users_controller, users_models
 from actionmanagementapp.auth import auth_controller
@@ -34,8 +34,7 @@ def create_app(test_config=None):
     # http://flask.pocoo.org/docs/1.0/config/?highlight=instance_relative_config
     app.config.from_mapping(
         SECRET_KEY='dev',
-        # DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        DBSESSION=database_setup.getProductionDatabaseSession(),
+        DBSESSION=dbSession,
         # the following key will be used from templates as: config['APPLICATION_NAME']
         APPLICATION_NAME=u'Εφαρμογή διαχείρισης δράσεων Δήμου'
 
@@ -63,11 +62,20 @@ def create_app(test_config=None):
     # register error pages handlers
     app.register_error_handler(404, custom_error_pages.page_not_found)
 
+    @app.teardown_appcontext
+    def shutdown_session(exception=None):
+        """
+        remove session after every request
+        :param exception:
+        :return:
+        """
+        dbSession.remove()
+
     return app
 
 
 if __name__ == '__main__':
-    database_setup  # I put that here. Maybe I do it in a different way
+    initDb()  # initialize the database
     app = create_app()
     app.secret_key = 'super_secret_key'  # TODO: change the secret key before production
     app.debug = True

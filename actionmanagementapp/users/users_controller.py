@@ -4,6 +4,7 @@
 Blueprint related to user management
 """
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import scoped_session
 from werkzeug.exceptions import abort
 
 from flask import (
@@ -27,7 +28,6 @@ def userList():
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']()
 
     # if the user is a simple user (cat id == 1) then redirect to his user details page
     # u = dbSession.query(User).filter(User.id == g.user.id).first()
@@ -35,8 +35,8 @@ def userList():
     #     return redirect(url_for('users.userDetails', user_id=g.user.id))
 
     # get the list of users
+    dbSession = current_app.config['DBSESSION']  # get the db session
     users = dbSession.query(User).all()
-    dbSession.close()
     return render_template('usermanagement/users.html', users=users)
 
 
@@ -50,7 +50,7 @@ def userDetails(user_id):
     :return:
     """
     # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     user = dbSession.query(User).filter(User.id == user_id).first()
     if user is not None:  # if the user is found in the database
         katigoria = user.userCategory.name
@@ -68,9 +68,10 @@ def addUser():
     Add user routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()
-
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    # get the user category
     userCat = dbSession.query(UserCategory).all()
+
     if request.method == 'POST':
         error = None  # set an error variable
 
@@ -123,7 +124,7 @@ def addUser():
                            password=generate_password_hash(password),
                            enabled=enabled)
             # get the db session from the application settings
-            dbSession = current_app.config['DBSESSION']
+
             dbSession.add(newUser)
             dbSession.commit()
 
@@ -142,7 +143,7 @@ def deleteUser(user_id):
     Delete user routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if request.method == 'POST':
         # delete the user from the database
         u = dbSession.query(User).filter(User.id == user_id).first()
@@ -174,7 +175,7 @@ def editUser(user_id):
     Edit user routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()  # initialize db session variable
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if request.method == 'POST':
         # get the form data and save them in the database
         u = dbSession.query(User).filter(User.id == user_id).first()
@@ -220,7 +221,7 @@ def changeUserPassword(user_id):
     Change user password routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()  # initialize db session variable
+    dbSession = current_app.config['DBSESSION']  # get the db session
     u = dbSession.query(User).filter(User.id == user_id).first()  # get the user from the database
     if u is None:  # if the user does not exist in the database
         abort(404)
@@ -255,7 +256,7 @@ def userCategories():
     User categories routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()  # initialize db session variable
+    dbSession = current_app.config['DBSESSION']  # get the db session
     categories = dbSession.query(UserCategory).all()
     return render_template('usermanagement/usercategories.html', userCategories=categories)
 
@@ -268,9 +269,9 @@ def addUserCategory():
     Add category routing function
     :return:
     """
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if request.method == 'POST':
 
-        dbSession = current_app.config['DBSESSION']()  # initialize db session variable
         c = UserCategory()
         c.id = request.form.get('id', None)
         c.name = request.form.get('name', None)
@@ -306,7 +307,7 @@ def editUserCategory(user_category_id):
     :return:
     """
     # get the db session variable
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     if request.method == 'POST':
         # get the POST fields
         catNameUpdated = request.form.get('name', None)
@@ -347,7 +348,7 @@ def deleteUserCategory(user_category_id):
     Delete category routing function
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()  # get the db session
+    dbSession = current_app.config['DBSESSION']  # get the db session
     c = dbSession.query(UserCategory).filter(UserCategory.id == user_category_id).first()  # get the category
     if request.method == 'POST':
         # get the id of the category to be deleted

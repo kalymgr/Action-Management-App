@@ -8,7 +8,8 @@ from werkzeug.security import generate_password_hash
 from actionmanagementapp.utilities.db_models import TimeStampMixin
 from actionmanagementapp.utilities import sql_alchemy_utils
 
-Base = sql_alchemy_utils.Base
+# Base = sql_alchemy_utils.Base
+from actionmanagementapp.utilities.database_init import Base
 
 
 # -- Database tables

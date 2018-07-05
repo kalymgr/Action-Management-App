@@ -5,6 +5,7 @@ from flask import Blueprint, request, current_app
 import json
 # define the blueprint
 from actionmanagementapp.log.log_models import LoggingRecord
+from actionmanagementapp.utilities.database_init import dbSession
 
 bp = Blueprint("log", __name__, url_prefix="/log")
 

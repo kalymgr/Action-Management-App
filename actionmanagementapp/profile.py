@@ -2,11 +2,11 @@
 This script is used for profiling the application
 """
 from actionmanagementapp import create_app
-from actionmanagementapp.utilities import database_setup
 from werkzeug.contrib.profiler import ProfilerMiddleware
+from actionmanagementapp.utilities.database_init import initDb
 
 if __name__ == '__main__':
-    database_setup  # I put that here. Maybe I do it in a different way
+    initDb()
     app = create_app()
     app.secret_key = 'super_secret_key'  # TODO: change the secret key before production
     app.debug = True

@@ -3,7 +3,6 @@
 import pytest
 from flask import g, session, current_app
 from actionmanagementapp.users.users_models import User
-from actionmanagementapp.utilities import database_setup
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings
 
 """

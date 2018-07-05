@@ -16,6 +16,7 @@ from flask import current_app
 from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings, \
     OrganizationResourceStrings
 
+
 # create the blueprint
 bp = Blueprint("org", __name__, url_prefix="/org")
 
@@ -27,10 +28,7 @@ def orgList():
     Routing function that shows list of the organizations
     :return:
     """
-
-    # get the db session from the application settings
-    dbSession = current_app.config['DBSESSION']()
-
+    dbSession = current_app.config['DBSESSION']  # get the db session
     # get the organization list
     organizationList = dbSession.query(Organization).all()
 
@@ -45,7 +43,7 @@ def addOrg():
     routing function for adding a new organization
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()  # get the db session
+    dbSession = current_app.config['DBSESSION']  # get the db session
     orgTypes = dbSession.query(OrganizationType).all()  # get the organization types
     organizations = dbSession.query(Organization).all()
     org = Organization()
@@ -65,7 +63,7 @@ def addOrg():
 def editOrg(org_id):
     """routing function for editing an organization data"""
 
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     # get the organization from the database
     org = dbSession.query(Organization).filter(Organization.id == org_id).first()
     orgTypes = dbSession.query(OrganizationType).all()
@@ -96,7 +94,7 @@ def deleteOrg(org_id):
     :param org_id:
     :return:
     """
-    dbSession=current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     org = dbSession.query(Organization).filter(Organization.id == org_id).first()
     if org is None:
         abort(404)
@@ -117,8 +115,7 @@ def services():
     Function that returns a page with a list of the services
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()
-
+    dbSession = current_app.config['DBSESSION']  # get the db session
     # get the list of services from the db
     serv = dbSession.query(Service).all()
     return render_template('org/services.html', services=serv)
@@ -132,7 +129,7 @@ def editService(service_id):
     :param service_id:
     :return:
     """
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     serv = dbSession.query(Service).filter(Service.id == service_id).first()
     services = dbSession.query(Service).all()
     organizations = dbSession.query(Organization).all()
@@ -157,7 +154,7 @@ def editService(service_id):
 @bp.route('/services/add', methods=('GET', 'POST'))
 @login_required
 def addService():
-    dbSession = current_app.config['DBSESSION']()
+    dbSession = current_app.config['DBSESSION']  # get the db session
     services = dbSession.query(Service).all()
     organizations = dbSession.query(Organization).all()
     serviceTypes = dbSession.query(ServiceType).all()
