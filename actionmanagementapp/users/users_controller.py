@@ -10,6 +10,7 @@ from werkzeug.exceptions import abort
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session, g)
 from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
+from actionmanagementapp.org.org_models import Service
 from actionmanagementapp.users.users_models import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
@@ -71,6 +72,7 @@ def addUser():
     dbSession = current_app.config['DBSESSION']  # get the db session
     # get the user category
     userCat = dbSession.query(UserCategory).all()
+    services = dbSession.query(Service).order_by(Service.name.asc()).all()
 
     if request.method == 'POST':
         error = None  # set an error variable
@@ -78,7 +80,7 @@ def addUser():
         forma = request.form
         name = request.form.get('name', None)
         username = request.form.get('username', None)
-        department = request.form.get('department', None)
+        serviceId = request.form.get('service', None)
         userCatId = request.form.get('usercategory', None)
         phone = request.form.get('phone', None)
         mobile = request.form.get('mobile', None)
@@ -116,7 +118,7 @@ def addUser():
             # save the user data in the database
             newUser = User(name=name,
                            username=username,
-                           department=department,
+                           serviceId=serviceId,
                            userCategoryId=userCatId,
                            phone=phone,
                            mobile=mobile,
@@ -132,7 +134,8 @@ def addUser():
             flash(UsersResourceString.INFO_USER_ADDED % newUser.name)
             # go to the main users page
             return redirect(url_for('users.userList'))
-    return render_template('usermanagement/adduser.html', userCategories=userCat)
+    return render_template('usermanagement/adduser.html',
+                           user=None, userCategories=userCat, services = services)
 
 
 @bp.route('/<int:user_id>/delete', methods=('GET', 'POST'))
@@ -186,6 +189,7 @@ def editUser(user_id):
         u.email = request.form.get('email', None)
         u.phone = request.form.get('phone', None)
         u.mobile = request.form.get('mobile', None)
+        u.serviceId = request.form.get('service', None)
 
         # get user category
         uCat = request.form.get('usercategory', None)
@@ -206,11 +210,12 @@ def editUser(user_id):
         u = dbSession.query(User).filter(User.id == user_id).first()
         # get the categories from the database
         uCategories = dbSession.query(UserCategory).all()
+        services = dbSession.query(Service).order_by(Service.name.asc()).all()
         # if the user does not exist, send 404 response
         if u is None:
             abort(404)
         return render_template('usermanagement/edituser.html', user=u,
-                           userCategories=uCategories)
+                           userCategories=uCategories, services=services)
 
 
 @bp.route('/<int:user_id>/changepassword', methods=('GET', 'POST'))

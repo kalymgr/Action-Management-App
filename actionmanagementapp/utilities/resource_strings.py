@@ -62,6 +62,7 @@ class UsersResourceString:
     ERROR_USER_PASSWORDS_DO_NOT_MATCH = u' Οι δύο κωδικοί δεν ταιριάζουν. '
 
     # -- form elements
+    FRM_USER_ID = u'Κωδ. χρήστη:'
     FRM_FULL_NAME = u'Όνοματεπώνυμο:'
     FRM_USERNAME = u'Όνομα χρήστη:'
     FRM_DEPARTMENT = u'Υπηρεσία:'
