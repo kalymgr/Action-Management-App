@@ -4,6 +4,7 @@ from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
 
 from actionmanagementapp.org import org_controller
+from actionmanagementapp.upload import upload_controller
 from actionmanagementapp.utilities.database_init import initDb, dbSession
 import auth
 from actionmanagementapp.users import users_controller, users_models
@@ -36,8 +37,9 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DBSESSION=dbSession,
         # the following key will be used from templates as: config['APPLICATION_NAME']
-        APPLICATION_NAME=u'Εφαρμογή διαχείρισης δράσεων Δήμου'
-
+        APPLICATION_NAME=u'Εφαρμογή διαχείρισης δράσεων Δήμου',
+        UPLOAD_FOLDER='uploads',  # name of the upload folder
+        MAX_CONTENT_LENGTH=15 * 1024 * 1024  # max size of uploaded files - 15 Mb
     )
 
     if test_config is None:
@@ -58,6 +60,7 @@ def create_app(test_config=None):
     app.register_blueprint(users_controller.bp)  # user management blueprint
     app.register_blueprint(log_controller.bp)  # logging blueprint
     app.register_blueprint(org_controller.bp)  # organizational chart blueprint
+    app.register_blueprint(upload_controller.bp)  # upload blueprint
 
     # register error pages handlers
     app.register_error_handler(404, custom_error_pages.page_not_found)

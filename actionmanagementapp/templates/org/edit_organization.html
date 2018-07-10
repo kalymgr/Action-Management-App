@@ -11,5 +11,14 @@
 
 {% block content %}
 {{ macros.organizationForm(organization, orgTypes, organizations) }}
+
+<!-- If the organization has a logo -->
+{% if organization.logoPath != '' %}
+    <!-- Show the organization logo -->
+    <div class="row">
+        <img src="{{url_for('uploads.orgLogos', filename=organization.logoPath)}}" class="col">
+    </div>
+{% endif %}
+
 {{ macros.showBacktoOrganizationListNav() }}
 {% endblock %}

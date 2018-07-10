@@ -70,72 +70,22 @@ def addUser():
     :return:
     """
     dbSession = current_app.config['DBSESSION']  # get the db session
-    # get the user category
+    # get the user categories and the services
     userCat = dbSession.query(UserCategory).all()
     services = dbSession.query(Service).order_by(Service.name.asc()).all()
 
-    if request.method == 'POST':
-        error = None  # set an error variable
+    # create a new user object
+    user = User()
 
-        forma = request.form
-        name = request.form.get('name', None)
-        username = request.form.get('username', None)
-        serviceId = request.form.get('service', None)
-        userCatId = request.form.get('usercategory', None)
-        phone = request.form.get('phone', None)
-        mobile = request.form.get('mobile', None)
-        email = request.form.get('email', None)
-        password = request.form.get('password', None)
-        password2 = request.form.get('password2', None)
-        # The checkbox field isn't returned if it is not checked.
-        # So I tell the application that, if the form has no enabled field, return None value
-        if request.form.get('enabled', None) == "True":
-            enabled = True
-        else:
-            enabled = False
+    # save the user in the database
+    error = UserHelperFunctions.saveUser(user, request, dbSession)
 
-        error = ''
+    # if everything was ok, go to the main users page
+    if error == '':
+        return redirect(url_for('users.userList'))
 
-        # Check for required fields that are empty
-        if not name or name == '':
-            error += UsersResourceString.ERROR_NAME_NOT_ENTERED
-        if not username:
-            error += UsersResourceString.ERROR_USERNAME_NOT_ENTERED
-        if not userCatId:
-            # error += UsersResourceString.ERROR_USER_CATEGORY_NOT_ENTERED
-            userCatId = 1  # make him/her a simple user
-        if not password:
-            error += UsersResourceString.ERROR_EMPTY_USER_PASSWORD
-        if password != password2:
-            error += UsersResourceString.ERROR_PASSWORDS_DO_NOT_MATCH
-        if not email:
-            error += UsersResourceString.ERROR_EMAIL_ADDRESS_NOT_ENTERED
-        """
-        """
-        if error is not '':  # if there was an error
-            flash(error)
-        else:
-            # save the user data in the database
-            newUser = User(name=name,
-                           username=username,
-                           serviceId=serviceId,
-                           userCategoryId=userCatId,
-                           phone=phone,
-                           mobile=mobile,
-                           email=email,
-                           password=generate_password_hash(password),
-                           enabled=enabled)
-            # get the db session from the application settings
-
-            dbSession.add(newUser)
-            dbSession.commit()
-
-            # show message
-            flash(UsersResourceString.INFO_USER_ADDED % newUser.name)
-            # go to the main users page
-            return redirect(url_for('users.userList'))
     return render_template('usermanagement/adduser.html',
-                           user=None, userCategories=userCat, services = services)
+                           user=None, userCategories=userCat, services=services)
 
 
 @bp.route('/<int:user_id>/delete', methods=('GET', 'POST'))
@@ -179,42 +129,22 @@ def editUser(user_id):
     :return:
     """
     dbSession = current_app.config['DBSESSION']  # get the db session
-    if request.method == 'POST':
-        # get the form data and save them in the database
-        u = dbSession.query(User).filter(User.id == user_id).first()
 
-        u.name = request.form.get('name', None)
-        u.username = request.form.get('username', None)
-        u.enabled = bool(request.form.get('enabled', None))
-        u.email = request.form.get('email', None)
-        u.phone = request.form.get('phone', None)
-        u.mobile = request.form.get('mobile', None)
-        u.serviceId = request.form.get('service', None)
+    # get the user
+    user = dbSession.query(User).filter(User.id == user_id).first()
+    # get the categories and the services from the database
+    uCategories = dbSession.query(UserCategory).all()
+    services = dbSession.query(Service).order_by(Service.name.asc()).all()
 
-        # get user category
-        uCat = request.form.get('usercategory', None)
-        if uCat is not None:
-            u.userCategoryId = uCat
-        u.department = request.form.get('department', None)
+    if user is None:
+        abort(404)
+    # save the user
+    error = UserHelperFunctions.saveUser(user, request, dbSession)
 
-        dbSession.add(u)  # update the user in the database
-        dbSession.commit()
-
-        # flash message that the user has been updated
-        flash(UsersResourceString.INFO_USER_UPDATED % u.name)
-        # return redirect
+    if error == '':
         return redirect(url_for('users.userList'))
 
-    else:
-        # get the user from the database
-        u = dbSession.query(User).filter(User.id == user_id).first()
-        # get the categories from the database
-        uCategories = dbSession.query(UserCategory).all()
-        services = dbSession.query(Service).order_by(Service.name.asc()).all()
-        # if the user does not exist, send 404 response
-        if u is None:
-            abort(404)
-        return render_template('usermanagement/edituser.html', user=u,
+    return render_template('usermanagement/edituser.html', user=user,
                            userCategories=uCategories, services=services)
 
 
@@ -396,3 +326,71 @@ class UserHelperFunctions:
             error += UsersResourceString.ERROR_USER_PASSWORDS_DO_NOT_MATCH
 
         return error
+
+    @staticmethod
+    def validateUser(user, form):
+        """
+        method for validating the user (insert and update operations)
+        :param user: the user object
+        :param form: the form with the user data
+        :return: the object and an error, if there is a problem with validation
+        """
+        user.name = form.get('name', None)
+        user.username = form.get('username', None)
+        user.serviceId = form.get('service', None)
+        user.userCategoryId = form.get('usercategory', None)
+        user.phone = form.get('phone', None)
+        user.mobile = form.get('mobile', None)
+        user.email = form.get('email', None)
+        # The checkbox field isn't returned if it is not checked.
+        # So I tell the application that, if the form has no enabled field, return None value
+        if form.get('enabled', None) == "on":
+            user.enabled = True
+        else:
+            user.enabled = False
+
+        # get the new password. These two fields make sense only when adding a new user
+        user.password = form.get('password', None)
+        password2 = form.get('password2', None)
+
+        error = ''
+
+        # Check for required fields that are empty
+        if not user.name or user.name == '':
+            error += UsersResourceString.ERROR_NAME_NOT_ENTERED
+        if not user.username:
+            error += UsersResourceString.ERROR_USERNAME_NOT_ENTERED
+        if not user.userCategoryId:
+            # error += UsersResourceString.ERROR_USER_CATEGORY_NOT_ENTERED
+            userCatId = 1  # make him/her a simple user
+
+        if not user.email:
+            error += UsersResourceString.ERROR_EMAIL_ADDRESS_NOT_ENTERED
+
+        # in the case of the insertion of a new user, check that the two passwords conform to the constraints
+        if user.id is None:
+            if not user.password:
+                error += UsersResourceString.ERROR_EMPTY_USER_PASSWORD
+            if user.password != password2:
+                error += UsersResourceString.ERROR_PASSWORDS_DO_NOT_MATCH
+
+        return user, error
+
+    @staticmethod
+    def saveUser(user, request, dbSession):
+        """
+        Method that saves a user in the database
+        :param user:
+        :param request:
+        :param dbSession:
+        :return: error, if one exists
+        """
+        if request.method == 'POST':
+            user, error = UserHelperFunctions.validateUser(user, request.form)
+            if error != '':
+                flash(error)
+            else:
+                dbSession.add(user)
+                dbSession.commit()
+                flash(UsersResourceString.INFO_USER_UPDATED)
+            return error

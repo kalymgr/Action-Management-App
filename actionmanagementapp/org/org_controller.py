@@ -3,10 +3,12 @@
 """
 Blueprint related to organizational chart management
 """
+import os
 
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session, g)
 from werkzeug.exceptions import abort
+from werkzeug.utils import secure_filename
 
 from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
 from actionmanagementapp.org.org_models import Organization, OrganizationType, Service, ServiceType
@@ -14,10 +16,11 @@ from actionmanagementapp.users.users_models import User, UserCategory
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings, \
-    OrganizationResourceStrings
-
+    OrganizationResourceStrings, GeneralResourceStrings
 
 # create the blueprint
+from actionmanagementapp.utilities.utility_classes import UploadHelper
+
 bp = Blueprint("org", __name__, url_prefix="/org")
 
 
@@ -76,9 +79,6 @@ def editOrg(org_id):
 
     if error == '':
         return redirect(url_for('org.orgList'))
-    else:
-        # dbSession.rollback()
-        pass
 
     return render_template('org/edit_organization.html',
                            organization=org,
@@ -179,7 +179,7 @@ class OrganizationHelperFunctions:
     """
 
     @staticmethod
-    def validateOrganization(organization, form):
+    def validateOrganization(organization, request):
         """
         method for validating (insert or update) an organization.
         This method performs the validation and stores the data of the form in the object
@@ -187,14 +187,15 @@ class OrganizationHelperFunctions:
         :return: the object and an error, if there is a problem with validation
         """
         if organization.id is None:  # if it is not none, it's an update operation
-            organization.id = form.get('id', None)
-        organization.name = form.get('name', None)
-        organization.address = form.get('address', None)
-        organization.ceo = form.get('ceo', None)
-        organization.type = form.get('type', None)
-        organization.email = form.get('email', None)
-        organization.phone = form.get('phone', None)
-        organization.parentOrganizationId = form.get('parentOrganizationId', None)
+            organization.id = request.form.get('id', None)
+        organization.name = request.form.get('name', None)
+        organization.address = request.form.get('address', None)
+        organization.ceo = request.form.get('ceo', None)
+        organization.type = request.form.get('type', None)
+        organization.email = request.form.get('email', None)
+        organization.phone = request.form.get('phone', None)
+        organization.parentOrganizationId = request.form.get('parentOrganizationId', None)
+        organization.irsNo = request.form.get('irsNo', None)
 
         # if needed set, parent organization to None, to avoid sql integrity constraints error
         if organization.parentOrganizationId == '':
@@ -219,14 +220,41 @@ class OrganizationHelperFunctions:
         :return: the error
         """
         if request.method == 'POST':
-            org, error = OrganizationHelperFunctions.validateOrganization(org, request.form)
+            org, error = OrganizationHelperFunctions.validateOrganization(org, request)
 
             # save the new organization in the database
             if error != '':  # if there was an error
                 flash(error)
             else:
+
+                # save the organization in the database
                 dbSession.add(org)
                 dbSession.commit()
+
+                # save the organization logo, if there exists one
+                try:
+                    organizationLogo = request.files.get('logo', None)  # get the logo file
+                    # if everything is ok with the logo file
+                    if organizationLogo and UploadHelper.allowed_image_file(organizationLogo.filename):
+
+                        logoFileName = secure_filename(organizationLogo.filename)
+                        dbLogoFileName = 'org_'+str(org.id)+'_'+logoFileName
+                        filePath = os.path.join(
+                                current_app.config['UPLOAD_FOLDER'],
+                                dbLogoFileName
+                            )
+
+                        # save the logo file in the proper folder
+                        organizationLogo.save(filePath)
+                        # save the logo path in the database
+                        org.logoPath = dbLogoFileName
+                        dbSession.add(org)
+                        dbSession.commit()
+                except IOError, e:
+                    flash(GeneralResourceStrings.ERR_PROBLEM_UPLOAD_FILE)
+                    flash(str(e))
+
+                # show message that the organization is saved
                 flash(OrganizationResourceStrings.TXT_ORGANIZATION_SAVED)
 
             return error

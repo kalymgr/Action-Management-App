@@ -122,6 +122,8 @@ class OrganizationResourceStrings:
     FRM_ORGANIZATION_ADDRESS = u'Διεύθυνση:'
     FRM_ORGANIZATION_PHONE = u'Τηλέφωνο:'
     FRM_ORGANIZATION_EMAIL = u'Διεύθυνση Email:'
+    FRM_ORGANIZATION_LOGO = u'Λογότυπο:'
+    FRM_ORGANIZATION_IRSNO = u'ΑΦΜ:'
     FRM_ADD_ORGANIZATION = u'Προσθήκη νομικού προσώπου'
     FRM_ADD_SERVICE = u'Προσθήκη υπηρεσίας'
     FRM_SERVICE_ID = u'Κωδ. Υπηρεσίας: '
@@ -171,6 +173,9 @@ class GeneralResourceStrings:
     # -- TEXT elements
     TXT_OPERATIONS = u'Λειτουργίες'
 
+
+    # -- Error elements
+    ERR_PROBLEM_UPLOAD_FILE = u'Πρόβλημα με τη μεταφόρτωση του αρχείου'
 
 class MenuResourceStrings:
     """

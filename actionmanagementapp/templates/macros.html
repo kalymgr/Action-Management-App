@@ -132,7 +132,7 @@
 
 {% macro organizationForm(organization, orgTypes, organizations) %}
 {# macro for displaying the organization form that is used when inserting or updating organizations #}
- <form method="post">
+ <form method="post" enctype="multipart/form-data">
         <p class="row">
            <label class="col text-right" for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
             <span class="col"><input type="text" name="name" id="name" value="{{organization.name}}"></span>
@@ -181,6 +181,17 @@
         <p class="row">
             <label class="col text-right" for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
             <span class="col"> <input type="text" id="email" name="email" value="{{organization.email}}"></span>
+        </p>
+        <p class="row">
+            <label class="col text-right" for="irsNo">{{g.organizationResourceStrings.FRM_ORGANIZATION_IRSNO}}</label>
+            <span class="col"> <input type="text" id="irsNo" name="irsNo" value="{{organization.irsNo}}"></span>
+        </p>
+
+        <p class="row">
+            <label class="col text-right" for="logo">{{g.organizationResourceStrings.FRM_ORGANIZATION_LOGO}}</label>
+            <span class="col">
+                <input type="file" name="logo" id="logo">
+            </span>
         </p>
         <div class="row">
             <span class="col d-flex justify-content-center">

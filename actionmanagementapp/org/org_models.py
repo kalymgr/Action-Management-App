@@ -21,6 +21,8 @@ class Organization(Base, TimeStampMixin):
     ceo = Column(String(50), nullable=False)
     phone = Column(String(50))
     email = Column(String(50))
+    irsNo = Column(String(15))  # internal revenue service number
+    logoPath = Column(String(300))  # path for the logo file
     parentOrganizationId = Column(Integer, ForeignKey('organization.id', onupdate='cascade'))
     children = relationship("Organization",
                             backref=backref('parent', remote_side=[id]))
