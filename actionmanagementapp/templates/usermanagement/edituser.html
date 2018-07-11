@@ -6,6 +6,17 @@
 
     {{ macros.userForm(user, userCategories, services)}}
 
+    <!-- if the user has an avatar -->
+    {% if user.avatar != None %}
+        <!-- display the user avatar -->
+        <div class="row">
+            <div class="col">
+                <img width="200px" class="rounded mx-auto d-block"
+                     src="{{url_for('uploads.getUploadedFile', filename=user.avatar)}}">
+            </div>
+        </div>
+    {% endif %}
+
     {{ macros.showBacktoUserListNav() }}
 
 {% endblock %}

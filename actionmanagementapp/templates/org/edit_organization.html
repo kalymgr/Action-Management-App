@@ -16,7 +16,10 @@
 {% if organization.logoPath != '' %}
     <!-- Show the organization logo -->
     <div class="row">
-        <img src="{{url_for('uploads.orgLogos', filename=organization.logoPath)}}" class="col">
+        <div class="col">
+            <img width="200px" class="rounded mx-auto d-block"
+                 src="{{url_for('uploads.getUploadedFile', filename=organization.logoPath)}}">
+        </div>
     </div>
 {% endif %}
 

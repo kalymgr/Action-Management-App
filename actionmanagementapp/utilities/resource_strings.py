@@ -80,6 +80,7 @@ class UsersResourceString:
     FRM_ADD_CATEGORY = u'Προσθήκη κατηγορίας'
     FRM_ADD_USER = u'Προσθήκη χρήστη'
     FRM_USER_CATEGORIES = u'Κατηγορίες χρηστών'
+    FRM_USER_AVATAR = u'Εικονίδιο χρήστη:'
 
     # -- text elements
     TXT_ADD_USER = u'Προσθήκη χρήστη'

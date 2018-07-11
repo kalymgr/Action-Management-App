@@ -3,12 +3,16 @@
 """
 Blueprint related to user management
 """
+import os
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import scoped_session
 from werkzeug.exceptions import abort
 
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, session, g)
+from werkzeug.utils import secure_filename
+
 from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
 from actionmanagementapp.org.org_models import Service
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -17,6 +21,8 @@ from flask import current_app
 from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings
 
 # create the blueprint
+from actionmanagementapp.utilities.utility_classes import UploadHelper
+
 bp = Blueprint("users", __name__, url_prefix="/users")
 
 
@@ -328,30 +334,31 @@ class UserHelperFunctions:
         return error
 
     @staticmethod
-    def validateUser(user, form):
+    def validateUser(user, request):
         """
         method for validating the user (insert and update operations)
         :param user: the user object
         :param form: the form with the user data
         :return: the object and an error, if there is a problem with validation
         """
-        user.name = form.get('name', None)
-        user.username = form.get('username', None)
-        user.serviceId = form.get('service', None)
-        user.userCategoryId = form.get('usercategory', None)
-        user.phone = form.get('phone', None)
-        user.mobile = form.get('mobile', None)
-        user.email = form.get('email', None)
+        user.name = request.form.get('name', None)
+        user.username = request.form.get('username', None)
+        user.serviceId = request.form.get('service', None)
+        user.userCategoryId = request.form.get('usercategory', None)
+        user.phone = request.form.get('phone', None)
+        user.mobile = request.form.get('mobile', None)
+        user.email = request.form.get('email', None)
         # The checkbox field isn't returned if it is not checked.
         # So I tell the application that, if the form has no enabled field, return None value
-        if form.get('enabled', None) == "on":
+        if request.form.get('enabled', None) == "on":
             user.enabled = True
         else:
             user.enabled = False
 
-        # get the new password. These two fields make sense only when adding a new user
-        user.password = form.get('password', None)
-        password2 = form.get('password2', None)
+        # get the password in the case of a new user
+        if user.id is None:
+            user.password = request.form.get('password', None)
+            password2 = request.form.get('password2', None)
 
         error = ''
 
@@ -386,11 +393,34 @@ class UserHelperFunctions:
         :return: error, if one exists
         """
         if request.method == 'POST':
-            user, error = UserHelperFunctions.validateUser(user, request.form)
+            user, error = UserHelperFunctions.validateUser(user, request)
             if error != '':
                 flash(error)
             else:
                 dbSession.add(user)
                 dbSession.commit()
-                flash(UsersResourceString.INFO_USER_UPDATED)
+
+                # save the user avatar, if it exists
+                try:
+                    userAvatar = request.files.get('avatar', None)
+                    # if everything is ok with the user avatar
+                    if userAvatar and UploadHelper.allowed_image_file(userAvatar.filename):
+                        # get the secure file name
+                        avatarFileName = secure_filename(userAvatar.filename)
+                        # set the name as it will be stored in the db and file system
+                        dbAvatarFileName = 'usr_'+str(user.id)+'_'+avatarFileName
+                        filePath = os.path.join(
+                            current_app.config['UPLOAD_FOLDER'],
+                            dbAvatarFileName
+                        )
+                        # save in the proper path
+                        userAvatar.save(filePath)
+                        user.avatar = dbAvatarFileName
+                        dbSession.add(user)
+                        dbSession.commit()
+
+                except IOError, e:
+                    flash(str(e))
+
+                flash(UsersResourceString.INFO_USER_UPDATED % user.name)
             return error

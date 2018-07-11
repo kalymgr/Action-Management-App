@@ -44,6 +44,7 @@ class User(Base, TimeStampMixin):
     enabled = Column(Boolean)
     userCategoryId = Column(Integer, ForeignKey('usercategory.id', onupdate='cascade'), nullable=False)
     userCategory = relationship('UserCategory', backref=backref('users'))
+    avatar = Column(String(300))  # path for the avatar file
 
 
 def insertDefaultUserData(DBSession):

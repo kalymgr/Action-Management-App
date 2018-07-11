@@ -251,7 +251,7 @@ class OrganizationHelperFunctions:
                         dbSession.add(org)
                         dbSession.commit()
                 except IOError, e:
-                    flash(GeneralResourceStrings.ERR_PROBLEM_UPLOAD_FILE)
+                    # flash(GeneralResourceStrings.ERR_PROBLEM_UPLOAD_FILE)
                     flash(str(e))
 
                 # show message that the organization is saved
