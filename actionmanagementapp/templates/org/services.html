@@ -34,7 +34,8 @@
                                   class="d-inline">
                                 <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
                             </form>
-                            <form action="#" class="d-inline">
+                            <form action="{{url_for('org.deleteService', service_id=service.id)}}"
+                                  class="d-inline">
                                 <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
                             </form>
                         </td>

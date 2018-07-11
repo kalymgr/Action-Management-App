@@ -100,10 +100,21 @@ def deleteOrg(org_id):
         abort(404)
 
     if request.method == 'POST':
-        dbSession.delete(org)
-        dbSession.commit()
-        flash(OrganizationResourceStrings.TXT_ORGANIZATION_DELETED)
-        return redirect(url_for('org.orgList'))
+        error = ''
+        # if the organization has children organizations
+        if org.children:
+            error += OrganizationResourceStrings.ERR_CHILDREN_ORGANIZATIONS
+        # if the organization has services
+        if org.services:
+            error += OrganizationResourceStrings.ERR_ORGANIZATION_SERVICES
+
+        if error == '':
+            dbSession.delete(org)
+            dbSession.commit()
+            flash(OrganizationResourceStrings.TXT_ORGANIZATION_DELETED)
+            return redirect(url_for('org.orgList'))
+        else:
+            flash(error)
 
     return render_template('org/delete_organization.html', org=org)
 
@@ -172,6 +183,38 @@ def addService():
                            organizations=organizations,
                            serviceTypes=serviceTypes)
 
+
+@bp.route('/services/<int:service_id>/delete', methods=('GET', 'POST'))
+@login_required
+def deleteService(service_id):
+    """
+    Routing function for deleting a service
+    :param service_id_id:
+    :return:
+    """
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    service = dbSession.query(Service).filter(Service.id == service_id).first()
+    if service is None:
+        abort(404)
+
+    if request.method == 'POST':
+        error = ''
+        # if the organization has children organizations
+        if service.children:
+            error += OrganizationResourceStrings.ERR_CHILDREN_SERVICES
+
+        if service.employees:
+            error += OrganizationResourceStrings.ERR_SERVICE_EMPLOYEES
+
+        if error == '':
+            dbSession.delete(service)
+            dbSession.commit()
+            flash(OrganizationResourceStrings.TXT_SERVICE_DELETED)
+            return redirect(url_for('org.services'))
+        else:
+            flash(error)
+
+    return render_template('org/delete_service.html', service=service)
 
 class OrganizationHelperFunctions:
     """

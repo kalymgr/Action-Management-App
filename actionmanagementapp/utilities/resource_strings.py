@@ -114,6 +114,10 @@ class OrganizationResourceStrings:
     ERR_ORGANIZATION_EMPTY_CEO = u' Δε δόθηκαν στοιχεία της διοίκησης.'
     ERR_SERVICE_EMPTY_NAME = u' Δε δόθηκε όνομα υπηρεσίας. '
     ERR_SERVICE_EMPTY_TYPE = u' Δε δόθηκε τύπος υπηρεσίας. '
+    ERR_CHILDREN_ORGANIZATIONS = u' Σε αυτό το νομικό πρόσωπο υπάγονται άλλα νομικά πρόσωπα. Δε μπορεί να διαγραφεί. '
+    ERR_CHILDREN_SERVICES = u' Σε αυτή την υπηρεσία υπάγονται άλλες υπηρεσίες. Δε μπορεί να διαγραφεί. '
+    ERR_SERVICE_EMPLOYEES = u' Υπάρχουν υπάλληλοι καταχωρημένοι σε αυτή την υπηρεσία. Δε μπορεί να διαγραφεί. '
+    ERR_ORGANIZATION_SERVICES = u' Υπάρχουν υπηρεσίες σε αυτό το νομικό πρόσωπο. Δε μπορεί να διαγραφεί. '
 
     # -- FORM elements
     FRM_ORGANIZATION_NAME = u'Όνομα:'
@@ -158,6 +162,9 @@ class OrganizationResourceStrings:
     TXT_BACK_TO_SERVICE_LIST = u'Πίσω στη λίστα με τις υπηρεσίες'
     TXT_SERVICE_SAVED = u'Η υπηρεσία έχει αποθηκευτεί.'
     TXT_ADD_SERVICE_TITLE = u'Προσθήκη υπηρεσίας'
+    TXT_SERVICE_DELETED = u'Η υπηρεσία έχει διαγραφεί.'
+    TXT_DELETE_SERVICE_TITLE = u'Διαγραφή υπηρεσίας'
+    TXT_CONFIRM_DELETE_SERVICE = u'Είστε σίγουροι ότι θέλετε να διαγράψετε την υπηρεσία %s;'
 
 
 
