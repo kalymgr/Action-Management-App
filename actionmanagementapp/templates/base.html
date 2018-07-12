@@ -30,9 +30,11 @@
         <div class="col-sm text-right">
           {% if g.user %}
             <span>{{ g.user['username'] }}</span>
-            <a href="{{ url_for('auth.logout') }}">{{g.authResourceStrings.TXT_LOGOUT}}</a>
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-secondary">
+            {{g.authResourceStrings.TXT_LOGOUT}}</a>
           {% else %}
-            <a href="{{ url_for('auth.login') }}">{{g.authResourceStrings.TXT_LOGIN}}</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary">
+            {{g.authResourceStrings.TXT_LOGIN}}</a>
           {% endif %}
         </div>
     </nav>
@@ -53,7 +55,7 @@
           <!-- Flash messages -->
       {% for msg in get_flashed_messages() %}
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center alert alert-primary">
                 {{ msg }}
             </div>
         </div>

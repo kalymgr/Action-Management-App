@@ -31,13 +31,16 @@
                     <td>
                         <form action="{{ url_for('users.userDetails', user_id=user.id) }}"
                         method="get" class="d-inline">
-                        <input type="submit" value="{{g.generalResourceStrings.FRM_VIEW}}"></form>
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_VIEW}}"
+                            class="btn btn-outline-primary btn-sm"></form>
                         <form action="{{ url_for('users.editUser', user_id=user.id) }}"
                         method="get" class="d-inline">
-                        <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"
+                            class="btn btn-outline-primary btn-sm"></form>
                         <form action="{{ url_for('users.deleteUser', user_id=user.id) }}"
                         method="get" class="d-inline">
-                        <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+                        <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"
+                        class="btn btn-outline-primary btn-sm"></form>
                     </td>
                 </tr>
                 {% endfor %}
@@ -50,9 +53,12 @@
     <div class="row justify-content-center bottom-buttons align-items-center">
         <span class="col">
             <form class="d-inline" action="{{ url_for('users.addUser') }}" method="get" class="d-inline">
-                <input type="submit" value="{{g.userResourceStrings.FRM_ADD_USER}}"></form>
+                <input type="submit" value="{{g.userResourceStrings.FRM_ADD_USER}}"
+                       class="btn btn-outline-primary">
+            </form>
             <form class="d-inline" action="{{ url_for('users.userCategories') }}" method="get">
-                <input type="submit" value="{{g.userResourceStrings.FRM_USER_CATEGORIES}}"></form>
+                <input type="submit" value="{{g.userResourceStrings.FRM_USER_CATEGORIES}}"
+                class="btn btn-primary"></form>
         </span>
     </div>
 
