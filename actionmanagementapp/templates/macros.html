@@ -207,28 +207,24 @@
 
 {% macro userForm(user, userCategories, services) %}
 {# macro for displaying the user form that is used when inserting or updating users #}
-<form action="#" method="post" enctype="multipart/form-data">
-    <div class="row">
-        <label for="id" class="col text-right">{{g.userResourceStrings.FRM_USER_ID}}</label>
-        <span class="col">
+<form action="#" method="post" enctype="multipart/form-data" onsubmit="validateFormFields(this)">
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="id">{{g.userResourceStrings.FRM_USER_ID}}</label>
             <input id="id" type="text" name="id" value="{{ user.id }}" class="form-control-plaintext" readonly>
-        </span>
+        </div>
+        <div class="form-group col-md-5">
+            <label for="name">{{g.userResourceStrings.FRM_FULL_NAME}}</label>
+            <input id="name" type="text" name="name" value="{{ user.name }}" class="form-control" required>
+        </div>
+        <div class="form-group col-md-5">
+            <label for="username">{{g.userResourceStrings.FRM_USERNAME}}</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" class="form-control" required>
+        </div>
     </div>
-    <div class="row">
-        <label for="name" class="col text-right">{{g.userResourceStrings.FRM_FULL_NAME}}</label>
-        <span class="col">
-            <input id="name" type="text" name="name" value="{{ user.name }}" class="form-control">
-        </span>
-    </div>
-    <div class="row">
-        <label for="username" class="col text-right">{{g.userResourceStrings.FRM_USERNAME}}</label>
-        <span class="col">
-            <input type="text" id="username" name="username" value="{{ user.username }}" class="form-control">
-        </span>
-    </div>
-    <div class="row">
-        <label for="service" class="col text-right">{{g.userResourceStrings.FRM_DEPARTMENT}}</label>
-        <span class="col">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="service">{{g.userResourceStrings.FRM_DEPARTMENT}}</label>
             <select id="service" name="service" class="custom-select">
                 {% for service in services %}
                     {% if service.id == user.serviceId %}
@@ -242,74 +238,85 @@
                     {% endif %}
                 {% endfor %}
             </select>
-        </span>
-    </div>
-    <div class="row">
-        <label for="usercategory" class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY}}</label>
-        <span class="col">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="usercategory">{{g.userResourceStrings.FRM_USER_CATEGORY}}</label>
+            <span>
             {% if g.user.userCategoryId != 3 %}  <!-- if the user isn't super administrator -->
-        <span id="usercategory" name="usercategory" disabled> <!-- disable the category selection -->
-    {% else %}
-        <select id="usercategory" name="usercategory" class="custom-select">
-    {% endif %}
-        {%  for cat in userCategories %}
+                <select id="usercategory" name="usercategory" disabled> <!-- disable the category selection -->
+            {% else %}
+                <select id="usercategory" name="usercategory" class="custom-select">
+            {% endif %}
+            {%  for cat in userCategories %}
             {% if user.userCategoryId == cat.id%} <!-- select the category of the user -->
                 <option value="{{ cat.id }}" selected>{{ cat.name }}</option>
             {% else %}
                 <option value="{{ cat.id }}">{{ cat.name }}</option>
             {% endif %}
-        {%  endfor %}
-        </select> </span>
+            {%  endfor %}
+                </select>
+
+            </span>
+        </div>
     </div>
-    <div class="row">
-        <label for="phone" class="col text-right">{{g.userResourceStrings.FRM_PHONE}}</label>
-        <span class="col ">
-            <input id="phone" type="text" name="phone" value="{{ user.phone }}" class="form-control">
-        </span>
-    </div>
-    <div class="row">
-        <label for="mobile" class="col text-right">{{g.userResourceStrings.FRM_MOBILE}}</label>
-        <span class="col">
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="phone">{{g.userResourceStrings.FRM_PHONE}}</label>
+            <input type="tel" id="phone" type="text" name="phone" value="{{ user.phone }}"
+                   class="form-control phone-number">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="mobile">{{g.userResourceStrings.FRM_MOBILE}}</label>
             <input id="mobile" type="text" name="mobile" value="{{ user.mobile }}" class="form-control">
-        </span>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="email">{{g.userResourceStrings.FRM_EMAIL}}</label>
+            <input id="email" type="email" name="email" value="{{ user.email }}" class="form-control" required>
+        </div>
     </div>
-    <div class="row">
-        <label for="email" class="col text-right">{{g.userResourceStrings.FRM_EMAIL}}</label>
-        <span class="col">
-            <input id="email" type="email" name="email" value="{{ user.email }}" class="form-control">
-        </span>
-    </div>
-    <div class="row">
-        <label for="enabled" class="col text-right">{{g.userResourceStrings.FRM_ENABLED}}</label>
-    {% if user.enabled == True %} <!-- set the checkbox checked if true -->
-        <span class="col">
-            <input id="enabled" type="checkbox" name="enabled"
-                   class="form-check-input position-static" checked>
-        </span>
-    {% else %}
-        <span class="col">
-            <input id="enabled" type="checkbox" name="enabled" class="form-check-input position-static">
-        </span>
-    {% endif %}
-    </div>
-     <div class="row">
-        <span class="col">
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="enabled">{{g.userResourceStrings.FRM_ENABLED}}</label>
+            {% if user.enabled == True %} <!-- set the checkbox checked if true -->
+                <span class="col">
+                    <input id="enabled" type="checkbox" name="enabled"
+                           class="form-check-input position-static" checked>
+                </span>
+            {% else %}
+                <span class="col">
+                    <input id="enabled" type="checkbox" name="enabled" class="form-check-input position-static">
+                </span>
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10">
             <label for="avatar" class="custom-file-label">
                 {{g.userResourceStrings.FRM_USER_AVATAR}}
             </label>
             <input id="avatar" name="avatar" type="file" class="custom-file-input">
+        </div>
+
+
+    </div>
+     <div class="row">
+        <span class="col">
+
+
         </span>
     </div>
 
     {% if user == None %}
     <!-- In case of a new user, show the fields for adding a new password -->
-    <div class="row">
-        <label for="password" class="col text-right">{{g.userResourceStrings.FRM_NEW_PASSWORD}}</label>
-        <span class="col"><input id="password" type="password" name="password"></span>
-    </div>
-    <div class="row">
-        <label for="password2" class="col text-right">{{g.userResourceStrings.FRM_CONFIRM_NEW_PASSWORD}}</label>
-        <span class="col"><input id="password2" type="password" name="password2"></span>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="password">{{g.userResourceStrings.FRM_NEW_PASSWORD}}</label>
+            <input id="password" type="password" name="password" class="form-control" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password2">{{g.userResourceStrings.FRM_CONFIRM_NEW_PASSWORD}}</label>
+            <input id="password2" type="password" name="password2" class="form-control" required>
+        </div>
     </div>
 
     {% endif %}
