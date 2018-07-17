@@ -8,34 +8,61 @@ function that validates phone numbers. Takes as input the form input element tha
 It is called by validateFormFields() function
 */
 function validatePhoneNumber(el){
-    /* if the number of characters is less than 10 */
-    if (el.value.length < 10){
-        el.setCustomValidity('Ο τηλεφωνικός αριθμός δεν είναι έγκυρος');
+	
+    /* in order for a phone number to be valid, it must have at least 10 digits. 
+	Also, only digits and spaces are allowed. This means that the sum of the number of digits and the number of spaces
+	should be equal to the total number of characters*/
+	
+	//get the length of the phone number
+	var phoneNumberLength = el.value.length;
+	//get the number of digits
+	if (el.value.match(/\d/g))
+		var digitsNumber = el.value.match(/\d/g).length;
+	else  // if regexp result is null, set to zero
+		var digitsNumber = 0;
+	
+	//get the number of spaces
+	if (el.value.match(/ /g))
+		var spacesNumber = el.value.match(/ /g).length;
+	else // if regexp result is null, set to zero
+		var spacesNumber = 0;
+	
+	// if the user has typed a phone number and it is invalid
+    if ( (phoneNumberLength>0) && ((phoneNumberLength < 10) || (phoneNumberLength != digitsNumber+spacesNumber)) )
+	{
+		// set the message, for the invalid phone number
+		el.setCustomValidity('Ο τηλεφωνικός αριθμός δεν είναι έγκυρος. Χρησιμοποιείστε μόνο ψηφία (τουλάχιστον 10) και κενά. ');
+		
     }
-    else  /* valid phone number */
+    else  // the user hasn't typed a phone number or the phone number typed is valid. Reset the validity
     {
-        el.setCustomValidity('');
+		el.setCustomValidity('');
     }
-
 }
 
 
 /**
 Function that validates form fields. It is called on submit
-Takes as input the form element.
+Takes as input the ok button element.
 Calls the other functions that validate form fields
 */
-function validateFormFields(formElement){
+function validateFormFields(okButtonElement){
+	
+	// get the form object
+	formObj = okButtonElement.form;
+	
     /* validate all phone numbers */
-    // get all telephone input (declared by using the class 'phone-number')
-    phoneNumberInputs = document.getElementsByClassName('phone-number');
-    console.log(phoneNumberInputs);
-    console.log('the end');
+	
+    // get all form input objects
+    formInputs = formObj.getElementsByTagName('input');
+    
 
-    for (var i=0; i<phoneNumberInputs.length; i++){
-        //for each phone number input element, add validation
-        validatePhoneNumber(phoneNumberInputs[i]);
-        alert(1);
+    for (var i=0; i<formInputs.length; i++){
+        //for each phone number (that has tel as type), add validation
+		if (formInputs[i].type == 'tel')
+		{
+			validatePhoneNumber(formInputs[i]);
+		}
     }
 
 }

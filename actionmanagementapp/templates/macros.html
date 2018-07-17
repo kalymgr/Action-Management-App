@@ -207,7 +207,7 @@
 
 {% macro userForm(user, userCategories, services) %}
 {# macro for displaying the user form that is used when inserting or updating users #}
-<form action="#" method="post" enctype="multipart/form-data" onsubmit="validateFormFields(this)">
+<form action="#" method="post" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="id">{{g.userResourceStrings.FRM_USER_ID}}</label>
@@ -264,11 +264,11 @@
         <div class="form-group col-md-4">
             <label for="phone">{{g.userResourceStrings.FRM_PHONE}}</label>
             <input type="tel" id="phone" type="text" name="phone" value="{{ user.phone }}"
-                   class="form-control phone-number">
+                   class="form-control">
         </div>
         <div class="form-group col-md-4">
             <label for="mobile">{{g.userResourceStrings.FRM_MOBILE}}</label>
-            <input id="mobile" type="text" name="mobile" value="{{ user.mobile }}" class="form-control">
+            <input id="mobile" type="tel" name="mobile" value="{{ user.mobile }}" class="form-control">
         </div>
         <div class="form-group col-md-4">
             <label for="email">{{g.userResourceStrings.FRM_EMAIL}}</label>
@@ -323,7 +323,8 @@
 
     <div class="row">
         <span class="col d-flex justify-content-center">
-            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}" class="btn btn-outline-primary">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"
+                   class="btn btn-outline-primary" onclick="validateFormFields(this)">
         </span>
     </div>
 </form>
