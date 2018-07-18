@@ -29,60 +29,69 @@
 {# macro for displaying the service form that is used when inserting or updating services #}
 <form method="post">
 
-    <p class="row">
-        <label for="id" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_ID}}
-        </label>
-        <span class="col">
-            <input type="text" id="id" name="id" value="{{service.id}}" disabled>
-        </span>
-    </p>
-    <p class="row">
-        <label for="name" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_NAME }}
-        </label>
-        <span class="col">
-            <input type="text" id="name" name="name" value="{{service.name}}">
-        </span>
-    </p>
-    <p class="row">
-        <label for="address" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_ADDRESS }}
-        </label>
-        <span class="col">
-            <input type="text" id="address" name="address" value="{{service.address}}">
-        </span>
-    </p>
-    <p class="row">
-        <label for="chief" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_CHIEF }}
-        </label>
-        <span class="col">
-            <input type="text" id="chief" name="chief" value="{{service.chief}}">
-        </span>
-    </p>
-    <p class="row">
-        <label for="phone" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_PHONE }}
-        </label>
-        <span class="col">
-            <input type="text" id="phone" name="phone" value="{{service.phone}}">
-        </span>
-    </p>
-    <p class="row">
-        <label for="email" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_EMAIL }}
-        </label>
-        <span class="col">
-            <input type="email" id="email" name="email" value="{{service.email}}">
-        </span>
-    </p>
-    <p class="row">
-        <label for="parentServiceId" class="col text-right">
-            {{g.organizationResourceStrings.FRM_PARENT_SERVICE }}
-        </label>
-        <span class="col">
-            <select id="parentServiceId" name="parentServiceId">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="id">{{g.organizationResourceStrings.FRM_SERVICE_ID}}</label>
+            <input type="text" id="id" name="id" value="{{service.id}}" class="form-control-plaintext" readonly>
+        </div>
+
+        <div class="form-group col-md-4">
+             <label for="name">
+                {{g.organizationResourceStrings.FRM_SERVICE_NAME }}
+            </label>
+            <input type="text" id="name" name="name" value="{{service.name}}" class="form-control">
+        </div>
+
+        <div class="form-group col-md-5">
+            <label for="type">
+                {{g.organizationResourceStrings.FRM_SERVICE_TYPE }}
+            </label>
+            <select id="type" name="type" class="custom-select">
+                {%for serviceType in serviceTypes %}
+                    {% if serviceType.id == service.type %}
+                        <option value="{{serviceType.id}}" selected>{{serviceType.name}}</option>
+                    {% else %}
+                        <option value="{{serviceType.id}}">{{serviceType.name}}</option>
+                    {% endif %}
+                {%endfor%}
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="address">
+                {{g.organizationResourceStrings.FRM_SERVICE_ADDRESS }}
+            </label>
+            <input type="text" id="address" name="address" value="{{service.address}}" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="chief">
+                {{g.organizationResourceStrings.FRM_SERVICE_CHIEF }}
+            </label>
+            <input type="text" id="chief" name="chief" value="{{service.chief}}" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="phone">
+                {{g.organizationResourceStrings.FRM_SERVICE_PHONE }}
+            </label>
+            <input type="tel" id="phone" name="phone" value="{{service.phone}}" class="form-control">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="email">
+                {{g.organizationResourceStrings.FRM_SERVICE_EMAIL }}
+            </label>
+            <input type="email" id="email" name="email" value="{{service.email}}" class="form-control">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="parentServiceId">
+                {{g.organizationResourceStrings.FRM_PARENT_SERVICE }}
+            </label>
+            <select id="parentServiceId" name="parentServiceId" class="custom-select">
                 <option value="">{{g.organizationResourceStrings.FRM_NO_SERVICE }}</option>
                 {% for s in services %}
                     {%if service.parentServiceId == s.id%}
@@ -92,14 +101,13 @@
                     {% endif %}
                 {% endfor %}
             </select>
-        </span>
-    </p>
-    <p class="row">
-        <label for="organizationId" class="col text-right">
-            {{g.organizationResourceStrings.FRM_ORGANIZATION }}
-        </label>
-        <span class="col">
-            <select id="organizationId" name="organizationId">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="organizationId">
+                {{g.organizationResourceStrings.FRM_ORGANIZATION }}
+            </label>
+
+            <select id="organizationId" name="organizationId" class="custom-select">
                 {% for org in organizations %}
                     {% if org.id == service.organizationId%}
                         <option value="{{org.id}}" selected>{{org.name}}</option>
@@ -108,27 +116,14 @@
                     {%endif%}
                 {%endfor%}
             </select>
-        </span>
-    </p>
-    <p class="row">
-        <label for="type" class="col text-right">
-            {{g.organizationResourceStrings.FRM_SERVICE_TYPE }}
-        </label>
-        <span class="col">
-            <select id="type" name="type">
-                {%for serviceType in serviceTypes %}
-                    {% if serviceType.id == service.type %}
-                        <option value="{{serviceType.id}}" selected>{{serviceType.name}}</option>
-                    {% else %}
-                        <option value="{{serviceType.id}}">{{serviceType.name}}</option>
-                    {% endif %}
-                {%endfor%}
-            </select>
-        </span>
-    </p>
+
+        </div>
+    </div>
+
     <div class="row">
         <span class="col d-flex justify-content-center">
-            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"
+                   class="btn btn-outline-primary" onclick="validateFormFields(this)">
         </span>
     </div>
 </form>
@@ -137,71 +132,81 @@
 {% macro organizationForm(organization, orgTypes, organizations) %}
 {# macro for displaying the organization form that is used when inserting or updating organizations #}
  <form method="post" enctype="multipart/form-data">
-        <p class="row">
-           <label class="col text-right" for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
-            <span class="col"><input type="text" name="name" id="name" value="{{organization.name}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="type">{{g.organizationResourceStrings.FRM_ORGANIZATION_TYPE}}</label>
-            <span class="col">
-                <select id="type" name="type">
-                    {% for t in orgTypes %}
-                        {%if t.id == organization.type %}
-                        <option value="{{ t.id }}" selected>{{ t.name }}</option>
-                        {%  else %}
-                        <option value="{{ t.id }}">{{ t.name }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="ceo">{{g.organizationResourceStrings.FRM_ORGANIZATION_CEO}}</label>
-            <span class="col"><input type="text" id="ceo" name="ceo" value="{{organization.ceo}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
-            <span class="col">
-                <select id="parentOrganizationId" name="parentOrganizationId">
-                <option value="">  Κανένας οργανισμός </option>
-                {% for org in organizations %}
-                {%if org.id == organization.parentOrganizationId%}
-                    <option value="{{ org.id }}" selected>{{ org.name }}</option>
-                {% else %}
-                    <option value="{{ org.id }}">{{ org.name }}</option>
-                {% endif %}
-                {% endfor %}
-                </select>
-            </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="address">{{g.organizationResourceStrings.FRM_ORGANIZATION_ADDRESS}}</label>
-        <span class="col"> <input type="text" id="address" name="address" value="{{organization.address}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="phone">{{g.organizationResourceStrings.FRM_ORGANIZATION_PHONE}}</label>
-            <span class="col"> <input type="text" id="phone" name="phone" value="{{organization.phone}}"> </span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
-            <span class="col"> <input type="email" id="email" name="email" value="{{organization.email}}"></span>
-        </p>
-        <p class="row">
-            <label class="col text-right" for="irsNo">{{g.organizationResourceStrings.FRM_ORGANIZATION_IRSNO}}</label>
-            <span class="col"> <input type="text" id="irsNo" name="irsNo" value="{{organization.irsNo}}"></span>
-        </p>
-
-        <p class="row">
-            <label class="col text-right" for="logo">{{g.organizationResourceStrings.FRM_ORGANIZATION_LOGO}}</label>
-            <span class="col">
-                <input type="file" name="logo" id="logo">
-            </span>
-        </p>
-        <div class="row">
-            <span class="col d-flex justify-content-center">
-                <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}">
-            </span>
+     <div class="form-row">
+        <div class="form-group col">
+            <label for="name">{{g.organizationResourceStrings.FRM_ORGANIZATION_NAME}}</label>
+            <input id="name" type="text" name="name" value="{{ organization.name }}" class="form-control" required>
         </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="type">{{g.organizationResourceStrings.FRM_ORGANIZATION_TYPE}}</label>
+            <select id="type" name="type" class="custom-select">
+                {% for t in orgTypes %}
+                    {%if t.id == organization.type %}
+                    <option value="{{ t.id }}" selected>{{ t.name }}</option>
+                    {%  else %}
+                    <option value="{{ t.id }}">{{ t.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="ceo">{{g.organizationResourceStrings.FRM_ORGANIZATION_CEO}}</label>
+            <input type="text" id="ceo" name="ceo" value="{{organization.ceo}}" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="parentOrganizationId">{{g.organizationResourceStrings.FRM_PARENT_ORGANIZATION}}</label>
+            <select id="parentOrganizationId" name="parentOrganizationId" class="custom-select">
+            <option value="">  Κανένας οργανισμός </option>
+            {% for org in organizations %}
+            {%if org.id == organization.parentOrganizationId%}
+                <option value="{{ org.id }}" selected>{{ org.name }}</option>
+            {% else %}
+                <option value="{{ org.id }}">{{ org.name }}</option>
+            {% endif %}
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+     <div class="form-row">
+         <div class="form-group col-md-6">
+             <label for="address">{{g.organizationResourceStrings.FRM_ORGANIZATION_ADDRESS}}</label>
+            <input class="form-control" type="text" id="address" name="address" value="{{organization.address}}">
+         </div>
+        <div class="form-group col-md-3">
+            <label for="phone">{{g.organizationResourceStrings.FRM_ORGANIZATION_PHONE}}</label>
+            <input type="tel" id="phone" name="phone" value="{{organization.phone}}" class="form-control">
+        </div>
+         <div class="form-group col-md-3">
+            <label for="email">{{g.organizationResourceStrings.FRM_ORGANIZATION_EMAIL}}</label>
+            <input type="email" id="email" name="email" value="{{organization.email}}" class="form-control">
+         </div>
+     </div>
+
+     <div class="form-row">
+         <div class="form-group col-md-3">
+             <label for="irsNo">{{g.organizationResourceStrings.FRM_ORGANIZATION_IRSNO}}</label>
+             <input type="text" id="irsNo" name="irsNo" value="{{organization.irsNo}}" class="form-control irs-no">
+         </div>
+     </div>
+     <div class="form-row">
+         <div class="form-group col-md-9">
+             <label for="logo" class="custom-file-label">{{g.organizationResourceStrings.FRM_ORGANIZATION_LOGO}}</label>
+             <input type="file" name="logo" id="logo" class="custom-file-input">
+         </div>
+     </div>
+
+
+    <div class="row">
+        <span class="col d-flex justify-content-center">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"
+                   class="btn btn-outline-primary" onclick="validateFormFields(this)">
+        </span>
+    </div>
     </form>
 {% endmacro %}
 
@@ -298,12 +303,6 @@
         </div>
 
 
-    </div>
-     <div class="row">
-        <span class="col">
-
-
-        </span>
     </div>
 
     {% if user == None %}

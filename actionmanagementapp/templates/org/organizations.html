@@ -27,10 +27,12 @@
                     <td>{{organization.ceo}}</td>
                     <td>
                         <form action="{{url_for('org.editOrg', org_id=organization.id)}}" class="d-inline">
-                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"
+                                   class="btn btn-outline-primary btn-sm">
                         </form>
                         <form action="{{url_for('org.deleteOrg', org_id=organization.id)}}" class="d-inline">
-                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"
+                                   class="btn btn-outline-primary btn-sm">
                         </form>
                     </td>
             {% endfor %}
@@ -44,7 +46,8 @@
     <div class="row justify-content-center bottom-buttons align-items-center">
         <span class="col">
             <form class="d-inline" method="get" action="{{url_for('org.addOrg')}}">
-                <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}"
+                       class="btn btn-primary">
             </form>
         </span>
     </div>

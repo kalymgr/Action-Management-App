@@ -25,9 +25,9 @@
                         </td>
                         <td>
                             <form class="d-inline" action="{{ url_for('users.editUserCategory', user_category_id=userCategory.id) }}" method="get">
-                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"></form>
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}" class="btn btn-outline-primary btn-sm"></form>
                             <form class="d-inline" action="{{ url_for('users.deleteUserCategory', user_category_id=userCategory.id) }}" method="get">
-                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"></form>
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}" class="btn btn-outline-primary btn-sm"></form>
                         </td>
                     </tr>
                 {% endfor %}
@@ -38,7 +38,7 @@
 
     <div class="row">
         <form class="col" action="{{ url_for('users.addUserCategory') }}" method="get">
-            <input type="submit" value="{{g.userResourceStrings.FRM_ADD_CATEGORY}}">
+            <input type="submit" value="{{g.userResourceStrings.FRM_ADD_CATEGORY}}" class="btn btn-outline-primary">
         </form>
     </div>
 

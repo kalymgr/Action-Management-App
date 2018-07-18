@@ -8,13 +8,21 @@
 {% block content %}
 
     <form action="#" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="id">{{g.userResourceStrings.FRM_USER_CATEGORY_ID}}</label>
+                <input id="id" type="text" name="id" value="{{ userCategory.id }}" class="form-control-plaintext" readonly>
+            </div>
+            <div class="form-group col-md-9">
+                <label for="name">{{g.userResourceStrings.FRM_USER_CATEGORY_NAME}}</label>
+                <input id="name" type="text" name="name" value="{{ userCategory.name }}" class="form-control">
+            </div>
+        </div>
         <p class="row">
-            <label for="id" class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY_ID}}</label>
-            <span class="col"><input id="id" type="text" name="id" value="{{ userCategory.id }}" disabled></span>
+
         </p>
         <p class="row">
-            <label for="name" class="col text-right">{{g.userResourceStrings.FRM_USER_CATEGORY_NAME}}</label>
-            <span class="col"><input id="name" type="text" name="name" value="{{ userCategory.name }}"></span>
+
         </p>
         <div class="row">
             <span class="col d-flex justify-content-center">
