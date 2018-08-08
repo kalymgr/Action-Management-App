@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block page_title %}{{g.userResourceStrings.TXT_USER_LIST}}{% endblock %}
+
+{% block content %}
+
+    <!-- show column names for the list of users-->
+    <div class="row justify-content-center">
+        <span class = "col">
+            <table class="table">
+                 <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_FULL_NAME}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_USERNAME}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_USER_CATEGORY}}</th>
+                        <th scope="col">{{g.userResourceStrings.TXT_EMAIL}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                    </tr>
+                 </thead>
+                <tbody>
+
+                {% for user in users %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td><a class="col-md"
+                           href="{{ url_for('users.userDetails', user_id=user.id) }}">
+                        {{ user.name }}</a></td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.userCategory.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </span>
+    </div>
+
+{% endblock %}

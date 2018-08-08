@@ -10,7 +10,7 @@ from sqlalchemy.orm import scoped_session
 from werkzeug.exceptions import abort
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for, session, g)
+    Blueprint, flash, redirect, render_template, request, url_for, session, g, make_response)
 from werkzeug.utils import secure_filename
 
 from actionmanagementapp.auth.auth_controller import login_required, user_permissions_restrictions
@@ -21,7 +21,7 @@ from flask import current_app
 from actionmanagementapp.utilities.resource_strings import UsersResourceString, AuthResourceStrings
 
 # create the blueprint
-from actionmanagementapp.utilities.utility_classes import UploadHelper
+from actionmanagementapp.utilities.utility_classes import UploadHelper, Pdfs
 
 bp = Blueprint("users", __name__, url_prefix="/users")
 
@@ -45,6 +45,28 @@ def userList():
     dbSession = current_app.config['DBSESSION']  # get the db session
     users = dbSession.query(User).all()
     return render_template('usermanagement/users.html', users=users)
+
+
+@bp.route('/pdf')
+@login_required
+@user_permissions_restrictions
+def userListPdf():
+    # get the list of users
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    users = dbSession.query(User).all()
+
+    rendered = render_template('usermanagement/reports/userspdf.html', users=users)
+
+    pdf = Pdfs.createPdf(rendered)
+
+    # create the pdf response
+    response = make_response(pdf.getvalue())
+
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline;filename=output.pdf'
+
+    return response
+    # return redirect(url_for('users.userList'))
 
 
 @bp.route('/<int:user_id>')
