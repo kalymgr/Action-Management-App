@@ -1,6 +1,8 @@
 """
 Blueprint for authentication
 """
+import os
+
 from werkzeug.exceptions import abort
 
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings, UsersResourceString, \
@@ -63,15 +65,20 @@ def login():
 def load_resource_strings():
     """
     This function will always run before the view function, no matter what URL is requested.
-    It loads the resource strings used in the templates
+    It loads the resource strings used in the templates.
+    It also loads the absolute file location of the font file needed for properly creating
+    pdf documents.
     :return:
     """
+    # resource strings
     g.userResourceStrings = UsersResourceString
     g.authResourceStrings = AuthResourceStrings
     g.generalResourceStrings = GeneralResourceStrings
     g.organizationResourceStrings = OrganizationResourceStrings
     g.menuResourceStrings = MenuResourceStrings
 
+    # absolute file location for font file for pdf documents. It will be used in CSS rules.
+    g.pdfFontFileAbsolutePath = os.path.abspath('./static/fonts/GFSDidot-Regular.ttf')
 
 @bp.before_app_request
 def load_logged_in_user():

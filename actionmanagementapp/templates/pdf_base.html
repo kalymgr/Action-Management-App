@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="el">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>{{config['APPLICATION_NAME']}}</title>
+    <style>
+        @font-face {
+			font-family: GFSDidot;
+			src: url({{g.pdfFontFileAbsolutePath}}) ;
+		}
+
+		p, body {
+			font-family: GFSDidot;
+			font-size: 10pt;
+		}
+
+		h1 {
+			font-family: GFSDidot;
+			font-size:40pt;
+		}
+    </style>
+</head>
+<body class="container">
+    <!-- Title of the page -->
+    <header class="page_title row">
+        <h1 class="col text-center">
+            {% block page_title %}{% endblock %}
+        </h1>
+    </header>
+
+    <!-- Show content of the page -->
+    {% block content %}{% endblock %}
+</body>

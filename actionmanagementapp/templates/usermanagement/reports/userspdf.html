@@ -1,10 +1,8 @@
-{% extends "base.html" %}
-{% block page_title %}
-{{g.userResourceStrings.TXT_USER_LIST}}
-{% endblock %}
+{% extends "pdf_base.html" %}
+
+{% block page_title %}{{ g.userResourceStrings.TXT_USER_LIST }}{% endblock %}
 
 {% block content %}
-
     <!-- show column names for the list of users-->
     <div class="row justify-content-center">
         <span class = "col">
@@ -15,7 +13,6 @@
                         <th scope="col">{{g.userResourceStrings.TXT_FULL_NAME}}</th>
                         <th scope="col">{{g.userResourceStrings.TXT_USERNAME}}</th>
                         <th scope="col">{{g.userResourceStrings.TXT_USER_CATEGORY}}</th>
-                        <th scope="col">{{g.userResourceStrings.TXT_EMAIL}}</th>
                         <th scope="col">{{g.organizationResourceStrings.TXT_SERVICE_NAME}}</th>
                     </tr>
                  </thead>
@@ -29,25 +26,11 @@
                         {{ user.name }}</a></td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.userCategory.name }}</td>
-                    <td>{{ user.email }}</td>
                     <td>{{ user.service.name }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
-        </span>
-    </div>
-
-    <!-- buttons at the bottom of the screen -->
-    <div class="row justify-content-center bottom-buttons align-items-center">
-        <span class="col">
-            <form class="d-inline" action="{{ url_for('users.addUser') }}" method="get" class="d-inline">
-                <input type="submit" value="{{g.userResourceStrings.FRM_ADD_USER}}"
-                       class="btn btn-outline-primary">
-            </form>
-            <form class="d-inline" action="{{ url_for('users.userCategories') }}" method="get">
-                <input type="submit" value="{{g.userResourceStrings.FRM_USER_CATEGORIES}}"
-                class="btn btn-primary"></form>
         </span>
     </div>
 
