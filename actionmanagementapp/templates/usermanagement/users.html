@@ -56,6 +56,12 @@
                 <input type="submit" value="{{g.userResourceStrings.FRM_ADD_USER}}"
                        class="btn btn-outline-primary">
             </form>
+
+            <form class="d-inline" action="{{ url_for('users.userListPdf') }}" method="get" class="d-inline">
+                <input type="submit" value="{{g.userResourceStrings.FRM_PRINT_USERS}}"
+                       class="btn btn-outline-primary">
+            </form>
+
             <form class="d-inline" action="{{ url_for('users.userCategories') }}" method="get">
                 <input type="submit" value="{{g.userResourceStrings.FRM_USER_CATEGORIES}}"
                 class="btn btn-primary"></form>

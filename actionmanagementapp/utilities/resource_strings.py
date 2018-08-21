@@ -81,6 +81,7 @@ class UsersResourceString:
     FRM_ADD_USER = u'Προσθήκη χρήστη'
     FRM_USER_CATEGORIES = u'Κατηγορίες χρηστών'
     FRM_USER_AVATAR = u'Εικονίδιο χρήστη'
+    FRM_PRINT_USERS = u'Εκτύπωση λίστας χρηστών'
 
     # -- text elements
     TXT_ADD_USER = u'Προσθήκη χρήστη'
@@ -141,6 +142,8 @@ class OrganizationResourceStrings:
     FRM_NO_SERVICE = u'Καμία υπηρεσία '
     FRM_ORGANIZATION = u'Νομικό πρόσωπο'
     FRM_SERVICE_TYPE = u'Τύπος'
+    FRM_PRINT_ORGANIZATIONS = u'Εκτύπωση λίστας νομικών προσώπων'
+    FRM_PRINT_SERVICES = u'Εκτύπωση λίστας υπηρεσιών'
 
     # -- TEXT elements
     TXT_NO_ORGANIZATIONS = u' Δεν υπάρχουν καταχωρημένα νομικά πρόσωπα. '

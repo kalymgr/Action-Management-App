@@ -80,6 +80,9 @@ def load_resource_strings():
     # absolute file location for font file for pdf documents. It will be used in CSS rules.
     g.pdfFontFileAbsolutePath = os.path.abspath('./static/fonts/GFSDidot-Regular.ttf')
 
+    # absolute folder location for uploaded images
+    g.imageFolderAbsolutePath = os.path.abspath('./uploads/')
+
 @bp.before_app_request
 def load_logged_in_user():
     """

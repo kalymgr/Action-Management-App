@@ -49,6 +49,10 @@
                 <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}"
                        class="btn btn-primary">
             </form>
+             <form class="d-inline" method="get" action="{{url_for('org.orgListPdf')}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_PRINT_ORGANIZATIONS}}"
+                       class="btn btn-primary">
+            </form>
         </span>
     </div>
 

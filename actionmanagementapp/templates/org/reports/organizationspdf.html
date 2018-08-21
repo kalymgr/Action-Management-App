@@ -1,0 +1,49 @@
+{% extends "pdf_base.html" %}
+
+{% block page_title %}{{g.organizationResourceStrings.TXT_ORGANIZATION_LIST_TITLE}}{% endblock %}
+
+{% block content %}
+
+    {% if organizationList|count != 0 %}
+    <div class="row justify-content-center">
+            <span class = "col">
+                <table class="table">
+                     <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_NAME}}</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_ADDRESS}}</th>
+                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_CEO}}</th>
+                        </tr>
+                     </thead>
+                <tbody>
+            {%  for organization in organizationList %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>
+                        {{organization.name}}
+                        <!-- show the organization logo, if there is one -->
+                        {% if organization.logoPath != None %}
+                            <img src="{{g.imageFolderAbsolutePath+'/'+organization.logoPath}}" height="100px">
+                        {% endif %}
+                    </td>
+                    <td>{{organization.address}}</td>
+                    <td>{{organization.ceo}}</td>
+            {% endfor %}
+                </tbody>
+            </table>
+            </span></div>
+
+    {% else %}
+       <p> {{g.organizationResourceStrings.TXT_NO_ORGANIZATIONS}}</p>
+    {% endif %}
+    <div class="row justify-content-center bottom-buttons align-items-center">
+        <span class="col">
+            <form class="d-inline" method="get" action="{{url_for('org.addOrg')}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_ORGANIZATION}}"
+                       class="btn btn-primary">
+            </form>
+        </span>
+    </div>
+
+{% endblock %}

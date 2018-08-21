@@ -8,6 +8,8 @@ from cStringIO import StringIO
 from xhtml2pdf import pisa
 # https://xhtml2pdf.readthedocs.io/en/latest/usage.html
 
+import logging
+pisa.showLogging()  # debug
 
 class UploadHelper():
     """

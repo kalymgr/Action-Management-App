@@ -6,7 +6,7 @@ Blueprint related to organizational chart management
 import os
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for, session, g)
+    Blueprint, flash, redirect, render_template, request, url_for, session, g, make_response)
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 
@@ -19,7 +19,7 @@ from actionmanagementapp.utilities.resource_strings import UsersResourceString, 
     OrganizationResourceStrings, GeneralResourceStrings
 
 # create the blueprint
-from actionmanagementapp.utilities.utility_classes import UploadHelper
+from actionmanagementapp.utilities.utility_classes import UploadHelper, Pdfs
 
 bp = Blueprint("org", __name__, url_prefix="/org")
 
@@ -119,6 +119,31 @@ def deleteOrg(org_id):
     return render_template('org/delete_organization.html', org=org)
 
 
+@bp.route('/pdf')
+@login_required
+@user_permissions_restrictions
+def orgListPdf():
+    """
+    pdf version of the list of organizations
+    :return:
+    """
+
+    # get the list of organizations
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    organizations = dbSession.query(Organization).all()
+
+    # get the rendered template
+    rendered = render_template('org/reports/organizationspdf.html', organizationList=organizations)
+
+    # create the pdf response
+    pdf = Pdfs.createPdf(rendered)
+    response = make_response(pdf.getvalue())
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline;filename=output.pdf'
+
+    # return the response
+    return response
+
 @bp.route('/services/')
 @login_required
 def services():
@@ -215,6 +240,31 @@ def deleteService(service_id):
             flash(error)
 
     return render_template('org/delete_service.html', service=service)
+
+
+@bp.route('services/pdf')
+@login_required
+@user_permissions_restrictions
+def serviceListPdf():
+    """
+    pdf version of the list of the services
+    :return:
+    """
+    # get the list of services
+    dbSession = current_app.config['DBSESSION']  # get the db session
+    services = dbSession.query(Service).all()
+
+    # create the rendered page
+    rendered = render_template('org/reports/servicespdf.html', services=services)
+
+    # create and return the response
+    pdf = Pdfs.createPdf(rendered)
+
+    response = make_response(pdf.getvalue())
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline;filename=output.pdf'
+
+    return response
 
 class OrganizationHelperFunctions:
     """

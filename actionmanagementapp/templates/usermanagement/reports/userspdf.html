@@ -21,9 +21,16 @@
                 {% for user in users %}
                 <tr>
                     <th scope="row">{{loop.index}}</th>
-                    <td><a class="col-md"
+                    <td>
+                        <a class="col-md"
                            href="{{ url_for('users.userDetails', user_id=user.id) }}">
-                        {{ user.name }}</a></td>
+                        {{ user.name }}</a>
+
+                        <!-- show the user avatar, if there is one -->
+                        {% if user.avatar != None %}
+                            <img src="{{g.imageFolderAbsolutePath+'/'+user.avatar}}" height="100px">
+                        {% endif %}
+                    </td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.userCategory.name }}</td>
                     <td>{{ user.service.name }}</td>

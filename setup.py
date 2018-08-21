@@ -7,6 +7,6 @@ setup(
     include_package_data=True,  # used to include templates, css etc. Data are declared in MANIFEST.in
     zip_safe=False,
     install_requires=[
-        'flask', 'SQLAlchemy', 'pymysql', 'pytest', 'flask-uploads'
+        'flask', 'SQLAlchemy', 'pymysql', 'pytest'
     ],
 )

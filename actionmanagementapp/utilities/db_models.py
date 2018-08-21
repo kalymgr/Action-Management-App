@@ -2,8 +2,6 @@ from sqlalchemy import Column, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
 
 
-
-
 class TimeStampMixin(object):
     """
     Mixin class with timestamp columns that should be added to every table

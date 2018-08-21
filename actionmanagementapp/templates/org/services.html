@@ -55,6 +55,10 @@
                 <input type="submit" value="{{g.organizationResourceStrings.FRM_ADD_SERVICE}}"
                        class="btn btn-primary">
             </form>
+             <form class="d-inline" method="get" action="{{url_for('org.serviceListPdf')}}">
+                <input type="submit" value="{{g.organizationResourceStrings.FRM_PRINT_SERVICES}}"
+                       class="btn btn-primary">
+            </form>
         </span>
     </div>
 {% endblock %}
