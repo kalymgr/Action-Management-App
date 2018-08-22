@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
 
+from actionmanagementapp.actions import actions_controller, actions_models
 from actionmanagementapp.org import org_controller
 from actionmanagementapp.upload import upload_controller
 from actionmanagementapp.utilities.database_init import initDb, dbSession
@@ -61,6 +62,7 @@ def create_app(test_config=None):
     app.register_blueprint(log_controller.bp)  # logging blueprint
     app.register_blueprint(org_controller.bp)  # organizational chart blueprint
     app.register_blueprint(upload_controller.bp)  # upload blueprint
+    app.register_blueprint(actions_controller.bp)  # actions blueprint
 
     # register error pages handlers
     app.register_error_handler(404, custom_error_pages.page_not_found)

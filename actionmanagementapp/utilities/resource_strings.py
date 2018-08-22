@@ -197,4 +197,5 @@ class MenuResourceStrings:
     TXT_MENU_USERS = u'Χρήστες'
     TXT_MENU_ORGANIZATIONS = u'Νομικά πρόσωπα'
     TXT_MENU_SERVICES = u'Υπηρεσίες'
+    TXT_MENU_ACTIONS = u'Δράσεις'
 

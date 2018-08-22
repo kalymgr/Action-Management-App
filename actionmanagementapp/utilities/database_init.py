@@ -43,6 +43,7 @@ def initDb():
     import actionmanagementapp.users.users_models
     import actionmanagementapp.org.org_models
     import actionmanagementapp.log.log_models
+    import actionmanagementapp.actions.actions_models
     Base.metadata.create_all(bind=engine)
 
     # insert default organizational data
