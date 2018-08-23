@@ -7,17 +7,17 @@
 
     {% if organizationList|count != 0 %}
     <div class="row justify-content-center">
-            <span class = "col">
-                <table class="table">
-                     <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_NAME}}</th>
-                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_ADDRESS}}</th>
-                            <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_CEO}}</th>
-                            <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
-                        </tr>
-                     </thead>
+        <span class = "col">
+            <table class="table">
+                 <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_NAME}}</th>
+                        <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_ADDRESS}}</th>
+                        <th scope="col">{{g.organizationResourceStrings.TXT_ORGANIZATION_CEO}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                    </tr>
+                 </thead>
                 <tbody>
             {%  for organization in organizationList %}
                 <tr>
@@ -38,7 +38,8 @@
             {% endfor %}
                 </tbody>
             </table>
-            </span></div>
+        </span>
+    </div>
 
     {% else %}
        <p> {{g.organizationResourceStrings.TXT_NO_ORGANIZATIONS}}</p>

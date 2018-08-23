@@ -80,16 +80,21 @@ class Action(Base, TimeStampMixin):
     id = Column(Integer, primary_key=True)
     name = Column(String(150), nullable=False)
     # service that is in charge of the specific action
-    serviceInCharge = Column(Integer, ForeignKey('service.id', onupdate='cascade'))
+    serviceInChargeId = Column(Integer, ForeignKey('service.id', onupdate='cascade'))
+    serviceInCharge = relationship('Service', backref=backref('actionsInChargeOf'),
+                                   foreign_keys=[serviceInChargeId])
     # service that will implement the action
-    implementationService = Column(Integer, ForeignKey('service.id', onupdate='cascade'))
-    actionCategory = Column(Integer, ForeignKey('action_category.id', onupdate='cascade'))
+    implementationServiceId = Column(Integer, ForeignKey('service.id', onupdate='cascade'))
+    implementationService = relationship('Service', backref=backref('actionsImplemented'),
+                                   foreign_keys=[implementationServiceId])
+    # action category
+    actionCategoryId = Column(Integer, ForeignKey('action_category.id', onupdate='cascade'))
     # text field that show if the action is new or in progress (Νέα or Συνεχιζόμενη)
     newOrInProgress = Column(String(20), nullable=True)
     # action priority
     priority = Column(String(20), nullable=True)
     # the group that the action belongs to (Μέτρο)
-    actionGroup = Column(Integer, ForeignKey('action_group.id', onupdate='cascade'))
+    actionGroupId = Column(Integer, ForeignKey('action_group.id', onupdate='cascade'))
     actionBudget = Column(Numeric(precision=15, scale=5), nullable=True)
     # date that the action starts
     startDate = Column(DateTime)

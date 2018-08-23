@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Actions</title>
-</head>
-<body>
-Actions...
-</body>
-</html>
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}{{g.actionResourceStrings.TXT_ACTION_LIST_TITLE}}{% endblock %}
+
+{% block content %}
+
+{% if actions|count != 0 %}
+<div class="row justify-content-center">
+        <span class = "col">
+            <table class="table">
+                 <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_TITLE}}</th>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_SERVICE_INCHARGE}}</th>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_BUDGET}}</th>
+                        <th scope="col">{{g.generalResourceStrings.TXT_OPERATIONS}}</th>
+                    </tr>
+                 </thead>
+                <tbody>
+            {%  for action in actions %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{action.name}}</td>
+                    <td>{{action.serviceInCharge.name}}</td>
+                    <td>{{action.actionBudget}}</td>
+                    <td>
+
+                        <form action="" class="d-inline">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"
+                                   class="btn btn-outline-primary btn-sm">
+                        </form>
+                        <form action="" class="d-inline">
+                            <input type="submit" value="{{g.generalResourceStrings.FRM_DELETE}}"
+                                   class="btn btn-outline-primary btn-sm">
+                        </form>
+
+                    </td>
+            {% endfor %}
+                </tbody>
+            </table>
+        </span>
+    </div>
+
+{% else %}
+<p> {{g.actionResourceStrings.TXT_NO_ACTIONS}}</p>
+{% endif %}
+
+{% endblock %}

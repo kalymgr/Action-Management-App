@@ -106,6 +106,19 @@ class UsersResourceString:
     TXT_USER_CATEGORY_NAME = u'Όνομα'
 
 
+class ActionResourceStrings:
+    """
+    Strings related to managing actions
+    """
+    # -- ERROR elements
+    # -- FORM elements
+    # -- TEXT elements
+    TXT_ACTION_LIST_TITLE = u'Λίστα δράσεων'
+    TXT_NO_ACTIONS = u'Δεν υπάρχουν καταχωρημένες δράσεις'
+    TXT_ACTION_TITLE = u'Τίτλος Δράσης'
+    TXT_ACTION_SERVICE_INCHARGE = u'Υπεύθυνη Υπηρεσία'
+    TXT_ACTION_BUDGET = u'Προϋπολογισμός'
+
 class OrganizationResourceStrings:
     """
     Strings related to the management of the organization
