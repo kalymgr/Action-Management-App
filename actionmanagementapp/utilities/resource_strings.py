@@ -112,12 +112,30 @@ class ActionResourceStrings:
     """
     # -- ERROR elements
     # -- FORM elements
+    FRM_ADD_ACTION = u'Προσθήκη δράσης'
+    FRM_PRINT_ACTIONS = u'Εκτύπωση λίστας δράσεων'
+    FRM_ACTION_ID = u'Κωδ.'
+    FRM_ACTION_BUDGET_CODE = u'Κωδ Προϋπολ'
+    FRM_ACTION_NAME = u'Τίτλος δράσης'
+    FRM_ACTION_CATEGORY = u'Κατηγορία'
+    FRM_ACTION_NEW_OR_IN_PROGRESS = u'Νέα ή Συνεχιζόμενη'
+    FRM_ACTION_SERVICE_IN_CHARGE = u'Αρμόδια υπηρεσία'
+    FRM_ACTION_IMPLEMENTATION_SERVICE = u'Υπηρεσία υλοποίησης'
+    FRM_ACTION_PRIORITY = u'Προτεραιότητα'
+    FRM_ACTION_GROUP = u'Μέτρο'
+    FRM_ACTION_STATUS = u'Κατάσταση'
+    FRM_ACTION_START_DATE = u'Ημνία Έναρξης'
+    FRM_ACTION_END_DATE = u'Ημνία Λήξης'
+
     # -- TEXT elements
     TXT_ACTION_LIST_TITLE = u'Λίστα δράσεων'
     TXT_NO_ACTIONS = u'Δεν υπάρχουν καταχωρημένες δράσεις'
     TXT_ACTION_TITLE = u'Τίτλος Δράσης'
     TXT_ACTION_SERVICE_INCHARGE = u'Υπεύθυνη Υπηρεσία'
     TXT_ACTION_BUDGET = u'Προϋπολογισμός'
+    TXT_ADD_ACTION_TITLE = u'Προσθήκη νέας δράσης'
+    TXT_EDIT_ACTION_TITLE = u'Επεξεργασία δράσης'
+    TXT_BACK_TO_ACTION_LIST = u'Πίσω στη λίστα με τις δράσεις'
 
 class OrganizationResourceStrings:
     """

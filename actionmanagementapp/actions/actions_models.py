@@ -88,14 +88,17 @@ class Action(Base, TimeStampMixin):
     implementationService = relationship('Service', backref=backref('actionsImplemented'),
                                    foreign_keys=[implementationServiceId])
     # action category
-    actionCategoryId = Column(Integer, ForeignKey('action_category.id', onupdate='cascade'))
+    categoryId = Column(Integer, ForeignKey('action_category.id', onupdate='cascade'))
     # text field that show if the action is new or in progress (Νέα or Συνεχιζόμενη)
     newOrInProgress = Column(String(20), nullable=True)
     # action priority
     priority = Column(String(20), nullable=True)
     # the group that the action belongs to (Μέτρο)
-    actionGroupId = Column(Integer, ForeignKey('action_group.id', onupdate='cascade'))
-    actionBudget = Column(Numeric(precision=15, scale=5), nullable=True)
+    groupId = Column(Integer, ForeignKey('action_group.id', onupdate='cascade'))
+    # the total budget of the action
+    budget = Column(Numeric(precision=15, scale=5), nullable=True)
+    # the total budget code of the action
+    budgetCode = Column(String(50), nullable=True)
     # date that the action starts
     startDate = Column(DateTime)
     # date that the action ends

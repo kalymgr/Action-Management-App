@@ -19,6 +19,12 @@
         {{g.organizationResourceStrings.TXT_BACK_TO_ORGANIZATION_LIST}} </a>
 {% endmacro %}
 
+{% macro showBacktoActionListNav() %}
+{# macro to show the link that gets the user back to the action list #}
+    <a href="{{ url_for('actions.actions') }}" class="btn btn-primary">
+        {{g.actionResourceStrings.TXT_BACK_TO_ACTION_LIST}} </a>
+{% endmacro %}
+
 {% macro showBacktoServiceListNav() %}
 {# macro to show the link that gets the user back to the organization list #}
     <a href="{{ url_for('org.services') }}" class="btn btn-primary">
@@ -338,4 +344,35 @@ Else (new user) show the form fields for storing the new password -->
     </div>
 </div>
 {% endif %}
+{% endmacro %}
+
+{% macro actionForm(action) %}
+{# macro for displaying the action form that is used when inserting or updating actions #}
+<form action="#" method="post" enctype="multipart/form-data">
+<div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="id">{{g.actionResourceStrings.FRM_ACTION_ID}}</label>
+            <input type="text" id="id" name="id" value="{{action.id}}" class="form-control">
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="budgetCode">{{g.actionResourceStrings.FRM_ACTION_BUDGET_CODE}}</label>
+            <input type="text" id="budgetCode" name="budgetCode" value="{{action.budgetCode}}"
+                   class="form-control">
+        </div>
+        <div class="form-group col-md-7">
+            <label for="name">{{g.actionResourceStrings.FRM_ACTION_NAME}}</label>
+            <input type="text" id="name" name="name" value="{{action.name}}"
+                   class="form-control">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            First column
+        </div>
+        <div class="form-group col-md-6">
+            Second column
+        </div>
+    </div>
+</form>
 {% endmacro %}

@@ -24,10 +24,10 @@
                     <th scope="row">{{loop.index}}</th>
                     <td>{{action.name}}</td>
                     <td>{{action.serviceInCharge.name}}</td>
-                    <td>{{action.actionBudget}}</td>
+                    <td>{{action.budget}}</td>
                     <td>
 
-                        <form action="" class="d-inline">
+                        <form action="{{url_for('actions.editAction', action_id=action.id)}}" class="d-inline">
                             <input type="submit" value="{{g.generalResourceStrings.FRM_EDIT}}"
                                    class="btn btn-outline-primary btn-sm">
                         </form>
@@ -46,5 +46,16 @@
 {% else %}
 <p> {{g.actionResourceStrings.TXT_NO_ACTIONS}}</p>
 {% endif %}
-
+<div class="row justify-content-center bottom-buttons align-items-center">
+        <span class="col">
+            <form class="d-inline" method="get" action="">
+                <input type="submit" value="{{g.actionResourceStrings.FRM_ADD_ACTION}}"
+                       class="btn btn-primary">
+            </form>
+             <form class="d-inline" method="get" action="">
+                <input type="submit" value="{{g.actionResourceStrings.FRM_PRINT_ACTIONS}}"
+                       class="btn btn-primary">
+            </form>
+        </span>
+    </div>
 {% endblock %}

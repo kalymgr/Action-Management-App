@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block page_title %}
+    {% if action == None %}
+        {{g.actionResourceStrings.TXT_ADD_ACTION_TITLE}}
+    {% else %}
+        {{g.actionResourceStrings.TXT_EDIT_ACTION_TITLE}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{{ macros.actionForm(action) }}
+
+{{ macros.showBacktoActionListNav() }}
+{% endblock %}
