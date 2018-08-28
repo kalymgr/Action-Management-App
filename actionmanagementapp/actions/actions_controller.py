@@ -10,8 +10,9 @@ from flask import Blueprint, current_app, render_template
 # create the blueprint
 from werkzeug.exceptions import abort
 
-from actionmanagementapp.actions.actions_models import Action
+from actionmanagementapp.actions.actions_models import Action, ActionCategory, ActionGroup
 from actionmanagementapp.auth.auth_controller import login_required
+from actionmanagementapp.org.org_models import Service
 
 bp = Blueprint("actions", __name__, url_prefix="/actions")
 
@@ -41,6 +42,9 @@ def editAction(action_id):
     # get the action from the database
     dbSession = current_app.config['DBSESSION']
     action = dbSession.query(Action).filter(Action.id == action_id).first()
+    services = dbSession.query(Service).all()
+    actionCategories = dbSession.query(ActionCategory).all()
+    actionGroups = dbSession.query(ActionGroup).all()
 
     if action is None:
         abort(404)
@@ -48,4 +52,7 @@ def editAction(action_id):
     # save the action - to be implemented
 
     # return the rendered template
-    return render_template('actions/edit_action.html', action=action)
+    return render_template('actions/edit_action.html', action=action,
+                           services=services,
+                           actionCategories=actionCategories,
+                           actionGroups=actionGroups)

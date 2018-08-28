@@ -346,7 +346,7 @@ Else (new user) show the form fields for storing the new password -->
 {% endif %}
 {% endmacro %}
 
-{% macro actionForm(action) %}
+{% macro actionForm(action, services, actionCategories, actionGroups) %}
 {# macro for displaying the action form that is used when inserting or updating actions #}
 <form action="#" method="post" enctype="multipart/form-data">
 <div class="form-row">
@@ -355,24 +355,114 @@ Else (new user) show the form fields for storing the new password -->
             <input type="text" id="id" name="id" value="{{action.id}}" class="form-control">
         </div>
 
-        <div class="form-group col-md-3">
-            <label for="budgetCode">{{g.actionResourceStrings.FRM_ACTION_BUDGET_CODE}}</label>
-            <input type="text" id="budgetCode" name="budgetCode" value="{{action.budgetCode}}"
-                   class="form-control">
-        </div>
         <div class="form-group col-md-7">
             <label for="name">{{g.actionResourceStrings.FRM_ACTION_NAME}}</label>
             <input type="text" id="name" name="name" value="{{action.name}}"
                    class="form-control">
         </div>
+
+        <div class="form-group col-md-3">
+            <label for="serviceInCharge">{{g.actionResourceStrings.FRM_ACTION_SERVICE_IN_CHARGE}}</label>
+            <span>
+            <select id="serviceInCharge" name="serviceInCharge" class="custom-select">
+                <option>-</option>
+            {%  for service in services %}
+                {% if action.serviceInChargeId == service.id%} <!-- select the category of the user -->
+                    <option value="{{ service.id }}" selected>{{ service.name }}</option>
+                {% else %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+
+            </span>
+        </div>
     </div>
+
     <div class="form-row">
-        <div class="form-group col-md-6">
-            First column
+        <div class="form-group col-md-3">
+            <label for="implementationService">{{g.actionResourceStrings.FRM_ACTION_IMPLEMENTATION_SERVICE}}</label>
+            <span>
+            <select id="implementationService" name="implementationService" class="custom-select">
+                <option>-</option>
+            {%  for service in services %}
+                {% if action.ImplementationService == service.id%} <!-- select the category of the user -->
+                    <option value="{{ service.id }}" selected>{{ service.name }}</option>
+                {% else %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+
+            </span>
         </div>
-        <div class="form-group col-md-6">
-            Second column
+        <div class="form-group col-md-3">
+            <label for="category">{{g.actionResourceStrings.FRM_ACTION_CATEGORY}}</label>
+
+            <span>
+            <select id="category" name="category" class="custom-select">
+                <option>-</option>
+            {%  for actionCategory in actionCategories %}
+                {% if action.categoryId == actionCategory.id%} <!-- select the category  -->
+                    <option value="{{ actionCategory.id }}" selected>{{ actionCategory.name }}</option>
+                {% else %}
+                    <option value="{{ actionCategory.id }}">{{ actionCategory.name }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+            </span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="newOrInProgress">{{g.actionResourceStrings.FRM_ACTION_NEW_OR_IN_PROGRESS}}</label>
+            <span>
+            <select id="newOrInProgress" name="newOrInProgress" class="custom-select">
+                <option>-</option>
+            {%  for el in g.dropDownLists.newOrInProgress %}
+                {% if action.newOrInProgress == el %} <!-- select if new or in progress -->
+                    <option value="{{ el }}" selected>{{ el }}</option>
+                {% else %}
+                    <option value="{{ el }}">{{ el }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+            </span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="priority">{{g.actionResourceStrings.FRM_ACTION_PRIORITY}}</label>
+            <span>
+            <select id="priority" name="priority" class="custom-select">
+                <option>-</option>
+            {%  for el in g.dropDownLists.priority %}
+                {% if action.priority == el %} <!-- select the priority -->
+                    <option value="{{ el }}" selected>{{ el }}</option>
+                {% else %}
+                    <option value="{{ el }}">{{ el }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+            </span>
         </div>
     </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="groupId">{{g.actionResourceStrings.FRM_ACTION_GROUP}}</label>
+            <span>
+            <select id="groupId" name="groupId" class="custom-select">
+                <option>-</option>
+            {%  for group in actionGroups %}
+                {% if groupId == group.id %} <!-- select the group -->
+                    <option value="{{ group.id }}" selected>{{ group.name }}</option>
+                {% else %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+            </span>
+        </div>
+    </div>
+
 </form>
 {% endmacro %}

@@ -230,3 +230,12 @@ class MenuResourceStrings:
     TXT_MENU_SERVICES = u'Υπηρεσίες'
     TXT_MENU_ACTIONS = u'Δράσεις'
 
+
+class DropdownLists:
+    """
+    class with values used in dropdown lists. This method is used to avoid
+    creating unnecessary tables in the database
+    """
+    newOrInProgress = [u'Νέα', u'Συνεχιζόμενη']
+    priority = [u'(1) Υψηλή', u'(2) Μεσαία', u'(3) Χαμηλή']
+

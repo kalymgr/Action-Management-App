@@ -36,7 +36,7 @@ class User(Base, TimeStampMixin):
     name = Column(String(200), nullable=False)
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(500), nullable=False)
-    serviceId = Column(Integer, ForeignKey('service.id', onupdate='cascade'), nullable=False)
+    serviceId = Column(Integer, ForeignKey('service.id', onupdate='cascade'), nullable=True)
     service = relationship('Service', backref=backref('employees'))
     phone = Column(String(15))
     mobile = Column(String(15))
@@ -77,7 +77,7 @@ def insertDefaultUserData(DBSession):
             email='mtsougranis@gmail.com',
             password=generate_password_hash('kalymgr'),
             userCategoryId=3,
-            enabled=True
+            enabled=True,
         )
         # insert the user in the database
         dbSession.add(defaultUser)

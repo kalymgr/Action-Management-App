@@ -13,7 +13,7 @@
 {{ macros.organizationForm(organization, orgTypes, organizations) }}
 
 <!-- If the organization has a logo -->
-{% if organization.logoPath != '' %}
+{% if organization.logoPath != None %}
     <!-- Show the organization logo -->
     <div class="row">
         <div class="col">

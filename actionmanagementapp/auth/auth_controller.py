@@ -6,7 +6,7 @@ import os
 from werkzeug.exceptions import abort
 
 from actionmanagementapp.utilities.resource_strings import AuthResourceStrings, UsersResourceString, \
-    GeneralResourceStrings, OrganizationResourceStrings, MenuResourceStrings, ActionResourceStrings
+    GeneralResourceStrings, OrganizationResourceStrings, MenuResourceStrings, ActionResourceStrings, DropdownLists
 
 from actionmanagementapp.log.http_log_handling import HttpLoggerSetup
 from actionmanagementapp.users.users_models import User, UserCategory
@@ -77,6 +77,7 @@ def load_resource_strings():
     g.organizationResourceStrings = OrganizationResourceStrings
     g.actionResourceStrings = ActionResourceStrings
     g.menuResourceStrings = MenuResourceStrings
+    g.dropDownLists = DropdownLists
 
     # absolute file location for font file for pdf documents. It will be used in CSS rules.
     g.pdfFontFileAbsolutePath = os.path.abspath('./static/fonts/GFSDidot-Regular.ttf')
