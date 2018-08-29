@@ -115,6 +115,7 @@ class ActionResourceStrings:
     FRM_ADD_ACTION = u'Προσθήκη δράσης'
     FRM_PRINT_ACTIONS = u'Εκτύπωση λίστας δράσεων'
     FRM_ACTION_ID = u'Κωδ.'
+    FRM_ACTION_BUDGET = u'Προϋπολογισμός'
     FRM_ACTION_BUDGET_CODE = u'Κωδ Προϋπολ'
     FRM_ACTION_NAME = u'Τίτλος δράσης'
     FRM_ACTION_CATEGORY = u'Κατηγορία'
@@ -136,6 +137,9 @@ class ActionResourceStrings:
     TXT_ADD_ACTION_TITLE = u'Προσθήκη νέας δράσης'
     TXT_EDIT_ACTION_TITLE = u'Επεξεργασία δράσης'
     TXT_BACK_TO_ACTION_LIST = u'Πίσω στη λίστα με τις δράσεις'
+    TXT_ACTION_FINANCING_SOURCE = u'Πηγή χρημ.'
+    TXT_ACTION_BUDGET_CODE = u'Κωδ. Προϋπ'
+    TXT_ACTION_AMOUNT = u'Ποσό'
 
 class OrganizationResourceStrings:
     """
@@ -238,4 +242,5 @@ class DropdownLists:
     """
     newOrInProgress = [u'Νέα', u'Συνεχιζόμενη']
     priority = [u'(1) Υψηλή', u'(2) Μεσαία', u'(3) Χαμηλή']
+    status = [u'Δεν έχει ξεκινήσει', u'Σε εξέλιξη', u'Ολοκληρώθηκε', u'Αναβλήθηκε', u'Σε αναμονή']
 

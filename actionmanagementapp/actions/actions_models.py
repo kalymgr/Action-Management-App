@@ -70,6 +70,10 @@ class ActionFinancingSource(Base, TimeStampMixin):
     budgetCode = Column(String(50), nullable=True)
     # the amount for financing the action from the specific financing source
     amount = Column(Numeric(precision=15, scale=5), nullable=True)
+    actionFinanced = relationship('Action', backref=backref('actionFinancingSources'),
+                                         foreign_keys=[actionId])
+    sourceOfFinance = relationship('FinancingSource', backref=backref('actionFinancingSources'),
+                                   foreign_keys=[financingSourceId])
 
 
 class Action(Base, TimeStampMixin):

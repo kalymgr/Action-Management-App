@@ -346,7 +346,7 @@ Else (new user) show the form fields for storing the new password -->
 {% endif %}
 {% endmacro %}
 
-{% macro actionForm(action, services, actionCategories, actionGroups) %}
+{% macro actionForm(action, services, actionCategories, actionGroups, financingSources) %}
 {# macro for displaying the action form that is used when inserting or updating actions #}
 <form action="#" method="post" enctype="multipart/form-data">
 <div class="form-row">
@@ -462,7 +462,90 @@ Else (new user) show the form fields for storing the new password -->
             </select>
             </span>
         </div>
+
+        <div class="form-group col-md-4">
+            <label for="budget">{{g.actionResourceStrings.FRM_ACTION_BUDGET}}</label>
+            <input type="text" id="budget" name="budget" value="{{action.budget}}"
+                   class="form-control">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="budgetCode">{{g.actionResourceStrings.FRM_ACTION_BUDGET_CODE}}</label>
+            <input type="text" id="budgetCode" name="budgetCode" value="{{action.budgetCode}}"
+                   class="form-control">
+        </div>
+
+         <div class="form-group col-md-4">
+            <label for="startDate">{{g.actionResourceStrings.FRM_ACTION_START_DATE}}</label>
+            <input type="date" id="startDate" name="startDate" value="{{action.startDate.strftime('%Y-%m-%d')}}"
+                   class="form-control">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="endDate">{{g.actionResourceStrings.FRM_ACTION_END_DATE}}</label>
+            <input type="date" id="endDate" name="endDate" value="{{action.endDate.strftime('%Y-%m-%d')}}"
+                   class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="status">{{g.actionResourceStrings.FRM_ACTION_STATUS}}</label>
+            <span>
+            <select id="status" name="status" class="custom-select">
+                <option>-</option>
+            {%  for el in g.dropDownLists.status %}
+                {% if action.status == el %} <!-- select the group -->
+                    <option value="{{ el }}" selected>{{ el }}</option>
+                {% else %}
+                    <option value="{{ el }}">{{ el }}</option>
+                {% endif %}
+            {%  endfor %}
+            </select>
+            </span>
+        </div>
+
     </div>
 
+    <div class="form-row">
+        <!-- Sources of financing -->
+        <div class="col-md-12">
+            <table  class="table table-hover small-text" id="sourcesOfFinanceTb">
+                <thead>
+                    <tr>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_FINANCING_SOURCE}}</th>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_BUDGET_CODE}}</th>
+                        <th scope="col">{{g.actionResourceStrings.TXT_ACTION_AMOUNT}}</th>
+                        <th>
+                            <a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person">
+                                <!-- using Font Awesome for icons -->
+                                <i class="fas fa-plus-square"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="financingSource" class="custom-select financingSource">
+                                <option>-</option>
+                                {%  for finSource in financingSources %}
+                                    {% if finSource.id == el %} <!-- select the group -->
+                                        <option value="{{ el }}" selected>{{ el }}</option>
+                                    {% else %}
+                                        <option value="{{ el }}">{{ el }}</option>
+                                    {% endif %}
+                                {%  endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form">
+        <span class="col d-flex justify-content-center">
+            <input type="submit" value="{{g.generalResourceStrings.FRM_SAVE}}"
+                   class="btn btn-outline-primary" onclick="validateFormFields(this)">
+        </span>
+    </div>
 </form>
 {% endmacro %}
