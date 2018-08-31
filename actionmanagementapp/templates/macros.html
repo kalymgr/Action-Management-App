@@ -553,19 +553,42 @@ Else (new user) show the form fields for storing the new password -->
 
             <script>
                 $(function(){
+
                     $('#addMore').on('click', function() {
-                    var data = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
-                    data.find("input").val('');
+                    /**
+                        Function executed when click on the add more button, on the financing sources table
+                    */
+                        // create a new row
+                        var newRow = "<tr><td> <select name='financingSource' class='custom-select financingSource'>" +
+                        "<option>-</option>{%  for finSource in financingSources %}<option value='{{ finSource.id }}'>{{ finSource.name }}</option>" +
+                        "{%  endfor %}</select></td><td><input type='text' name='financingSourceBudgetCode' class='form-control'></td>" +
+                        "<td><input type='text' name='financingSourceAmount' class='form-control'></td>" +
+                        "<td><a href='javascript:void(0);'  class='remove'><span class='fas fa-trash'></span></a></td></tr>";
+
+                        var table = $("#sourcesOfFinanceTb");
+                        table.append(newRow);
+
+                        console.log('add row button clicked');
+
+                    });
+
+                    $(document).on('click', '.remove', function() {
+                    /**
+                        Function executed when clicking on the delete row button, on the financing sources table
+                    */
+                        // get the table row
+                        var trIndex = $(this).closest("tr").index();
+                        $(this).closest("tr").remove();
+
+                        /*
+                        if(trIndex>1) {
+                            $(this).closest("tr").remove();
+                        } else {
+                            alert("Sorry!! Can't remove first row!");
+                        }
+                        */
+                    });
                 });
-                $(document).on('click', '.remove', function() {
-                var trIndex = $(this).closest("tr").index();
-                if(trIndex>1) {
-                    $(this).closest("tr").remove();
-                } else {
-                    alert("Sorry!! Can't remove first row!");
-                }
-                });
-});
             </script>
         </div>
         <div class="col-md-6">Second column</div>
