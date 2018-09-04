@@ -348,6 +348,9 @@ Else (new user) show the form fields for storing the new password -->
 
 {% macro actionForm(action, services, actionCategories, actionGroups, financingSources) %}
 {# macro for displaying the action form that is used when inserting or updating actions #}
+<script>
+
+</script>
 <form action="#" method="post" enctype="multipart/form-data">
 <div class="form-row">
         <div class="form-group col-md-2">
@@ -524,18 +527,28 @@ Else (new user) show the form fields for storing the new password -->
                 <tbody>
                 <!-- for each source of financing for the specific action, show details -->
                 {% for actionFinancingSource in action.actionFinancingSources %}
+
+                <script>
+
+                    // show the table row
+                    // showTableRow("{{ actionFinancingSource.sourceOfFinance.name }}");
+                    // showTableRow({{ actionFinancingSource|tojson }});
+                </script>
+
                     <tr>
                         <td>
+
                             <select name="financingSource" class="custom-select financingSource">
                                 <option>-</option>
                                 {%  for finSource in financingSources %}
-                                    {% if finSource.id == actionFinancingSource.financingSourceId %} <!-- select the group -->
+                                    {% if finSource.id == actionFinancingSource.financingSourceId %}
                                         <option value="{{ finSource.id }}" selected>{{ finSource.name }}</option>
                                     {% else %}
                                         <option value="{{ finSource.id }}">{{ finSource.name }}</option>
                                     {% endif %}
                                 {%  endfor %}
                             </select>
+
                         </td>
                         <td>
                             <input type="text" name="financingSourceBudgetCode" class="form-control"
@@ -552,43 +565,7 @@ Else (new user) show the form fields for storing the new password -->
             </table>
 
             <script>
-                $(function(){
 
-                    $('#addMore').on('click', function() {
-                    /**
-                        Function executed when click on the add more button, on the financing sources table
-                    */
-                        // create a new row
-                        var newRow = "<tr><td> <select name='financingSource' class='custom-select financingSource'>" +
-                        "<option>-</option>{%  for finSource in financingSources %}<option value='{{ finSource.id }}'>{{ finSource.name }}</option>" +
-                        "{%  endfor %}</select></td><td><input type='text' name='financingSourceBudgetCode' class='form-control'></td>" +
-                        "<td><input type='text' name='financingSourceAmount' class='form-control'></td>" +
-                        "<td><a href='javascript:void(0);'  class='remove'><span class='fas fa-trash'></span></a></td></tr>";
-
-                        var table = $("#sourcesOfFinanceTb");
-                        table.append(newRow);
-
-                        console.log('add row button clicked');
-
-                    });
-
-                    $(document).on('click', '.remove', function() {
-                    /**
-                        Function executed when clicking on the delete row button, on the financing sources table
-                    */
-                        // get the table row
-                        var trIndex = $(this).closest("tr").index();
-                        $(this).closest("tr").remove();
-
-                        /*
-                        if(trIndex>1) {
-                            $(this).closest("tr").remove();
-                        } else {
-                            alert("Sorry!! Can't remove first row!");
-                        }
-                        */
-                    });
-                });
             </script>
         </div>
         <div class="col-md-6">Second column</div>

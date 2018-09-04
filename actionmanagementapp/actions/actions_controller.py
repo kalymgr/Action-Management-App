@@ -5,12 +5,13 @@ Blueprint related to actions
 """
 
 
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, jsonify
 
 # create the blueprint
 from werkzeug.exceptions import abort
 
-from actionmanagementapp.actions.actions_models import Action, ActionCategory, ActionGroup, FinancingSource
+from actionmanagementapp.actions.actions_models import Action, ActionCategory, ActionGroup, FinancingSource, \
+    ActionFinancingSource
 from actionmanagementapp.auth.auth_controller import login_required
 from actionmanagementapp.org.org_models import Service
 
@@ -59,3 +60,49 @@ def editAction(action_id):
                            actionCategories=actionCategories,
                            actionGroups=actionGroups,
                            financingSources=financingSources)
+
+
+@bp.route('/financingsources_json', methods=('GET',))
+@login_required
+def financingSourcesJson():
+    """
+    Function that returns the financing sources data as json
+    :return:
+    """
+    # get the financing sources data
+    dbSession = current_app.config['DBSESSION']
+    financingSources = dbSession.query(FinancingSource).all()
+
+    # create the data that will be jsonified
+    d = {}  # dictionary containing the financing sources
+    for financingSource in financingSources:
+        d[financingSource.id] = financingSource.name
+
+    return jsonify(d)
+
+
+@bp.route('/<int:action_id>/financingsources_json', methods=('GET',))
+@login_required
+def actionFinancingSourcesJson(action_id):
+    """
+    Function that returns the financing sources of a specific action
+    :param action_id: the id of the action
+    :return: the financing sources of the action
+    """
+    # get the financing sources of the specific action, from the database
+    dbSession = current_app.config['DBSESSION']
+    actionFinancingSources = \
+        dbSession.query(ActionFinancingSource)\
+            .filter(ActionFinancingSource.actionId == action_id).all()
+
+    # create the data that will be jsonified
+    d = {}  # dictionary of the action financing sources
+    for actionFinancingSource in actionFinancingSources:
+        d[actionFinancingSource.financingSourceId] = \
+        {
+            'budgetCode': actionFinancingSource.budgetCode,
+            'amount': actionFinancingSource.amount
+        }
+
+    return jsonify(d)
+
