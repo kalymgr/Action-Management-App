@@ -517,7 +517,7 @@ Else (new user) show the form fields for storing the new password -->
                         <th scope="col">{{g.actionResourceStrings.TXT_ACTION_BUDGET_CODE}}</th>
                         <th scope="col">{{g.actionResourceStrings.TXT_ACTION_AMOUNT}}</th>
                         <th>
-                            <a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person">
+                            <a href="javascript:void(0);" style="font-size:18px;" id="addMorefinancingSources" title="Add More Financing Sources">
                                 <!-- using Font Awesome for icons -->
                                 <i class="fas fa-plus-square"></i>
                             </a>
@@ -525,19 +525,15 @@ Else (new user) show the form fields for storing the new password -->
                     </tr>
                 </thead>
                 <tbody>
-                <!-- for each source of financing for the specific action, show details -->
-                {% for actionFinancingSource in action.actionFinancingSources %}
-
                 <script>
-
-                    // show the table row
-                    // showTableRow("{{ actionFinancingSource.sourceOfFinance.name }}");
-                    // showTableRow({{ actionFinancingSource|tojson }});
+                    <!-- Show the financing sources table rows -->
+                    loadFinancingSourcesTable({{ action.id }});
                 </script>
-
+                <!-- for each source of financing for the specific action, show details -->
+                <!--
+                {% for actionFinancingSource in action.actionFinancingSources %}
                     <tr>
                         <td>
-
                             <select name="financingSource" class="custom-select financingSource">
                                 <option>-</option>
                                 {%  for finSource in financingSources %}
@@ -558,15 +554,13 @@ Else (new user) show the form fields for storing the new password -->
                             <input type="text" name="financingSourceAmount" class="form-control"
                             value="{{ actionFinancingSource.amount }}">
                         </td>
-                        <td><a href='javascript:void(0);'  class='remove'><span class='fas fa-trash'></span></a></td>
+                        <td><a href='javascript:void(0);'  class='removeFinancingSource'><span class='fas fa-trash'></span></a></td>
                     </tr>
                 {% endfor %}
+                -->
                 </tbody>
             </table>
 
-            <script>
-
-            </script>
         </div>
         <div class="col-md-6">Second column</div>
     </div>
