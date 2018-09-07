@@ -93,16 +93,19 @@ def actionFinancingSourcesJson(action_id):
     dbSession = current_app.config['DBSESSION']
     actionFinancingSources = \
         dbSession.query(ActionFinancingSource)\
-            .filter(ActionFinancingSource.actionId == action_id).all()
+        .filter(ActionFinancingSource.actionId == action_id).all()
 
     # create the data that will be jsonified
-    d = {}  # dictionary of the action financing sources
-    for actionFinancingSource in actionFinancingSources:
-        d[actionFinancingSource.financingSourceId] = \
-        {
-            'budgetCode': actionFinancingSource.budgetCode,
-            'amount': actionFinancingSource.amount
-        }
 
-    return jsonify(d)
+    l = []  # list of the action financing sources
+    for actionFinancingSource in actionFinancingSources:
+        l.append(
+            {
+                'actionId': actionFinancingSource.actionId,
+                'financingSourceId': actionFinancingSource.financingSourceId,
+                'budgetCode': actionFinancingSource.budgetCode,
+                'amount': actionFinancingSource.amount
+            }
+        )
+    return jsonify(l)
 
