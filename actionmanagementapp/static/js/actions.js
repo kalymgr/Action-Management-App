@@ -2,6 +2,7 @@
  Code that will be executed in the action edit page
  **/
 
+
 var ActionFinancingTable = function(){
 	/**
 	Javascript class for handling the action financing table
@@ -71,6 +72,7 @@ ActionFinancingTable.prototype.setRow = function(rowData, financingSources){
 	}
 	var tableRow = "<tr><td><select name='financingSource' class='custom-select financingSource'><option>-</option>";
 	for (var key in financingSources){
+		console.log(financingSources[key]);
 	    if (key == rowData['financingSourceId']){  // if the element is selected
 	        tableRow += "<option value='" + rowData['financingSourceId'] +
 	        "' selected>" + financingSources[key] + "</option>";
@@ -89,27 +91,28 @@ ActionFinancingTable.prototype.setRow = function(rowData, financingSources){
     // add the table row to the table
     var table = $(this.tableHtmlId);
     table.append(tableRow);
-
 }
 
 
 // create a new object for the financing table
 var actionFinTable = new ActionFinancingTable();
- 
- 
+
+
 $( document ).ready(function() {
     /**
     Code that will load when the document is ready
     */
 		
+		
     $('#addMorefinancingSources').on('click', function() {
     /**
         Function executed when clicking on the add more button, on the financing sources table
     */
-        actionFinTable.setRow(null, this.financingSources);
+        actionFinTable.setRow(null, actionFinTable.financingSources);
 
     });
 
+	
     $(document).on('click', '.removeFinancingSource', function() {
     /**
         Function executed when clicking on the delete row button, on the financing sources table
@@ -119,12 +122,29 @@ $( document ).ready(function() {
         $(this).closest("tr").remove();
 
     });
+	
+	
+	/** add event handlers */
+	jQuery(document).on('click', '#saveActionButton', function(event){
+		console.log('something');
+		validateFormFields(event.currentTarget);
+		saveAction();
+	});
 });
 
 
  function loadFinancingSourcesTable(actionId){
 	/**
-	Method that loads the financing sources of an action.
+	Function that loads the financing sources of an action.
 	*/
 	actionFinTable.showTableRows(actionId);
+}
+
+
+function saveAction(){
+	/**
+	Function responsible for saving the action data in the database
+	*/
+	
+	
 }

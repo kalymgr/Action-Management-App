@@ -48,7 +48,6 @@ def editAction(action_id):
     actionGroups = dbSession.query(ActionGroup).all()
     financingSources = dbSession.query(FinancingSource).all()
 
-
     if action is None:
         abort(404)
 
@@ -108,4 +107,3 @@ def actionFinancingSourcesJson(action_id):
             }
         )
     return jsonify(l)
-
