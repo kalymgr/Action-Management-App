@@ -3,6 +3,24 @@
  **/
 
 
+/** angular.js code for managing actions */
+// create the action app object
+var actionApp = angular.module('actionApp', []);
+
+// change from {{ }} to {a  a} so as not to clash with jinja templates brackets
+actionApp.config(['$interpolateProvider', function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{a');
+  $interpolateProvider.endSymbol('a}');
+}]);
+
+// setup the angular.js controller of the app
+actionApp.controller('actionCtrl', function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+}); 
+
+
+
 var ActionFinancingTable = function(){
 	/**
 	Javascript class for handling the action financing table
