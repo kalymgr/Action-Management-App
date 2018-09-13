@@ -15,8 +15,8 @@ actionApp.config(['$interpolateProvider', function($interpolateProvider) {
 
 // setup the angular.js controller of the app
 actionApp.controller('actionCtrl', function($scope) {
-    $scope.firstName= "John";
-    $scope.lastName= "Doe";
+    $scope.code;
+    $scope.title;
 }); 
 
 
