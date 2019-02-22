@@ -1,5 +1,6 @@
 # deciding which files to exclude from git
 htmlcov/*
+Documentation/*
 *.pyc
 .idea/workspace.xml
 # ignore microsoft office temporary files
