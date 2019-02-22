@@ -348,34 +348,26 @@ Else (new user) show the form fields for storing the new password -->
 
 {% macro actionForm(action, services, actionCategories, actionGroups, financingSources) %}
 {# macro for displaying the action form that is used when inserting or updating actions #}
-<form action="#" method="post" enctype="multipart/form-data"
+<form id="actionCtrl" action="#" method="post" enctype="multipart/form-data"
       ng-app="actionApp" ng-controller="actionCtrl">
+
 <div class="form-row">
         <div class="form-group col-md-2">
             <label for="id">{{g.actionResourceStrings.FRM_ACTION_ID}}</label>
-            <input type="text" id="id" name="id" value="{{action.id}}" class="form-control">
+            <input type="text" id="id" name="id" ng-model="action.id" class="form-control">
         </div>
 
         <div class="form-group col-md-7">
             <label for="name">{{g.actionResourceStrings.FRM_ACTION_NAME}}</label>
-            <input type="text" id="name" name="name" value="{{action.name}}"
+            <input type="text" id="name" name="name" ng-model="action.name"
                    class="form-control">
         </div>
 
         <div class="form-group col-md-3">
             <label for="serviceInCharge">{{g.actionResourceStrings.FRM_ACTION_SERVICE_IN_CHARGE}}</label>
             <span>
-            <select id="serviceInCharge" name="serviceInCharge" class="custom-select">
-                <option>-</option>
-            {%  for service in services %}
-                {% if action.serviceInChargeId == service.id%} <!-- select the category of the user -->
-                    <option value="{{ service.id }}" selected>{{ service.name }}</option>
-                {% else %}
-                    <option value="{{ service.id }}">{{ service.name }}</option>
-                {% endif %}
-            {%  endfor %}
-            </select>
-
+            <select id="serviceInCharge" ng-model="action.serviceInChargeId" name="serviceInCharge"
+                    ng-options="x.id as x.name for x in services" class="custom-select"> </select>
             </span>
         </div>
     </div>
@@ -384,32 +376,16 @@ Else (new user) show the form fields for storing the new password -->
         <div class="form-group col-md-3">
             <label for="implementationService">{{g.actionResourceStrings.FRM_ACTION_IMPLEMENTATION_SERVICE}}</label>
             <span>
-            <select id="implementationService" name="implementationService" class="custom-select">
-                <option>-</option>
-            {%  for service in services %}
-                {% if action.ImplementationService == service.id%} <!-- select the category of the user -->
-                    <option value="{{ service.id }}" selected>{{ service.name }}</option>
-                {% else %}
-                    <option value="{{ service.id }}">{{ service.name }}</option>
-                {% endif %}
-            {%  endfor %}
-            </select>
-
+            <select id="implementationService" name="implementationService" ng-model="action.implementationServiceId"
+                    ng-options="x.id as x.name for x in services" class="custom-select"> </select>
             </span>
         </div>
         <div class="form-group col-md-3">
             <label for="category">{{g.actionResourceStrings.FRM_ACTION_CATEGORY}}</label>
 
             <span>
-            <select id="category" name="category" class="custom-select">
-                <option>-</option>
-            {%  for actionCategory in actionCategories %}
-                {% if action.categoryId == actionCategory.id%} <!-- select the category  -->
-                    <option value="{{ actionCategory.id }}" selected>{{ actionCategory.name }}</option>
-                {% else %}
-                    <option value="{{ actionCategory.id }}">{{ actionCategory.name }}</option>
-                {% endif %}
-            {%  endfor %}
+            <select id="category" name="category" class="custom-select"
+            ng-model="action.categoryId" ng-options="x.id as x.name for x in actionCategories">
             </select>
             </span>
         </div>
@@ -417,15 +393,8 @@ Else (new user) show the form fields for storing the new password -->
         <div class="form-group col-md-3">
             <label for="newOrInProgress">{{g.actionResourceStrings.FRM_ACTION_NEW_OR_IN_PROGRESS}}</label>
             <span>
-            <select id="newOrInProgress" name="newOrInProgress" class="custom-select">
-                <option>-</option>
-            {%  for el in g.dropDownLists.newOrInProgress %}
-                {% if action.newOrInProgress == el %} <!-- select if new or in progress -->
-                    <option value="{{ el }}" selected>{{ el }}</option>
-                {% else %}
-                    <option value="{{ el }}">{{ el }}</option>
-                {% endif %}
-            {%  endfor %}
+            <select id="newOrInProgress" name="newOrInProgress" class="custom-select"
+                    ng-model="action.newOrInProgress" ng-options="x for x in newOrInProgressList">
             </select>
             </span>
         </div>
@@ -433,15 +402,9 @@ Else (new user) show the form fields for storing the new password -->
         <div class="form-group col-md-3">
             <label for="priority">{{g.actionResourceStrings.FRM_ACTION_PRIORITY}}</label>
             <span>
-            <select id="priority" name="priority" class="custom-select">
-                <option>-</option>
-            {%  for el in g.dropDownLists.priority %}
-                {% if action.priority == el %} <!-- select the priority -->
-                    <option value="{{ el }}" selected>{{ el }}</option>
-                {% else %}
-                    <option value="{{ el }}">{{ el }}</option>
-                {% endif %}
-            {%  endfor %}
+            <select id="priority" name="priority" class="custom-select"
+                    ng-model="action.priority" ng-options="x for x in priority">
+
             </select>
             </span>
         </div>
@@ -451,54 +414,42 @@ Else (new user) show the form fields for storing the new password -->
         <div class="form-group col-md-4">
             <label for="groupId">{{g.actionResourceStrings.FRM_ACTION_GROUP}}</label>
             <span>
-            <select id="groupId" name="groupId" class="custom-select">
-                <option>-</option>
-            {%  for group in actionGroups %}
-                {% if groupId == group.id %} <!-- select the group -->
-                    <option value="{{ group.id }}" selected>{{ group.name }}</option>
-                {% else %}
-                    <option value="{{ group.id }}">{{ group.name }}</option>
-                {% endif %}
-            {%  endfor %}
+            <select id="groupId" name="groupId" class="custom-select"
+                    ng-model="action.groupId" ng-options="x.id as x.name for x in actionGroups">
+
             </select>
             </span>
         </div>
 
         <div class="form-group col-md-4">
             <label for="budget">{{g.actionResourceStrings.FRM_ACTION_BUDGET}}</label>
-            <input type="text" id="budget" name="budget" value="{{action.budget}}"
+            <input type="text" id="budget" name="budget" ng-model="action.budget"
                    class="form-control">
         </div>
 
         <div class="form-group col-md-4">
             <label for="budgetCode">{{g.actionResourceStrings.FRM_ACTION_BUDGET_CODE}}</label>
-            <input type="text" id="budgetCode" name="budgetCode" value="{{action.budgetCode}}"
+            <input type="text" id="budgetCode" name="budgetCode" ng-model="action.budgetCode"
                    class="form-control">
         </div>
 
          <div class="form-group col-md-4">
             <label for="startDate">{{g.actionResourceStrings.FRM_ACTION_START_DATE}}</label>
-            <input type="date" id="startDate" name="startDate" value="{{action.startDate.strftime('%Y-%m-%d')}}"
+            <input type="date" id="startDate" name="startDate" ng-model="action.startDate"
                    class="form-control">
         </div>
 
         <div class="form-group col-md-4">
             <label for="endDate">{{g.actionResourceStrings.FRM_ACTION_END_DATE}}</label>
-            <input type="date" id="endDate" name="endDate" value="{{action.endDate.strftime('%Y-%m-%d')}}"
+            <input type="date" id="endDate" name="endDate" ng-model="action.endDate"
                    class="form-control">
         </div>
         <div class="form-group col-md-4">
             <label for="status">{{g.actionResourceStrings.FRM_ACTION_STATUS}}</label>
             <span>
-            <select id="status" name="status" class="custom-select">
-                <option>-</option>
-            {%  for el in g.dropDownLists.status %}
-                {% if action.status == el %} <!-- select the group -->
-                    <option value="{{ el }}" selected>{{ el }}</option>
-                {% else %}
-                    <option value="{{ el }}">{{ el }}</option>
-                {% endif %}
-            {%  endfor %}
+            <select id="status" name="status" class="custom-select"
+                    ng-model="action.status" ng-options="x for x in status">
+
             </select>
             </span>
         </div>
@@ -523,39 +474,8 @@ Else (new user) show the form fields for storing the new password -->
                     </tr>
                 </thead>
                 <tbody>
-                <script>
-                    <!-- Show the financing sources table rows -->
-                    loadFinancingSourcesTable({{ action.id }});
-                </script>
-                <!-- for each source of financing for the specific action, show details -->
-                <!--
-                {% for actionFinancingSource in action.actionFinancingSources %}
-                    <tr>
-                        <td>
-                            <select name="financingSource" class="custom-select financingSource">
-                                <option>-</option>
-                                {%  for finSource in financingSources %}
-                                    {% if finSource.id == actionFinancingSource.financingSourceId %}
-                                        <option value="{{ finSource.id }}" selected>{{ finSource.name }}</option>
-                                    {% else %}
-                                        <option value="{{ finSource.id }}">{{ finSource.name }}</option>
-                                    {% endif %}
-                                {%  endfor %}
-                            </select>
 
-                        </td>
-                        <td>
-                            <input type="text" name="financingSourceBudgetCode" class="form-control"
-                                   value="{{ actionFinancingSource.budgetCode }}">
-                        </td>
-                        <td>
-                            <input type="text" name="financingSourceAmount" class="form-control"
-                            value="{{ actionFinancingSource.amount }}">
-                        </td>
-                        <td><a href='javascript:void(0);'  class='removeFinancingSource'><span class='fas fa-trash'></span></a></td>
-                    </tr>
-                {% endfor %}
-                -->
+
                 </tbody>
             </table>
 
@@ -571,4 +491,18 @@ Else (new user) show the form fields for storing the new password -->
     </div>
 
 </form>
+<script>
+$( document ).ready(function() {
+    // load the data necessary
+    angular.element('#actionCtrl').scope().loadServices();
+    angular.element('#actionCtrl').scope().loadActionCategories();
+    angular.element('#actionCtrl').scope().loadActionGroups();
+    angular.element('#actionCtrl').scope().loadFinancingSources();
+    angular.element('#actionCtrl').scope().loadAction({{ action.id }});
+    console.log('action financing sources loaded');
+    angular.element('#actionCtrl').scope().showFinancingSourcesTableRows({{ action.id }});
+    console.log('financing sources showing');
+    angular.element('#actionCtrl').scope().$apply();
+});
+</script>
 {% endmacro %}

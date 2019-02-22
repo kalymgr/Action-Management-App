@@ -6,7 +6,7 @@ Blueprint related to organizational chart management
 import os
 
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for, session, g, make_response)
+    Blueprint, flash, redirect, render_template, request, url_for, session, g, make_response, jsonify)
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 
@@ -265,6 +265,32 @@ def serviceListPdf():
     response.headers['Content-Disposition'] = 'inline;filename=output.pdf'
 
     return response
+
+
+@bp.route('services/json')
+@login_required
+@user_permissions_restrictions
+def servicesJson():
+    """
+    get the list of services as json
+    :return:
+    """
+    # get the services from the database
+    dbSession = current_app.config['DBSESSION']
+    services = dbSession.query(Service).all()
+
+    # create the list of services that will be returned as json
+    servicesList = []
+    for serv in services:
+        servicesList.append(
+            {
+                'id': serv.id,
+                'name': serv.name,
+            }
+        )
+
+    return jsonify(servicesList)
+
 
 class OrganizationHelperFunctions:
     """

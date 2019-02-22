@@ -6,6 +6,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 2.7 (actionsmanagerep)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="angular" level="application" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="py.test" />

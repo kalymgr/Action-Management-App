@@ -1,1 +1,3 @@
-{}
+{
+  "tests/org/test_org_controller.py::test_orgList": true
+}
